@@ -1,0 +1,2925 @@
+<!DOCTYPE html><style>body {
+  cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/default.cur),
+  default;
+}
+
+a,
+img {
+  cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/pointer.cur),
+  default;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: dodgerblue;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, .4) 25%,
+    transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .4) 50%,
+    rgba(255, 255, 255, .4) 75%,
+    transparent 75%,
+    transparent);
+  border-radius: 3em;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #DEDEDE;
+  border-radius: 3em;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}</style><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="JavaWeb学习，包括了Web交互、Tomcat、Servlet、JSP等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb">
+<meta property="og:url" content="http://taoyyz.github.io/2021/08/03/JavaWeb/index.html">
+<meta property="og:site_name" content="欢迎光临taoyyz的Blog">
+<meta property="og:description" content="JavaWeb学习，包括了Web交互、Tomcat、Servlet、JSP等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731161144760.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731163425498.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731181519317.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731181608049.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731181655875.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731181756724.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731182403416.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731182428481.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731182541089.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731182624541.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731183046584.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731183455885.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731183551065.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801015440946.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801020007942.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801020356707.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731211508413.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210731210732207.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801014531501.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801014651107.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801134635415.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801173507355.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801170942567.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801172350702.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801184932632.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801232407311.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801235001351.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210803154816147.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210803163341005.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210803164915947.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210801235001351.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210804031015234.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210804130306959.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805021115545.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805024528927.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805000518670.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805144208603.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805144128175.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805143123203.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805143143363.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805002755326.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805143232859.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805143342462.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805143357398.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805143419831.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805143450080.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805143018353.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210805141755489.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210806001159331.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210806011642699.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210806155853142.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210806162531202.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210806165132525.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210806184821807.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210806211454118.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210806213921964.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210807133551501.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210807174933312.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210807174853954.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210807215817460.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210807215853195.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210812213208092.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210812225952027.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210813145133785.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210813173209744.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210813230628575.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210814213435643.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210815013209415.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210815013246676.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210815160048822.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210815224049640.png">
+<meta property="article:published_time" content="2021-08-03T10:02:17.000Z">
+<meta property="article:modified_time" content="2023-09-28T16:56:12.306Z">
+<meta property="article:author" content="taoyyz小陶">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Servlet">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://taoyyz.github.io/images/image-20210731161144760.png"><title>JavaWeb | 欢迎光临taoyyz的Blog</title><link ref="canonical" href="http://taoyyz.github.io/2021/08/03/JavaWeb/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","wordWrap":true},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: true,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/links/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">资源和链接</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="far fa-address-card"></i></span><span class="header-nav-menu-item__text">关于</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">欢迎光临taoyyz的Blog</div><div class="header-banner-info__subtitle"></div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">JavaWeb</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-08-03</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2023-09-29</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">15.2k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">90分</span></span></div></header><div class="post-body">
+        <h1 id="JavaWeb服务器端学习">
+          <a href="#JavaWeb服务器端学习" class="heading-link"><i class="fas fa-link"></i></a><a href="#JavaWeb服务器端学习" class="headerlink" title="JavaWeb服务器端学习"></a>JavaWeb服务器端学习</h1>
+      
+        <h2 id="Web相关概念回顾">
+          <a href="#Web相关概念回顾" class="heading-link"><i class="fas fa-link"></i></a><a href="#Web相关概念回顾" class="headerlink" title="Web相关概念回顾"></a>Web相关概念回顾</h2>
+      
+        <h3 id="软件架构">
+          <a href="#软件架构" class="heading-link"><i class="fas fa-link"></i></a><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h3>
+      <ul>
+<li>C/S：客户端/服务器端</li>
+<li>B/S：浏览器/服务器端</li>
+</ul>
+
+        <h3 id="资源分类">
+          <a href="#资源分类" class="heading-link"><i class="fas fa-link"></i></a><a href="#资源分类" class="headerlink" title="资源分类"></a>资源分类</h3>
+      <ul>
+<li><p>静态资源，如html，css，JavaScript</p>
+</li>
+<li><p>动态资源，如servlet/jsp，asp，php</p>
+
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731161144760.png" alt="image-20210731161144760" style="zoom: 50%;">
+      </li>
+</ul>
+
+        <h3 id="网络通信三要素">
+          <a href="#网络通信三要素" class="heading-link"><i class="fas fa-link"></i></a><a href="#网络通信三要素" class="headerlink" title="网络通信三要素"></a>网络通信三要素</h3>
+      <ul>
+<li>IP：电子设备（计算机）在网络中的唯一标识</li>
+<li>端口：应用程序在计算机上的唯一标识（0~65535）</li>
+<li>传输协议：规定了数据传输的规则<ul>
+<li>TCP：三次握手的安全协议</li>
+<li>UDP：面向无连接的不安全协议</li>
+</ul>
+</li>
+</ul>
+
+        <h2 id="Tomcat服务器软件">
+          <a href="#Tomcat服务器软件" class="heading-link"><i class="fas fa-link"></i></a><a href="#Tomcat服务器软件" class="headerlink" title="Tomcat服务器软件"></a>Tomcat服务器软件</h2>
+      <ul>
+<li><p><strong>服务器</strong>：安装了服务器软件的计算机</p>
+</li>
+<li><p><strong>服务器软件</strong>：用于接受用户的请求、处理请求、作出响应</p>
+</li>
+<li><p><strong>Web服务器软件（Web容器）</strong>：在Web服务器软件中，可以部署Web项目，让用户可以通过服务器来访问这些项目</p>
+</li>
+<li><p>常见的Java相关的Web服务器软件：</p>
+<ul>
+<li><p>WebLogic：Oracle公司的大型JavaEE服务器，收费的，支持所有的JavaEE规范</p>
+</li>
+<li><p>WebSphere：IBM公司的大型JavaEE服务器，收费的，支持所有的JavaEE规范</p>
+</li>
+<li><p>JBoss：JBoss公司的大型JavaEE服务器，收费的，支持所有的JavaEE规范</p>
+</li>
+<li><p>Tomcat：Apache基金组织的中小型JavaEE服务器，仅支持少量JavaEE规范，开源、免费</p>
+<p><em>JavaEE：Java语言在企业级开发中使用的技术规范的总和，一共规定了13项大的规范</em></p>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="Tomcat">
+          <a href="#Tomcat" class="heading-link"><i class="fas fa-link"></i></a><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h3>
+      
+        <h4 id="下载：">
+          <a href="#下载：" class="heading-link"><i class="fas fa-link"></i></a><a href="#下载：" class="headerlink" title="下载："></a>下载：</h4>
+      <ul>
+<li>访问<code>https://tomcat.apache.org</code>下载对应的版本</li>
+</ul>
+
+        <h4 id="安装：">
+          <a href="#安装：" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装：" class="headerlink" title="安装："></a>安装：</h4>
+      <ul>
+<li>直接解压压缩包即可，安装目录不要有中文和空格</li>
+<li>目录结构：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731163425498.png" alt="image-20210731163425498" style="zoom:67%;">
+      </li>
+</ul>
+
+        <h4 id="卸载：">
+          <a href="#卸载：" class="heading-link"><i class="fas fa-link"></i></a><a href="#卸载：" class="headerlink" title="卸载："></a>卸载：</h4>
+      <ul>
+<li>直接删除安装目录即可</li>
+</ul>
+
+        <h4 id="启动：">
+          <a href="#启动：" class="heading-link"><i class="fas fa-link"></i></a><a href="#启动：" class="headerlink" title="启动："></a>启动：</h4>
+      <ul>
+<li>在安装目录下的<code>bin</code>目录执行<code>startup.bat</code>批处理文件<ul>
+<li>如果出现控制台乱码，修改安装目录下的<code>conf</code>目录下的<code>logging.properties</code>文件的<code>encoding</code>为<code>GBK</code></li>
+<li>如果控制台一闪而过：配置<code>JAVA_HOME</code>和<code>JRE_HOME</code>的环境变量</li>
+<li>启动报错：在安装目录下的<code>logs</code>目录查看日志文件<ul>
+<li>端口占用错误：<ol>
+<li>找到占用端口的程序，杀死该进程：<ul>
+<li>cmd输入<code>netstat -ano</code>查看占用8080端口的进程PID</li>
+<li>任务管理器杀死该PID的进程</li>
+</ul>
+</li>
+<li>修改自身的端口号：<ul>
+<li>编辑安装目录下的<code>conf</code>目录下的<code>server.xml</code></li>
+<li>修改<code>&lt;Connerctor port=端口号/&gt;</code>中相应的端口号，使得不冲突</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>HTTP协议默认端口号默认为80，访问时可以省略端口号</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="访问：">
+          <a href="#访问：" class="heading-link"><i class="fas fa-link"></i></a><a href="#访问：" class="headerlink" title="访问："></a>访问：</h4>
+      <ul>
+<li>本机访问：浏览器访问<code>http://127.0.0.1:8080</code>或<code>http://localhost:8080</code></li>
+<li>访问其他：<code>http://服务器ip:8080</code></li>
+</ul>
+
+        <h4 id="关闭：">
+          <a href="#关闭：" class="heading-link"><i class="fas fa-link"></i></a><a href="#关闭：" class="headerlink" title="关闭："></a>关闭：</h4>
+      <ul>
+<li>正常关闭：执行安装目录下的<code>bin</code>目录的<code>shutdown.bat</code>批处理文件，也可以在窗口直接<code>Ctrl+C</code></li>
+<li>强制关闭：直接关掉启动<code>startup.bat</code>的窗口</li>
+</ul>
+
+        <h4 id="配置：">
+          <a href="#配置：" class="heading-link"><i class="fas fa-link"></i></a><a href="#配置：" class="headerlink" title="配置："></a>配置：</h4>
+      
+        <h5 id="部署项目的方式：">
+          <a href="#部署项目的方式：" class="heading-link"><i class="fas fa-link"></i></a><a href="#部署项目的方式：" class="headerlink" title="部署项目的方式："></a>部署项目的方式：</h5>
+      
+        <h6 id="1-直接将项目放到安装目录下的webapps目录下即可">
+          <a href="#1-直接将项目放到安装目录下的webapps目录下即可" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-直接将项目放到安装目录下的webapps目录下即可" class="headerlink" title="1.直接将项目放到安装目录下的webapps目录下即可"></a>1.直接将项目放到安装目录下的<code>webapps</code>目录下即可</h6>
+      <ol>
+<li>在<code>webapps</code>目录下放置项目文件夹</li>
+<li>将<code>war</code>包放置到<code>webapps</code>目录下，这种方式在Tomcat服务器启动时会自动解包成项目文件夹</li>
+</ol>
+
+        <h6 id="2-配置conf目录下的server-xml文件，重启服务器生效">
+          <a href="#2-配置conf目录下的server-xml文件，重启服务器生效" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-配置conf目录下的server-xml文件，重启服务器生效" class="headerlink" title="2.配置conf目录下的server.xml文件，重启服务器生效"></a>2.配置<code>conf</code>目录下的<code>server.xml</code>文件，重启服务器生效</h6>
+      <p>​ 在<code>&lt;Host&gt;&lt;/Host&gt;</code>标签体中配置<code>&lt;Context docBase=&quot;项目路径&quot; path=&quot;/虚拟访问路径&quot;/&gt;</code></p>
+
+        <h6 id="3-在conf-Catalina-localhost目录下创建任意的xml文件">
+          <a href="#3-在conf-Catalina-localhost目录下创建任意的xml文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-在conf-Catalina-localhost目录下创建任意的xml文件" class="headerlink" title="3.在conf/Catalina/localhost目录下创建任意的xml文件"></a>3.在<code>conf/Catalina/localhost</code>目录下创建任意的xml文件</h6>
+      <p>​ 在创建的xml文件中配置<code>&lt;Context docBase=&quot;项目路径&quot; /&gt;</code>，此时的虚拟访问路径就是创建的xml文件名称</p>
+
+        <h5 id="静态项目和动态项目">
+          <a href="#静态项目和动态项目" class="heading-link"><i class="fas fa-link"></i></a><a href="#静态项目和动态项目" class="headerlink" title="静态项目和动态项目"></a>静态项目和动态项目</h5>
+      <ul>
+<li><p>目录结构：</p>
+<ul>
+<li><p>Java动态项目的目录结构：</p>
+<p>——<code>项目根目录</code></p>
+<p>————<code>WEB-INF目录</code></p>
+<p>——————<code>web.xml</code> ：web项目的核心配置文件</p>
+<p>——————<code>classes目录</code>：放置字节码文件的目录</p>
+<p>——————<code>lib目录</code>：放置依赖的jar包</p>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="Tomcat与IDEA集成">
+          <a href="#Tomcat与IDEA集成" class="heading-link"><i class="fas fa-link"></i></a><a href="#Tomcat与IDEA集成" class="headerlink" title="Tomcat与IDEA集成"></a>Tomcat与IDEA集成</h4>
+      
+        <h5 id="IDEA集成Tomcat">
+          <a href="#IDEA集成Tomcat" class="heading-link"><i class="fas fa-link"></i></a><a href="#IDEA集成Tomcat" class="headerlink" title="IDEA集成Tomcat"></a>IDEA集成Tomcat</h5>
+      <ul>
+<li>在IDEA的导航栏选择
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731181519317.png" alt="image-20210731181519317">
+      </li>
+<li>在<code>运行</code>二级菜单选择
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731181608049.png" alt="image-20210731181608049">
+      </li>
+<li>在<code>编辑配置</code>弹出的窗口中选择<code>+</code>号添加新配置
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731181655875.png" alt="image-20210731181655875">
+      </li>
+<li>配置新服务器的来源
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731181756724.png" alt="image-20210731181756724">
+      </li>
+<li>保存即可完成配置</li>
+</ul>
+
+        <h5 id="IDEA启动Tomcat">
+          <a href="#IDEA启动Tomcat" class="heading-link"><i class="fas fa-link"></i></a><a href="#IDEA启动Tomcat" class="headerlink" title="IDEA启动Tomcat"></a>IDEA启动Tomcat</h5>
+      <ul>
+<li><p>创建JavaEE项目或模块，勾选Web Application
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731182403416.png" alt="image-20210731182403416">
+      <br>并勾选<code>创建web.xml</code>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731182428481.png" alt="image-20210731182428481">
+      </p>
+</li>
+<li><p>启动创建的JavaWeb项目：点击导航栏的
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731182541089.png" alt="image-20210731182541089">
+      <br>或右上角的
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731182624541.png" alt="image-20210731182624541">
+      </p>
+</li>
+<li><p>浏览器访问ip:端口以及Tomcat部署的war包，访问路径为Tomcat配置窗口的<code>部署</code>菜单下</p>
+<p><strong>注意</strong>：</p>
+<ol>
+<li><strong>新版IDEA</strong>下的<code>部署</code>菜单的最下面，找到<code>Application Context</code>即为**访问路径<br>**
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731183046584.png" alt="image-20210731183046584">
+      </li>
+<li><strong>新版IDEA</strong>的JavaEE项目创建稍有不同，如果想要原来的<strong>JavaEE项目创建界面</strong>，修改IDEA的软件注册表：<ul>
+<li><code>Ctrl Shift Alt /</code>：打开<code>维护界面</code><br>，选择<code>注册表</code>：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731183455885.png" alt="image-20210731183455885" style="zoom:80%;">
+      </li>
+<li>搜索并勾选<code>javaee.legacy.project.wizard</code>：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731183551065.png" alt="image-20210731183551065">
+      </li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h5 id="IDEA的Tomcat项目配置">
+          <a href="#IDEA的Tomcat项目配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#IDEA的Tomcat项目配置" class="headerlink" title="IDEA的Tomcat项目配置"></a>IDEA的Tomcat项目配置</h5>
+      <ol>
+<li><p>IDEA会为每一个Tomcat部署的项目单独建立一份配置文件：在启动项目时打印在Server控制台</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801015440946.png" alt="image-20210801015440946">
+      </p>
+<p>其中<code>CATALINA_BASE</code>后面的路径就是项目配置文件的路径</p>
+</li>
+<li><p>IDEA项目的工作空间和Tomcat部署的web项目不是同一个概念</p>
+<p> *<br>Tomcat真正访问的是Tomcat部署的web项目，对应着IDEA项目工作空间的
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801020007942.png" alt="image-20210801020007942">
+      <br>目录下的所有资源</p>
+<ul>
+<li>WEB-INF目录下的资源不能被浏览器直接访问</li>
+</ul>
+</li>
+<li><p>断点调试：通过
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801020356707.png" alt="image-20210801020356707">
+      以debug方式启动项目</p>
+</li>
+</ol>
+
+        <h2 id="Servlet入门">
+          <a href="#Servlet入门" class="heading-link"><i class="fas fa-link"></i></a><a href="#Servlet入门" class="headerlink" title="Servlet入门"></a>Servlet入门</h2>
+      <p><code>Servlet = Server + Applet</code></p>
+<ul>
+<li>概念：运行在服务器端的小程序，Servlet是一个接口，定义了Java类被浏览器访问到(Tomcat识别)的规则</li>
+</ul>
+
+        <h3 id="快速入门：">
+          <a href="#快速入门：" class="heading-link"><i class="fas fa-link"></i></a><a href="#快速入门：" class="headerlink" title="快速入门："></a>快速入门：</h3>
+      <ol>
+<li><p>创建JavaEE项目</p>
+</li>
+<li><p>定义一个类，实现Servlet接口
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731211508413.png" alt="image-20210731211508413">
+      </p>
+</li>
+<li><p>实现接口中的抽象方法</p>
+</li>
+<li><p><strong>配置Servlet</strong>：在<code>web.xml</code>文件中配置Servlet</p>
+
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210731210732207.png" alt="image-20210731210732207">
+      </li>
+</ol>
+
+        <h3 id="Servlet执行过程：">
+          <a href="#Servlet执行过程：" class="heading-link"><i class="fas fa-link"></i></a><a href="#Servlet执行过程：" class="headerlink" title="Servlet执行过程："></a>Servlet执行过程：</h3>
+      <ol>
+<li>当服务器接收到浏览器的请求后，会解析请求的URL路径，获取访问的Servlet的资源路径</li>
+<li>查找web.xml文件，是否有对应的<code>&lt;url-pattern&gt;</code>标签体内容</li>
+<li>如果有，就通过<code>&lt;servlet-name&gt;</code>标签找到对应的<code>&lt;servlet-class&gt;</code>全类名</li>
+<li>Tomcat会将字节码文件加载进内存，并且创建其对象</li>
+<li>调用其方法</li>
+</ol>
+
+        <h3 id="Servlet生命周期">
+          <a href="#Servlet生命周期" class="heading-link"><i class="fas fa-link"></i></a><a href="#Servlet生命周期" class="headerlink" title="Servlet生命周期"></a>Servlet生命周期</h3>
+      <ul>
+<li><p>被创建：执行<code>init()</code>方法，只执行一次</p>
+<ul>
+<li><p>Servlet什么时候被创建？</p>
+<ul>
+<li><p>默认情况下，第一次被访问时，Servlet被创建</p>
+</li>
+<li><p>可以配置指定Servlet的创建时机：</p>
+<p>在web.xml配置文件中，对每一个<code>&lt;servlet&gt;</code>标签配置<code>&lt;load-on-startup&gt;</code>标签的值</p>
+<ol>
+<li>此标签值默认为-1，指定为负数会在第一次被访问时创建，指定为0或正数会在启动服务器时创建</li>
+<li><code>&lt;load-on-startup&gt;</code>较小值的 servlet 在以较大值的 servlet 之前加载</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>由于Servlet的<code>init()</code>方法只执行一次，说明一个Servlet在内存中只存在一个对象，Servlet是单例的，所以多个用户同时访问时，可能会存在安全问题，所以尽量不要再Servlet中定义成员变量</p>
+</li>
+</ul>
+</li>
+<li><p>提供服务：执行<code>service()</code>方法，会执行多次</p>
+<ul>
+<li>每次访问Servlet时都会调用一次<code>service()</code>方法</li>
+</ul>
+</li>
+<li><p>被销毁：执行<code>destroy()</code>方法，只执行一次</p>
+<ul>
+<li>在服务器关闭之前执行</li>
+</ul>
+<p><em>对于每一个Servlet都会执行上述方法（初始化、销毁）</em></p>
+</li>
+</ul>
+
+        <h3 id="Servlet3-0注解开发">
+          <a href="#Servlet3-0注解开发" class="heading-link"><i class="fas fa-link"></i></a><a href="#Servlet3-0注解开发" class="headerlink" title="Servlet3.0注解开发"></a>Servlet3.0注解开发</h3>
+      <ul>
+<li><p>好处：简化了<code>web.xml</code>的配置</p>
+</li>
+<li><p>步骤：</p>
+<ul>
+<li><p>创建JavaEE项目，选择Servlet的版本为3.0以上，可以不勾选<code>web.xml</code>了</p>
+<p>注意：选择的<code>JavaEE</code>版本为<code>JavaEE6</code>开始才支持<code>3.0</code>，<code>JavaEE7</code>为<code>3.1</code>，<code>JavaEE8</code>为<code>4.0</code></p>
+</li>
+<li><p>定义一个类，实现Servlet接口</p>
+</li>
+<li><p>重写抽象方法</p>
+</li>
+<li><p>在类上使用<code>@WebServlet</code>注解，指定映射的虚拟访问路径，例如：</p>
+</li>
+<li><p>通过<code>urlPatterns</code>指定：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801014531501.png" alt="image-20210801014531501">
+      </p>
+</li>
+<li><p>或直接给<code>value</code>赋值（可省略）：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801014651107.png" alt="image-20210801014651107">
+      </p>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="Servlet体系结构">
+          <a href="#Servlet体系结构" class="heading-link"><i class="fas fa-link"></i></a><a href="#Servlet体系结构" class="headerlink" title="Servlet体系结构"></a>Servlet体系结构</h3>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801134635415.png" alt="image-20210801134635415">
+      </p>
+<ul>
+<li><code>GenericServlet</code>对<code>Servlet</code>接口中其他的方法做了默认空实现，只将<code>service()</code>方法作为抽象方法</li>
+<li><code>HttpServlet</code>对<code>HTTP</code>协议进行了封装，在<code>service()</code>方法中对每种请求方式（<code>doXxx()</code>）做了分发</li>
+</ul>
+
+        <h3 id="Servlet相关配置">
+          <a href="#Servlet相关配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#Servlet相关配置" class="headerlink" title="Servlet相关配置"></a>Servlet相关配置</h3>
+      <ol>
+<li><code>urlPattern</code>：Servlet的访问路径，这是一个<code>String[]</code>数组<ul>
+<li>可以为一个Servlet定义多个访问路径</li>
+<li>路径定义规则：<ol>
+<li><code>/xxx</code></li>
+<li><code>/xxx/xxx</code> 多层路径的目录型结构</li>
+<li><code>/xxx/*</code> 匹配/xxx开头，后面内容随意的Servlet</li>
+<li><code>/*</code> 匹配所有可能的虚拟请求路径</li>
+<li><code>*.do</code> 匹配前面任意，后面以.do结尾的Servlet，注意前面没有<code>/</code></li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+
+        <h2 id="HTTP">
+          <a href="#HTTP" class="heading-link"><i class="fas fa-link"></i></a><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2>
+      <ul>
+<li><p>概念：<code>Hyper Text Transfer Protocol</code> 超文本传输协议</p>
+<ul>
+<li>定义和客户端和服务器端的通信时发送数据的格式</li>
+<li>特点：<ol>
+<li>基于TCP/IP的高级协议</li>
+<li>默认端口号：80，例如访问<code>http://www.baidu.com</code>相当于<code>http://ip地址:80</code></li>
+<li>基于请求/响应模型，一次请求对应一次响应</li>
+<li>无状态的：每次请求之间相互独立，不能通信数据</li>
+</ol>
+</li>
+<li>历史版本：<ul>
+<li>1.0 ：每次请求/响应都会建立新的连接</li>
+<li>1.1：可以复用连接</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="请求消息数据格式">
+          <a href="#请求消息数据格式" class="heading-link"><i class="fas fa-link"></i></a><a href="#请求消息数据格式" class="headerlink" title="请求消息数据格式"></a>请求消息数据格式</h3>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801173507355.png" alt="image-20210801173507355">
+      </p>
+<ul>
+<li><p>请求行</p>
+<ol>
+<li><p>格式：<code>请求方式 请求url 请求协议/版本</code>    
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801170942567.png" alt="image-20210801170942567">
+      </p>
+</li>
+<li><p>请求方式：HTTP协议有7种请求方式，<strong>常用的有2种</strong>：</p>
+<ul>
+<li>GET：<ol>
+<li>请求参数在请求行中，在url后    
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801172350702.png" alt="image-20210801172350702">
+      </li>
+<li>请求的url长度有限制</li>
+<li>不太安全</li>
+</ol>
+</li>
+<li>POST：<ol>
+<li>请求参数在请求体中</li>
+<li>请求的url长度没有限制</li>
+<li>相对安全</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>请求头：包含若干个属性，格式为 <code>请求头属性名：请求头属性值</code></p>
+<p>常见的请求头:</p>
+<ul>
+<li><code>Host</code>：请求的主机名</li>
+<li><code>User-Agent</code>：浏览器告诉服务器，访问服务器的浏览器的版本信息</li>
+<li><code>Accept</code>：可接收的格式</li>
+<li><code>Accept-Language</code>：可接收的语言</li>
+<li><code>Referer</code>：告诉服务器这个请求是哪个URL过来的，可以用于防盗链和统计工作</li>
+<li><code>Connection</code>：连接方式</li>
+</ul>
+</li>
+<li><p>请求空行：最后一个请求头之后是一个空行，包括回车符和换行符，分隔POST请求头和体</p>
+</li>
+<li><p>请求体（正文）：在POST方法中含有，封装了POST请求消息的请求参数</p>
+</li>
+</ul>
+
+        <h3 id="Request">
+          <a href="#Request" class="heading-link"><i class="fas fa-link"></i></a><a href="#Request" class="headerlink" title="Request"></a>Request</h3>
+      <p><em>Request对象和Response对象都是由服务器创建的，我们来使用它们，Request对象用于获取请求消息，Response对象用于设置响应消息</em></p>
+
+        <h4 id="Request对象继承体系">
+          <a href="#Request对象继承体系" class="heading-link"><i class="fas fa-link"></i></a><a href="#Request对象继承体系" class="headerlink" title="Request对象继承体系"></a>Request对象继承体系</h4>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801184932632.png" alt="image-20210801184932632">
+      </p>
+
+        <h4 id="Request功能">
+          <a href="#Request功能" class="heading-link"><i class="fas fa-link"></i></a><a href="#Request功能" class="headerlink" title="Request功能"></a>Request功能</h4>
+      
+        <h5 id="Request对象获取请求消息">
+          <a href="#Request对象获取请求消息" class="heading-link"><i class="fas fa-link"></i></a><a href="#Request对象获取请求消息" class="headerlink" title="Request对象获取请求消息"></a>Request对象获取请求消息</h5>
+      <ol>
+<li><p>获取<strong>请求行</strong>数据</p>
+<ul>
+<li><code>public String getMethod()</code>获取<strong>请求方式</strong>，例如 GET、POST 或 PUT。</li>
+<li><code>public String getContextPath()</code><font color="orange">获取<strong>请求上下文</strong>(虚拟目录)</font>，该路径以<code>/</code><br>字符开头但不以<code>/</code>字符结束，对于默认上下文（即<code>/</code>根），此方法返回<code>&quot;&quot;</code>空字符串</li>
+<li><code>public String getServletPath()</code>获取<strong>请求调用Servlet的URL部分</strong>，此路径以<code>/</code>字符开头，包括 servlet 名称或到 servlet<br>的路径</li>
+<li><code>public String queryString()</code>获取<strong>以GET请求查询的参数</strong>，如果没有参数则返回<code>null</code></li>
+<li><code>public String getRequestURI()</code><font color="orange">获取<strong>请求的URL的一部分</strong></font>，相当于拼接ContextPath和ServletPath<ul>
+<li><code>URI</code>：统一资源标识符</li>
+</ul>
+</li>
+<li><code>public String getRequestURL()</code>获取<strong>请求的URL</strong>，返回的 URL 包含一个协议、服务器名称、端口号、服务器路径，但是*<br><em>不包含<code>queryString()</code>的内容</em>*<ul>
+<li><code>URL</code>：统一资源定位符</li>
+</ul>
+</li>
+<li><code>public String getProtocol()</code>继承于<code>ServletRequest</code>接口，返回请求使用的协议的名称和版本</li>
+<li><code>public String getRemoteAddr()</code>继承于<code>ServletRequest</code>接口，获取客户机的IP地址</li>
+</ul>
+</li>
+<li><p>获取<strong>请求头</strong>数据</p>
+<ul>
+<li><code>String getHeader(String name)</code>返回指定的请求头的值，如果该请求不包含指定<code>name</code>的头，则此方法返回 <code>null</code><br>。如果有多个具有相同名称的头，则此方法返回请求中的第一个头。<strong>头名称不区分大小写</strong></li>
+<li><code>Enumeration&lt;E&gt; getHearderNames() </code>返回此请求包含的所有头名称的枚举。如果该请求没有头，则此方法返回一个空枚举</li>
+</ul>
+</li>
+<li><p>获取<strong>请求体</strong>数据</p>
+<ul>
+<li><p>只有POST方式才有请求体，在请求体中封装了POST请求的请求参数</p>
+</li>
+<li><p>步骤：</p>
+<ol>
+<li><p>获取流对象</p>
+<p><code>BufferedReader getReader()</code><font color="orange">获取<strong>字符输入流</strong></font>，只能操作字符数据，适合操作文本</p>
+<p><code>ServletInputStream getInputStream()</code>获取字节输入流，可操作所有数据，适合文件上传场景</p>
+</li>
+<li><p>从流对象中拿数据</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+
+        <h5 id="其他功能">
+          <a href="#其他功能" class="heading-link"><i class="fas fa-link"></i></a><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h5>
+      <ol>
+<li><p><strong>获取请求参数的通用方式</strong>：不论GET还是POST方式都可以使用下列的方法</p>
+<ul>
+<li><code>String getParameter(String name)</code>根据参数名<code>name</code>获取参数值，如果该参数不存在则返回<code>null</code></li>
+<li><code>String[] getParameterValues(String name)</code>根据参数名<code>name</code><br>获取参数值的数组，多用于复选框，如果该参数不存在则返回<code>null</code></li>
+<li><code>Enumeration&lt;String&gt; getParameterNames()</code>获取所有请求的参数名称，没有参数则返回空枚举</li>
+<li><code>Map&lt;String,String[]&gt; getParameterMap()</code>获取所有请求的参数的集合</li>
+</ul>
+<p><strong><font color="red">中文乱码问题：</font></strong></p>
+<p>:white_check_mark:GET方式在Tomcat 8下的乱码问题被解决了</p>
+<p>:x:POST方式会乱码，<strong>解决方式</strong>：<code>request.setCharacterEncoding(&quot;utf-8&quot;);</code>设置字符编码方式</p>
+</li>
+<li><p><strong>请求转发</strong>：一种在服务器内部的资源跳转方式</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801232407311.png" alt="image-20210801232407311">
+      </p>
+<ul>
+<li>步骤：<ol>
+<li>通过request对象获取<em>请求转发器</em>对象：<code>RequestDispatcher getRequestDispatcher(String s)</code></li>
+<li>使用<em>请求转发器</em>对象进行转发：<code>void forward(ServletRequest var1, ServletResponse var2)</code></li>
+</ol>
+</li>
+<li>特点：<ol>
+<li>转发后浏览器地址栏路径没有发生变化</li>
+<li>只能转发到<strong>当前服务器的内部资源</strong></li>
+<li>转发是一次请求</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>共享数据</strong></p>
+<ul>
+<li>域对象：一个有作用范围的对象，可以在范围内共享数据</li>
+<li>request域：代表一次请求的范围，一般用于请求转发的多个资源中共享数据</li>
+<li>方法：继承于<code>ServletRequest</code>接口<ol>
+<li><code>void setAttribute(String s,Object o)</code>：存储数据</li>
+<li><code>Object getAttribute(String s)</code>：通过键获取值</li>
+<li><code>void removeAttribute(String s)</code>：通过键移除键值对</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>获取ServletContext</strong></p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801235001351.png" alt="image-20210801235001351">
+      </p>
+<ul>
+<li><code>ServletContext getServletContext()</code>：获取ServletContext对象</li>
+</ul>
+</li>
+</ol>
+
+        <h4 id="案例">
+          <a href="#案例" class="heading-link"><i class="fas fa-link"></i></a><a href="#案例" class="headerlink" title="案例"></a>案例</h4>
+      <ul>
+<li><p>需求：</p>
+<ol>
+<li><p>编写login.html登录页面。需要具有username和password两个输入框</p>
+</li>
+<li><p>使用Druid数据库连接池技术，操作mysql的day14数据库中的user表</p>
+<p><strong>注意：使用这些框架时，要把jar包放到WEB-INF目录下才能被打包进项目！</strong></p>
+</li>
+<li><p>使用jdbcTemplate技术封装JDBC</p>
+</li>
+<li><p>登录成功跳转到SuccessServlet展示：登录成功！[用户名]，欢迎您</p>
+<p><strong>注意：页面乱码要设置request的<code>setCharacterEncoding()</code>和response的<code>setContentType()</code></strong></p>
+</li>
+<li><p>登录失败跳转到FailServlet展示：登录失败，用户名或密码错误</p>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h4 id="BeanUtils">
+          <a href="#BeanUtils" class="heading-link"><i class="fas fa-link"></i></a><a href="#BeanUtils" class="headerlink" title="BeanUtils"></a>BeanUtils</h4>
+      <ul>
+<li><p>用于封装<code>JavaBean</code></p>
+<ul>
+<li><code>JavaBean</code>：标准的Java类<ul>
+<li><code>标准的Java类</code>：<ol>
+<li>类必须被<code>public</code>修饰</li>
+<li>必须提供空参构造器</li>
+<li>成员变量必须用<code>private</code>修饰</li>
+<li>提供公共<code>setter</code>和<code>getter</code>方法</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>功能：封装数据</li>
+</ul>
+</li>
+<li><p>概念：</p>
+<ul>
+<li><p>成员变量</p>
+</li>
+<li><p>属性：<code>setter</code>和<code>getter</code>方法截取替换后的产物</p>
+<p>例如：对于方法<code>getUsername()</code>，截取之后：<code>Username</code>，首字母替换为小写：<code>username</code></p>
+</li>
+<li><p>方法：</p>
+<ol>
+<li><p><code>void setProperty(Object bean,String name,Object value)</code></p>
+<p>此方法为<code>bean</code>的成员变量<strong>属性</strong>：<code>name</code>赋值为<code>value</code></p>
+</li>
+<li><p><code>String getProperty(Object bean,String name)</code></p>
+<p>此方法返回<code>bean</code>的成员变量<strong>属性</strong>：<code>name</code>的值，总会返回<code>String</code>字符串形式</p>
+</li>
+<li><p><code>void populate(Object bean,Map properties)</code>：根据<code>properties</code>的属性封装到<code>bean</code>里</p>
+<p>建议配合<code>request.getParameterMap()</code>返回所有的请求参数的<code>Map</code>键值对集合使用</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="响应消息数据格式">
+          <a href="#响应消息数据格式" class="heading-link"><i class="fas fa-link"></i></a><a href="#响应消息数据格式" class="headerlink" title="响应消息数据格式"></a>响应消息数据格式</h3>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210803154816147.png" alt="image-20210803154816147">
+      </p>
+<ul>
+<li><p>响应行</p>
+<ol>
+<li><p>格式：<code>协议/版本 响应状态码 状态码描述</code></p>
+</li>
+<li><p>响应状态码：服务器告诉浏览器本次请求和响应的状态</p>
+<p>分类：状态码都是3位数字</p>
+<ul>
+<li><p><code>1xx</code>：服务器接收客户端消息但没有接收完成，等待一段时间后发送<code>1xx</code>状态码。这一类型的状态码，代表请求已被接受，需要继续处理。</p>
+</li>
+<li><p><code>2xx</code>：请求已成功，出现此状态码是表示正常状态。例如：<code>200 OK</code></p>
+</li>
+<li><p><code>3xx</code>：重定向，后续的请求地址（重定向目标）在本次响应的 <code>Location</code>域中指明。</p>
+<p>例如：<code>302：</code>：请求的资源临时从不同的 URI响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。</p>
+<p>​            <code>304</code>：客户端发送了一个带条件的 GET 请求且该请求已被允许，而文档的内容(<br>自上次访问以来或根据请求的条件)并没有改变则返回此状态码。响应禁止包含消息体，因此以消息头后空行结尾。</p>
+</li>
+<li><p><code>4xx</code>：客户端请求错误</p>
+<p>例如：<code>404</code>：代表请求的路径在服务器上没有对应的资源<code>Not Found</code></p>
+<p>​            <code>405</code>：请求方式没有对应的<em>方法</em>（GET、POST等）</p>
+</li>
+<li><p><code>5xx</code>：服务器错误，例如<code>500</code>：服务器内部错误，一般是服务器后台源代码错误</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>响应头</p>
+<p>常见的响应头：</p>
+<ul>
+<li><p><code>Content-Type</code>：服务器告诉客户端本次响应体的数据格式以及编码格式。</p>
+<p>浏览器会根据<code>Content-Type</code>自动适应编码格式</p>
+</li>
+<li><p><code>Content-disposition</code>：服务器告诉客户端以什么格式打开响应体数据</p>
+<ul>
+<li><code>in-line</code>：在浏览器内打开，默认值</li>
+<li><code>attachment</code>：以附件形式打开响应体，需要指定<code>filename=xxx</code>，常用于文件下载</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>响应空行：最后一个响应头之后是一个空行，包括回车符和换行符，分隔响应头和体</p>
+</li>
+<li><p>响应体：服务器传送给客户端的数据</p>
+</li>
+</ul>
+
+        <h3 id="Response">
+          <a href="#Response" class="heading-link"><i class="fas fa-link"></i></a><a href="#Response" class="headerlink" title="Response"></a>Response</h3>
+      
+        <h4 id="Response对象继承体系">
+          <a href="#Response对象继承体系" class="heading-link"><i class="fas fa-link"></i></a><a href="#Response对象继承体系" class="headerlink" title="Response对象继承体系"></a>Response对象继承体系</h4>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210803163341005.png" alt="image-20210803163341005">
+      </p>
+
+        <h4 id="Response功能">
+          <a href="#Response功能" class="heading-link"><i class="fas fa-link"></i></a><a href="#Response功能" class="headerlink" title="Response功能"></a>Response功能</h4>
+      
+        <h5 id="Response对象设置响应消息">
+          <a href="#Response对象设置响应消息" class="heading-link"><i class="fas fa-link"></i></a><a href="#Response对象设置响应消息" class="headerlink" title="Response对象设置响应消息"></a>Response对象设置响应消息</h5>
+      <ol>
+<li><p>设置响应行</p>
+<p>格式：<code>HTTP/1.1 200 OK</code></p>
+<ul>
+<li><code>void setStatus(int sc)</code>设置此响应的<strong>状态码</strong>。此方法用于设置没有错误时的返回状态代码（例如状态代码 SC_OK 或<br>SC_MOVED_TEMPORARILY）。如果有错误，并且调用者希望调用 Web 应用程序中定义的错误页面，则应改用  <code>sendError</code> 方法。</li>
+</ul>
+</li>
+<li><p>设置响应头：</p>
+<ul>
+<li><code>void setHeader(String name, String value)</code>设置<strong>响应头</strong>，如果已经设置了头，则新值将重写以前的值。<code>containsHeader</code><br>方法可用于测试在设置其值之前头是否存在。</li>
+</ul>
+</li>
+<li><p>设置响应体</p>
+<p>使用步骤：</p>
+<ol>
+<li>获取输出流<ul>
+<li><code>PrintWriter getWriter()</code>获取<strong>字符</strong>输出流</li>
+<li><code>ServletOutputStream getOutputStream()</code>获取<strong>字节</strong>输出流</li>
+</ul>
+</li>
+<li>使用输出流将数据输出到客户端浏览器</li>
+</ol>
+</li>
+</ol>
+
+        <h4 id="案例-1">
+          <a href="#案例-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#案例-1" class="headerlink" title="案例"></a>案例</h4>
+      
+        <h5 id="完成重定向">
+          <a href="#完成重定向" class="heading-link"><i class="fas fa-link"></i></a><a href="#完成重定向" class="headerlink" title="完成重定向"></a>完成重定向</h5>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210803164915947.png" alt="image-20210803164915947">
+      </p>
+
+        <h6 id="步骤：">
+          <a href="#步骤：" class="heading-link"><i class="fas fa-link"></i></a><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h6>
+      <p>在设置重定向时，往往分为两个步骤：</p>
+<ol>
+<li>利用<code>setStatus(302)</code>告知浏览器需要重定向</li>
+<li>利用<code>setHeader(&quot;location&quot;,&quot;重定向到哪个虚拟访问路径&quot;)</code>设置<code>location</code>域</li>
+</ol>
+<p>可以把上述两部简化为一步，调用<code>void sendRedirect(String s)</code>方法指定<font color="red">重定向</font>的虚拟访问路径<code>s</code>即可</p>
+<p><font color="GoldEnrod"><strong>转发的特点：</strong></font></p>
+<ol>
+<li>转发后浏览器<strong>地址栏路径没有发生变化</strong></li>
+<li>只能转发到<strong>当前服务器的内部资源</strong></li>
+<li>转发是<strong>一次请求</strong></li>
+<li><code>forward()</code>可以使用request域对象共享数据</li>
+</ol>
+
+        <h6 id="重定向的特点：">
+          <a href="#重定向的特点：" class="heading-link"><i class="fas fa-link"></i></a><a href="#重定向的特点：" class="headerlink" title="重定向的特点："></a><font color="Orchid"><strong>重定向的特点</strong>：</font></h6>
+      <ol>
+<li>重定向后浏览器的<strong>地址栏路径发生变化</strong></li>
+<li>重定向可以访问<strong>其他站点（服务器）的资源</strong></li>
+<li>重定向是<strong>两次请求</strong>，</li>
+<li><code>sendRedirect()</code>不能使用request域对象共享数据</li>
+</ol>
+
+        <h6 id="路径写法：">
+          <a href="#路径写法：" class="heading-link"><i class="fas fa-link"></i></a><a href="#路径写法：" class="headerlink" title="路径写法："></a>路径写法：</h6>
+      <p>分类：</p>
+<ol>
+<li><p>相对路径：通过相对路径不可以确定唯一的资源，不以<code>/</code>开头</p>
+<p>规则：找到当前的资源和目标资源之间的相对位置关系</p>
+<ul>
+<li><code>./</code>：当前目录，不写也默认</li>
+<li><code>../</code>：上一级目录</li>
+</ul>
+</li>
+<li><p>绝对路径：通过绝对路径可以确定唯一的资源，以<code>/</code>开头</p>
+<p>例如：<code>http://localhost/day15/responseDemo2</code>，可以简写为<code>/day15/responseDemo2</code></p>
+<p>规则：判断定义的路径是给谁用的（客户端/服务器）？判断请求是从哪里来的</p>
+<ul>
+<li>给客户端浏览器使用：需要加虚拟目录（项目的访问路径），建议使用<code>getContextPath()</code>来动态获取</li>
+<li>给服务器使用：不需要加虚拟目录</li>
+</ul>
+</li>
+</ol>
+
+        <h5 id="服务器输出字符数据到浏览器">
+          <a href="#服务器输出字符数据到浏览器" class="heading-link"><i class="fas fa-link"></i></a><a href="#服务器输出字符数据到浏览器" class="headerlink" title="服务器输出字符数据到浏览器"></a>服务器输出字符数据到浏览器</h5>
+      
+        <h6 id="步骤：-1">
+          <a href="#步骤：-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#步骤：-1" class="headerlink" title="步骤："></a>步骤：</h6>
+      <ol>
+<li><p>获取字符输出流：<code>PrintWriter getWriter()</code>，调用<code>ServletResponse</code>的此方法返回字符输出流对象，</p>
+<p>但获取到的流默认编码是<code>ISO-8859-1</code>（1个字节编码），如果要输出中文（2到3个字节）需要解决<font color="DarkOrange"><br>乱码问题</font></p>
+</li>
+<li><p>输出数据</p>
+</li>
+</ol>
+
+        <h6 id="注意：乱码问题">
+          <a href="#注意：乱码问题" class="heading-link"><i class="fas fa-link"></i></a><a href="#注意：乱码问题" class="headerlink" title="注意：乱码问题"></a>注意：<font color="DarkOrange">乱码问题</font></h6>
+      <p>由于浏览器默认解码方式与平台有关，比如<code>windows</code>下默认<code>GBK</code>，所以需要在<font color="Crimson"><br>获取流之前指定<code>ContentType</code></font></p>
+<ol>
+<li><code>response.setHeader(&quot;content-type&quot;,&quot;text/html;charset=utf-8&quot;)</code>，这种方式太麻烦</li>
+<li><code>response.setContentType(&quot;text/html;charset=utf-8&quot;)</code>，这个方法直接设置<code>ContentType</code></li>
+</ol>
+
+        <h5 id="服务器输出字节数据到浏览器">
+          <a href="#服务器输出字节数据到浏览器" class="heading-link"><i class="fas fa-link"></i></a><a href="#服务器输出字节数据到浏览器" class="headerlink" title="服务器输出字节数据到浏览器"></a>服务器输出字节数据到浏览器</h5>
+      
+        <h6 id="步骤">
+          <a href="#步骤" class="heading-link"><i class="fas fa-link"></i></a><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h6>
+      <ol>
+<li>获取字节输出流：<code>ServletOutputStream getOutputStream()</code>，调用此方法返回字节输出流对象</li>
+<li>输出数据</li>
+</ol>
+
+        <h6 id="注意">
+          <a href="#注意" class="heading-link"><i class="fas fa-link"></i></a><a href="#注意" class="headerlink" title="注意"></a>注意</h6>
+      <ol>
+<li>输出字节数据时，如果使用<code>byte[] getBytes()</code>方法，则按照平台的默认字符集（<code>windows</code>下为<code>GBK</code>）编码</li>
+<li>需要按照指定的编码获得字节数组，则利用重载形式<code>byte[] getBytes(String charsetName)</code>设置编码集</li>
+</ol>
+
+        <h5 id="验证码案例——Response">
+          <a href="#验证码案例——Response" class="heading-link"><i class="fas fa-link"></i></a><a href="#验证码案例——Response" class="headerlink" title="验证码案例——Response"></a>验证码案例——Response</h5>
+      
+        <h6 id="产生验证码图像">
+          <a href="#产生验证码图像" class="heading-link"><i class="fas fa-link"></i></a><a href="#产生验证码图像" class="headerlink" title="产生验证码图像"></a>产生验证码图像</h6>
+      <ol>
+<li><p>利用<code>BufferedImage</code>类的构造方法<code>BufferedImage(int width,int height,int imageType)</code>产生一个指定<code>width</code>、<code>height</code><br>和图像类型<code>imageType</code>的初始图像，<code>imageType</code>可以为<code>BufferedImage.TYPE_INT_RGB</code></p>
+</li>
+<li><p>获取此<code>BufferedImage</code>图像的<code>Graphics</code>画笔对象，用于对图像进行绘制</p>
+</li>
+<li><p>绘制：</p>
+<ul>
+<li>利用<code>setColor(Color c)</code>设置画笔的渲染颜色</li>
+<li>利用<code>fillRect(int x,int y,int width,int height)</code>填充矩形从<code>(x,y)</code>到<code>(x+width,y+height)</code></li>
+<li>利用<code>drawRect(int x,int y,int width,int height)</code>绘制边框，注意边框有<code>1px</code>的宽度</li>
+<li>利用<code> drawLine(int x1,int y1,int x2,int y2)</code>绘制线条，线条从<code>(x1,y1)</code>到<code>(x2,y2)</code></li>
+</ul>
+</li>
+<li><p>产生随机验证码字符</p>
+<ul>
+<li>利用<code>drawString(String str,int x,int y)</code>绘制文本，<code>str</code>将会被绘制到<code>(x,y)</code>位置</li>
+<li>文本可以由随机数<code>Random</code>类产生，再由<code>String valueOf(Object obj)</code>包装为<code>String</code>对象</li>
+</ul>
+</li>
+<li><p>将图片输出到页面上</p>
+<ul>
+<li><p><code>ImageIO</code>的静态方法<code>write(RenderedImage image,String formatName,OutputStream output)</code>可以把实现了<code>RenderedImage</code><br>接口的指定<code>image</code>对象以<code>formatName</code>格式输出到<code>output</code>输出流</p>
+<p>在本案例中把上面绘制好的<code>image</code>以<code>jpg</code>格式输出到<code>ServletResponse</code>对象的字节输出流</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ImageIO.write(image, <span class="string">&quot;jpg&quot;</span>, response.getOutputStream());</span><br></pre></td></tr></table></div></figure></li>
+</ul>
+</li>
+</ol>
+
+        <h3 id="ServletContext">
+          <a href="#ServletContext" class="heading-link"><i class="fas fa-link"></i></a><a href="#ServletContext" class="headerlink" title="ServletContext"></a>ServletContext</h3>
+      <ul>
+<li><p>概念：代表整个WEB应用，可以和程序的容器（服务器）来通信</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210801235001351.png" alt="image-20210801235001351">
+      </p>
+</li>
+<li><p>获取：</p>
+<ol>
+<li>通过<code>ServletRequest</code>对象获取：<code>ServletContext getServletContext()</code></li>
+<li>通过<code>HttpServlet</code>对象获取：<code>this.getServletContext()</code></li>
+</ol>
+</li>
+<li><p>功能：</p>
+<ol>
+<li><p>获取MIME类型：<code>String getMimeType(String s)</code>返回文件名为<code>s</code>的MIME类型</p>
+<ul>
+<li><p>MIME：在互联网通信过程中定义的一种文件数据类型</p>
+<p>格式： <code>大类型/小类型</code>，例如<code>text/html</code>或 <code>image/jpeg</code></p>
+</li>
+</ul>
+</li>
+<li><p>域对象：共享数据</p>
+<ul>
+<li>方法<ol>
+<li><code>void setAttribute(String s,Object o)</code>设置域对象<code>s</code>的值为<code>o</code></li>
+<li><code>Object getAttribute(String s)</code>返回域对象<code>s</code>的值为<code>Object</code>类型</li>
+<li><code>void removeAttribute(String s)</code>删除域对象中指定的<code>s</code>对应的键值对</li>
+</ol>
+</li>
+<li>作用范围：所有用户所有请求的数据，生命周期很长（伴随服务器）</li>
+</ul>
+</li>
+<li><p>获取文件的真实（服务器）路径</p>
+<ul>
+<li><p>方法：<code>String getRealPath(String s)</code>返回<code>s</code>资源的真实路径</p>
+<p><font color="red"><strong>注意：真实路径：</strong></font></p>
+<ol>
+<li><p>对于项目<font color="Crimson"><br>web目录下的文件</font>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210804031015234.png" alt="image-20210804031015234">
+      ，均被打包到部署的真实根路径下</p>
+<p><strong>真实根路径：</strong><code>Tomcat</code>服务器此项目配置文件<code>conf/Catalina/localhost/上下文名称.xml</code>里</p>
+<p>可以在Tomcat启动时控制台打印的<code>Using CATALINA_BASE:此项目配置文件路径</code>找到</p>
+<p>在<code>xml</code>配置文件里的<code>&lt;Context /&gt;</code>标签里的<code>docBase=&quot;项目路径&quot;</code>即为项目真实路径</p>
+</li>
+<li><p>对于项目<font color="Crimson">web目录下的<code>WEB-INF</code>文件夹</font>，均被打包到部署的真实根路径下的<code>WEB-INF</code><br>文件夹</p>
+<p><code>WEB-INF</code>文件夹还包含了编译之后的<code>class</code>字节码文件（存放于<code>classes</code>文件夹）</p>
+</li>
+<li><p>对于项目<font color="Crimson"><code>src</code>目录下的文件</font>，均被打包到部署的真实根路径下的<code>WEB-INF</code><br>下的<code>classes</code>文件夹</p>
+<p>相比之下<code>ClassLoader</code>类加载器对象的<code>getResource(String name)</code>方法只能获取<code>src</code>的文件</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h4 id="文件下载案例">
+          <a href="#文件下载案例" class="heading-link"><i class="fas fa-link"></i></a><a href="#文件下载案例" class="headerlink" title="文件下载案例"></a>文件下载案例</h4>
+      <ul>
+<li><p>需求：</p>
+<ol>
+<li>页面显示超链接</li>
+<li>点击超链接后弹出下载提示框</li>
+<li>完成图片文件下载</li>
+</ol>
+</li>
+<li><p>分析：</p>
+<ul>
+<li><p>超链接指向的资源如果能被浏览器解析，则在浏览器中展示（例如图片），如果不能解析，则会弹出下载提示框（例如视频）</p>
+</li>
+<li><p>任何资源都需要弹出下载提示框</p>
+</li>
+<li><p>使用<strong>响应头</strong>可以指定资源的打开方式：</p>
+<ul>
+<li><p><code>Content-disposition</code>：服务器告诉客户端以什么格式打开响应体数据</p>
+<ol>
+<li><p><code>in-line</code>：在浏览器内打开，默认值</p>
+</li>
+<li><p><code>attachment</code>：以<strong>附件形式打开</strong>响应体，需要指定<code>filename=xxx</code>，常用于文件下载</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>步骤：</p>
+<ol>
+<li><p>定义页面，编辑超链接<code>href</code>指向<code>Servlet</code>，可以利用<strong>请求参数携带需要下载的文件名</strong></p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210804130306959.png" alt="image-20210804130306959">
+      </p>
+</li>
+<li><p>定义Servlet</p>
+<ul>
+<li>获取文件名称：位于请求参数</li>
+<li>使用字节输入流加载文件到内存<ul>
+<li>加载文件进内存需要获取到文件的<strong>真实路径</strong></li>
+</ul>
+</li>
+<li>指定response的响应头：<code>Content-disposition</code>为以附件形式打开：<code>attachment</code></li>
+<li>将数据输出到<code>response</code>的输出流</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h5 id="中文文件名问题">
+          <a href="#中文文件名问题" class="heading-link"><i class="fas fa-link"></i></a><a href="#中文文件名问题" class="headerlink" title="中文文件名问题"></a>中文文件名问题</h5>
+      <ul>
+<li>解决思路：<ol>
+<li>获取客户端使用的浏览器版本信息</li>
+<li>根据不同的版本信息，设置不同的<code>filename</code>编码方式（利用编码工具类）</li>
+</ol>
+</li>
+</ul>
+
+        <h3 id="会话技术">
+          <a href="#会话技术" class="heading-link"><i class="fas fa-link"></i></a><a href="#会话技术" class="headerlink" title="会话技术"></a>会话技术</h3>
+      <ul>
+<li>会话：一次会话中包含多次请求和响应<ul>
+<li>一次会话：浏览器第一次给服务器资源发送请求，会话<strong>建立</strong>，直到有一方断开为止，会话<strong>结束</strong></li>
+</ul>
+</li>
+<li>功能：在<strong>一次会话的范围内的多次请求间<font color="OrangeRed">共享数据</font></strong></li>
+<li>方式：<ol>
+<li>客户端会话技术：Cookie</li>
+<li>服务器端会话技术：Session</li>
+</ol>
+</li>
+</ul>
+
+        <h4 id="Cookie">
+          <a href="#Cookie" class="heading-link"><i class="fas fa-link"></i></a><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4>
+      
+        <h5 id="概念">
+          <a href="#概念" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念" class="headerlink" title="概念"></a>概念</h5>
+      <ul>
+<li>客户端会话技术，将数据保存到客户端</li>
+</ul>
+
+        <h5 id="快速入门">
+          <a href="#快速入门" class="heading-link"><i class="fas fa-link"></i></a><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h5>
+      <ul>
+<li><p>使用步骤：</p>
+<ol>
+<li>创建Cookie对象，绑定数据<ul>
+<li><code>Cookie(String name, String value)</code>，构造一个带指定名称和值的<code>Cookie</code>对象</li>
+</ul>
+</li>
+<li>发送Cookie对象，随着<code>HttpServletResponse</code>对象<ul>
+<li><code>void addCookie(Cookie cookie) </code>将指定<code>Cookie</code>添加到<code>response</code>，可多次调用设置多个<code>Cookie</code></li>
+</ul>
+</li>
+<li>获取Cookie，拿到数据，通过<code>HttpServletRequest</code>对象<ul>
+<li><code>Cookie[] getCookies()</code>返回包含客户端随此请求一起发送的所有 <code>Cookie</code> 对象的数组。如果没有发送任何<code>Cookie</code><br>，则此方法返回  <code>null</code></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>实现原理：</p>
+<ul>
+<li>基于响应头：<code>Set-Cookie</code>和请求头<code>Cookie</code>实现</li>
+</ul>
+</li>
+<li><p>Cookie细节：</p>
+<ol>
+<li><p>一次发送多个Cookie？</p>
+<p><strong>可以</strong>创建多个Cookie并多次调用<code>addCookie(Cookie cookie)</code>发送</p>
+</li>
+<li><p>Cookie在浏览器中保存的时间？</p>
+<ul>
+<li><p>默认情况下，浏览器关闭后，Cookie被销毁</p>
+</li>
+<li><p>持久化存储Cookie：<code>setMaxAge(int seconds)</code></p>
+<p>参数<code>seconds</code>的取值情况：</p>
+<ol>
+<li>正数：将Cookie数据写到硬盘的文件中，持久化存储，存活时间为<code>seconds</code>秒，写入即开始计时</li>
+<li>零：删除Cookie信息</li>
+<li>负数：默认值，浏览器关闭后Cookie被销毁</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>Cookie保存中文？</p>
+<ul>
+<li><p><code>Tomcat8</code><strong>之前</strong>，Cookie<strong>不能</strong>直接存储中文数据</p>
+<p>需要将中文数据转码保存，一般采用URL编码（由%XX组成）</p>
+</li>
+<li><p><code>Tomcat8</code><strong>之后</strong>，Cookie<strong>可以</strong>直接存储中文数据，但是对于特殊字符（例如空格、<code>:</code>等）还是不支持，建议使用URL编码</p>
+</li>
+</ul>
+</li>
+<li><p>Cookie共享的范围？</p>
+<ol>
+<li><p>假设在<font color="OrangeRed">同一个Tomcat服务器中部署了多个web项目</font>，能否共享Cookie？</p>
+<ul>
+<li><p>默认情况下，Cookie不能共享</p>
+</li>
+<li><p>可以通过<code>setPath(String path)</code>设置Cookie的共享范围，<strong>默认为当前的虚拟上下文目录</strong></p>
+<p>例如默认相当于<code>setPath(&quot;/虚拟上下文目录&quot;)</code></p>
+<p>如果要共享到Tomcat服务器多个项目，可以设置为服务器根目录<code>setPath(&quot;/&quot;)</code></p>
+</li>
+</ul>
+</li>
+<li><p>假设在<font color="OrangeRed">不同的Tomcat服务器中部署了多个web项目</font>，能否共享Cookie？</p>
+<ul>
+<li><p><code>setDomain(String path)</code>如果设置的一级域名相同，那么多个服务器之间Cookie可以共享</p>
+<p>例如<code>setDomain(&quot;.baidu.com&quot;)</code>，那么<code>tieba.baidu.com</code>和<code>news.baidu.com</code>可以共享cookie</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h5 id="Cookie的特点">
+          <a href="#Cookie的特点" class="heading-link"><i class="fas fa-link"></i></a><a href="#Cookie的特点" class="headerlink" title="Cookie的特点"></a>Cookie的特点</h5>
+      <ol>
+<li>Cookie存储数据在客户端浏览器</li>
+<li>浏览器对于单个Cookie的大小有限制(一般4KB)，以及对于同一个域名下的总Cookie数量也有限制(一般20个)</li>
+</ol>
+
+        <h5 id="Cookie的作用">
+          <a href="#Cookie的作用" class="heading-link"><i class="fas fa-link"></i></a><a href="#Cookie的作用" class="headerlink" title="Cookie的作用"></a>Cookie的作用</h5>
+      <ol>
+<li>Cookie一般用于存储少量的不太敏感的数据</li>
+<li>在不登陆的情况下完成服务器对客户端的身份识别</li>
+</ol>
+
+        <h5 id="案例-2">
+          <a href="#案例-2" class="heading-link"><i class="fas fa-link"></i></a><a href="#案例-2" class="headerlink" title="案例"></a>案例</h5>
+      <ul>
+<li><p>记住上一次访问的时间</p>
+<ul>
+<li><p>需求：</p>
+<ol>
+<li>访问一个Servlet，如果是第一次访问，则提示：您好，欢迎您首次登录</li>
+<li>如果不是第一次访问，则提示：欢迎回来，上次您登录的时间是：[时间字符串]</li>
+</ol>
+</li>
+<li><p>分析：</p>
+<ul>
+<li><p>可以采用Cookie来完成</p>
+</li>
+<li><p>在Servlet中判断是否有一个名为<code>lastTime</code>的Cookie</p>
+<p><strong>有</strong>？说明不是第一次访问</p>
+<ol>
+<li>响应数据：欢迎回来，您上次访问的事件是：[lastTime的时间]</li>
+<li>写回Cookie：lastTime=[当前时间]</li>
+</ol>
+<p><strong>没有</strong>？说明是第一次访问</p>
+<ol>
+<li>响应数据：您好，欢迎您首次登录</li>
+<li>写回Cookie：lastTime=[当前时间]</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="Session">
+          <a href="#Session" class="heading-link"><i class="fas fa-link"></i></a><a href="#Session" class="headerlink" title="Session"></a>Session</h4>
+      
+        <h5 id="概念-1">
+          <a href="#概念-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念-1" class="headerlink" title="概念"></a>概念</h5>
+      <ul>
+<li>服务器端会话技术，在一次会话的多次请求间共享数据，将数据保存在服务器端的对象中：<code>HttpSession</code>类</li>
+</ul>
+
+        <h5 id="快速入门-1">
+          <a href="#快速入门-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#快速入门-1" class="headerlink" title="快速入门"></a>快速入门</h5>
+      <p>获取<code>HttpSession</code>对象：<code>HttpServletRequest</code>实现类调用<code>HttpSession getSession()</code>返回此对象</p>
+<p>使用<code>HttpSession</code>对象：3个方法：</p>
+<ol>
+<li><code>Object getAttribute(Stirng name)</code>返回与此会话中的指定<code>name</code>绑定在一起的对象，没有则返回<code>null</code></li>
+<li><code>void setAttribute(String name,Object value)</code>使用指定<code>name</code>将<code>value</code>对象绑定到此会话，有则替换</li>
+<li><code>void removeAttribute(String name)</code> 从此会话中移除与指定<code>name</code>绑定在一起的对象</li>
+</ol>
+
+        <h5 id="原理">
+          <a href="#原理" class="heading-link"><i class="fas fa-link"></i></a><a href="#原理" class="headerlink" title="原理"></a>原理</h5>
+      <ul>
+<li>Session的实现依赖于Cookie，其实就是一个Cookie请求头/响应头字段：<code>JSESSIONID</code></li>
+</ul>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805021115545.png" alt="image-20210805021115545">
+      </p>
+
+        <h5 id="Session的细节">
+          <a href="#Session的细节" class="heading-link"><i class="fas fa-link"></i></a><a href="#Session的细节" class="headerlink" title="Session的细节"></a>Session的细节</h5>
+      <ol>
+<li><p>客户端关闭后，服务器不关闭，两次获取的Session是同一个吗？</p>
+<ul>
+<li><strong>默认情况下</strong>不是同一个，客户端关闭后Session就失效了</li>
+<li>可以通过手动指定Cookie的字段：<code>JSESSIONID</code>为<code>session.getId()</code>然后设置Cookie的存活时间</li>
+</ul>
+</li>
+<li><p>客户端不关闭，服务器关闭后，两次获取的Session是同一个吗？</p>
+<ul>
+<li><p>不是同一个，但是要确保数据不丢失：</p>
+<p><strong>Tomcat会自动序列化/反序列化，但IDEA活化会删除work目录导致活化失败，建议部署到Tomcat</strong></p>
+<ul>
+<li>session的钝化：在服务器正常关闭之前，把session对象序列化到硬盘上</li>
+<li>session的活化：在服务器启动后，将序列化的session文件反序列化到内存，还原<code>JSESSIONID</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Session的失效时间？</p>
+<ul>
+<li>服务器关闭</li>
+<li>session对象调用<code>invalidate()</code></li>
+<li>session的默认失效时间：30分钟，在Tomcat配置文件<code>web.xml</code>中配置<code>&lt;session-config&gt;</code>的超时时间</li>
+</ul>
+</li>
+</ol>
+
+        <h5 id="Session的特点">
+          <a href="#Session的特点" class="heading-link"><i class="fas fa-link"></i></a><a href="#Session的特点" class="headerlink" title="Session的特点"></a>Session的特点</h5>
+      <ol>
+<li>session用于存储一次会话的多次请求的数据，存储在服务器端</li>
+<li>session可以存储任意类型、任意大小的数据</li>
+</ol>
+
+        <h4 id="Session和Cookie的区别：">
+          <a href="#Session和Cookie的区别：" class="heading-link"><i class="fas fa-link"></i></a><a href="#Session和Cookie的区别：" class="headerlink" title="Session和Cookie的区别："></a>Session和Cookie的区别：</h4>
+      <ol>
+<li>session存储数据在服务器端，而Cookie在客户端</li>
+<li>session存储数据没有大小限制，而Cookie有</li>
+<li>session数据安全，Cookie相对不安全</li>
+</ol>
+
+        <h4 id="验证码案例——Session">
+          <a href="#验证码案例——Session" class="heading-link"><i class="fas fa-link"></i></a><a href="#验证码案例——Session" class="headerlink" title="验证码案例——Session"></a>验证码案例——Session</h4>
+      <ul>
+<li><p>需求：</p>
+<ol>
+<li>访问带有验证码的登录界面login.jsp</li>
+<li>用户输入用户名、密码以及验证码<ul>
+<li>如果用户名和密码输入有误，则跳转到登录页面，提示：用户名或密码错误</li>
+<li>如果验证码输入有误，则跳转到登录页面，提示：验证码错误</li>
+<li>如果全部输入正确，则跳转到success.jsp，显示：[用户名]，欢迎您</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>分析：</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805024528927.png" alt="image-20210805024528927">
+      </p>
+</li>
+</ul>
+
+        <h3 id="JSP">
+          <a href="#JSP" class="heading-link"><i class="fas fa-link"></i></a><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h3>
+      <p><strong>JSP是 Java Server Pages （Java服务器端页面）的缩写</strong></p>
+
+        <h4 id="概念-2">
+          <a href="#概念-2" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念-2" class="headerlink" title="概念"></a>概念</h4>
+      <ul>
+<li>可以理解为一个特殊的页面，其中既可以直接定义HTML标签，又可以定义Java代码</li>
+<li>可以用于简化书写</li>
+</ul>
+
+        <h4 id="原理：">
+          <a href="#原理：" class="heading-link"><i class="fas fa-link"></i></a><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4>
+      <p><strong>JSP本质上就是一个<code>Servlet</code></strong></p>
+<ul>
+<li>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805000518670.png" alt="image-20210805000518670">
+       
+* JSP编译之后的类继承于`HttpJspBase`，而`HttpJspBase`继承于`HttpServlet`
+
+<ul>
+<li><p>JSP的脚本：JSP定义Java代码的方式</p>
+<ol>
+<li><code>&lt;% Java代码 %&gt;</code>：定义的Java代码在<code>service()</code>方法中，可以定义<code>service()</code>方法中的所有内容</li>
+<li><code>&lt;%! Java代码 %&gt;</code>：只能定义成员变量和成员方法</li>
+<li><code>&lt;%= Java代码%&gt;</code>：定义的Java代码会输出到页面上，相当于调用<code>out.write(Java代码)</code></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="JSP的内置对象">
+          <a href="#JSP的内置对象" class="heading-link"><i class="fas fa-link"></i></a><a href="#JSP的内置对象" class="headerlink" title="JSP的内置对象"></a>JSP的内置对象</h4>
+      <ul>
+<li><p>概念：在JSP页面中不需要创建，可以直接使用的对象</p>
+</li>
+<li><p>JSP一共有9个内置对象，都可以通过<code>pageContext</code>对象来获取：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805144208603.png" alt="image-20210805144208603">
+      </p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805144128175.png" alt="image-20210805144128175">
+      </p>
+<ol>
+<li><p><code>request</code>：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805143123203.png" alt="image-20210805143123203">
+      </p>
+</li>
+<li><p><code>response</code>：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805143143363.png" alt="image-20210805143143363">
+      </p>
+</li>
+<li><p><code>out</code>：一个<code>JspWriter</code><br>字符输出流对象，可以将数据输出到页面上
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805002755326.png" alt="image-20210805002755326">
+      </p>
+<p><code>JspWriter</code>的<code>out</code>对象和<code>response.getWriter()</code>对象的<strong>区别</strong>：</p>
+<ul>
+<li><p><code>JspWriter</code>的<code>out</code>对象定义在什么位置就输出内容到什么位置</p>
+</li>
+<li><p><code>response.getWriter()</code>是一个<code>PrintWriter</code>对象（继承于<code>Writer</code>），它的输出总会在页面最前面</p>
+<p><strong>原因：</strong><code>Tomcat</code>服务器作出响应之前会先找<code>response.getWriter()</code>的缓冲区数据，再找<code>out</code><br>对象的缓冲区数据，所以导致<code>response.getWriter()</code>输出的内容永远在<code>out</code>对象之前</p>
+<p><strong>总结：</strong>在JSP中，编写的普通的文本内容相当于调用了<code>out.write(&quot;文本内容&quot;)</code><br>，这些文本内容会被写入到页面相应的位置，也可以被夹在JSP的两段<code>&lt;%Java代码%&gt;</code>之间</p>
+</li>
+</ul>
+</li>
+<li><p><code>pageContext</code>：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805143232859.png" alt="image-20210805143232859">
+      一个<code>PageContext</code>对象，只在当前页面有效</p>
+</li>
+<li><p><code>application</code>：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805143342462.png" alt="image-20210805143342462">
+      一个<code>ServletContext</code>实现类对象</p>
+</li>
+<li><p><code>page</code>：一个
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805143357398.png" alt="image-20210805143357398">
+      对象</p>
+</li>
+<li><p><code>config</code>：一个
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805143419831.png" alt="image-20210805143419831">
+      实现类对象</p>
+</li>
+<li><p><code>session</code>：一个
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805143450080.png" alt="image-20210805143450080">
+      实现类对象</p>
+</li>
+<li><p><code>exception</code>：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805143018353.png" alt="image-20210805143018353">
+      </p>
+<ul>
+<li>只有当JSP页面声明了<code>isErrorPage=&quot;true&quot;</code>才有此内置对象</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h4 id="JSP指令">
+          <a href="#JSP指令" class="heading-link"><i class="fas fa-link"></i></a><a href="#JSP指令" class="headerlink" title="JSP指令"></a>JSP指令</h4>
+      <ul>
+<li><p>作用：用于配置JSP页面，导入资源文件</p>
+</li>
+<li><p>格式：<code>&lt;%@指令名称 属性名1=属性值1 属性名2=属性值2...%&gt;</code></p>
+</li>
+<li><p>分类：</p>
+<ul>
+<li><p><code>page</code>：用于配置JSP页面</p>
+<ul>
+<li><code>contentType</code>：等同于<code>response.setContentType()</code>。IDEA会自动读取JSP的此属性更改文件编码<ol>
+<li>设置响应体的MIME类型以及字符集</li>
+<li>设置当前JSP页面的编码，IDEA会根据此属性自动修改文件编码，否则需手动指定<code>pageEncoding</code></li>
+</ol>
+</li>
+<li><code>pageEncoding</code>：指定当前JSP文件的编码，建议与<code>contentType</code>的<code>charset</code>统一</li>
+<li><code>import</code>：导入包，和Java中的<code>import</code>效果一样</li>
+<li><code>errorPage</code>：当前页面发生异常后，会自动跳转到指定的错误页面</li>
+<li><code>isErrorPage</code>：标识当前页面是否是错误页面<ol>
+<li>如果为true，则可以调用<code>exception</code>对象输出错误信息</li>
+<li>如果为false，则不可以调用<code>exception</code>对象（默认值）</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><code>include</code>：用于导入页面的资源文件</p>
+<ul>
+<li>例如在一个JSP页面利用<code>@include</code>引入另一个页面，在访问此JSP页面时会先载入引入的页面在上方</li>
+</ul>
+</li>
+<li><p><code>taglib</code>：用于导入资源，例如导入<code>JSTL</code>：</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210805141755489.png" alt="image-20210805141755489">
+      </p>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="JSP注释">
+          <a href="#JSP注释" class="heading-link"><i class="fas fa-link"></i></a><a href="#JSP注释" class="headerlink" title="JSP注释"></a>JSP注释</h4>
+      <ul>
+<li><p>HTML注释：<code>&lt;!-- --&gt;</code>只能注释HTML代码</p>
+</li>
+<li><p>JSP注释：<code>&lt;%-- --%&gt;</code>可以注释HTML代码也可以注释JSP代码，推荐使用</p>
+<p>区别：</p>
+<ul>
+<li>使用HTML注释，会把注释也响应给浏览器，只不过浏览器不显示出来</li>
+<li>使用JSP注释，在编译时就会忽略JSP注释及其内容</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="MVC开发模式">
+          <a href="#MVC开发模式" class="heading-link"><i class="fas fa-link"></i></a><a href="#MVC开发模式" class="headerlink" title="MVC开发模式"></a>MVC开发模式</h4>
+      
+        <h5 id="JSP演变历史：">
+          <a href="#JSP演变历史：" class="heading-link"><i class="fas fa-link"></i></a><a href="#JSP演变历史：" class="headerlink" title="JSP演变历史："></a>JSP演变历史：</h5>
+      <ul>
+<li>早期只有Servlet，只能使用response输出标签数据，非常麻烦</li>
+<li>后来有了JSP，简化了Servlet的开发，但是在JSP中既写Java代码，又写HTML标签等造成了难以维护</li>
+<li>再后来Java的Web开发借鉴了MVC开发模式，使得程序的设计更加合理</li>
+</ul>
+
+        <h5 id="MVC的概念：">
+          <a href="#MVC的概念：" class="heading-link"><i class="fas fa-link"></i></a><a href="#MVC的概念：" class="headerlink" title="MVC的概念："></a>MVC的概念：</h5>
+      <ul>
+<li><code>M</code>：Model，模型：<code>JavaBean</code><ul>
+<li>完成具体的业务操作，如：查询数据库、封装对象</li>
+</ul>
+</li>
+<li><code>V</code>：View，视图：<code>JSP</code><ul>
+<li>展示数据</li>
+</ul>
+</li>
+<li><code>C</code>：Controller，控制器：<code>Servlet</code><ul>
+<li>获取用户的输入</li>
+<li>调用Model</li>
+<li>将Model返回的数据交给View进行展示</li>
+</ul>
+</li>
+</ul>
+<p>优缺点：</p>
+<ul>
+<li>优点<ol>
+<li>耦合性低，方便维护，利于分工协作</li>
+<li>重用性高</li>
+</ol>
+</li>
+<li>缺点：<ol>
+<li>使得项目架构变得复杂，对开发人员要求高</li>
+</ol>
+</li>
+</ul>
+
+        <h4 id="EL表达式">
+          <a href="#EL表达式" class="heading-link"><i class="fas fa-link"></i></a><a href="#EL表达式" class="headerlink" title="EL表达式"></a>EL表达式</h4>
+      <p><strong>EL 是 Expression Language 表达式语言的缩写</strong></p>
+<ul>
+<li><p>作用：替换和简化JSP页面中Java代码的编写</p>
+</li>
+<li><p>语法：<code>$&#123;表达式&#125;</code></p>
+</li>
+<li><p>注意：</p>
+<ul>
+<li>JSP默认支持EL表达式<ul>
+<li><strong>忽略EL表达式</strong>：<ol>
+<li>设置JSP指令<code>@page</code>的属性<code>isELIgnored=&quot;true&quot;</code>，忽略当前JSP页面所有的EL表达式</li>
+<li><code>\$&#123;表达式&#125;</code>，忽略<code>\</code>之后的EL表达式</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>使用：</p>
+<ul>
+<li><p>运算</p>
+<ul>
+<li>运算符：<ol>
+<li>算术运算符：<code>+</code>、<code>-</code>、<code>*</code>、<code>/(div)</code>、<code>%(mod)</code></li>
+<li>比较运算符：<code>&gt;</code>、<code>&lt;</code>、<code>&gt;=</code>、<code>&lt;=</code>、<code>==</code>、<code>!=</code></li>
+<li>逻辑运算符：<code>&amp;&amp;(and)</code>、<code>||(or)</code>、<code>!(not)</code></li>
+<li>空运算符：<code>empty</code><ul>
+<li>空运算符用于判断字符串、集合、数组对象是否为null或长度是否为0</li>
+<li>可以搭配逻辑运算符使用：<ol>
+<li><code>not empty 对象</code>，对<code>empty</code>的判断结果取反</li>
+<li><code>empty 对象1 and empty 对象2</code>，对两个<code>empty</code>判断结果进行逻辑与运算</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>获取值</strong></p>
+<ul>
+<li><p>EL表达式只能从域对象中获取值</p>
+</li>
+<li><p>语法：</p>
+<ol>
+<li><p><code>$&#123;域名称.键名&#125;</code>：从指定的域名称中获取指定键的值</p>
+<p><strong>域名称（相当于Map）：</strong></p>
+<ul>
+<li><p>pageScope –&gt; pageContext</p>
+</li>
+<li><p>requestScope –&gt; request</p>
+</li>
+<li><p>sessionScope –&gt;session</p>
+</li>
+<li><p>applicantScope –&gt;application（ServletContext）</p>
+<p>例如在request域中存储了<code>name=Jerry</code></p>
+<p>使用<code>$&#123;requestScope.name&#125;</code>即可获取<code>Jerry</code>，这相当于<code>$&#123;requestScope.get(&quot;name&quot;)&#125;</code></p>
+<p>值得注意的是，如果获取的数据不存在域中，不会导致显示<code>null</code>，而是不显示</p>
+</li>
+</ul>
+</li>
+<li><p><code>$&#123;键名&#125;</code>：依次从<em>最小的域</em>中查找是否有该键对应的值，直到查找到为止</p>
+<p><strong>最小的域</strong>：按照上方<strong>域名称</strong>从上往下的顺序即从小到大</p>
+</li>
+<li><p>获取对象：</p>
+<ul>
+<li><p><code>$&#123;域名称.键名&#125;</code>，返回键名对应的对象的<code>toString()</code>形式</p>
+</li>
+<li><p><code>$&#123;域名称.键名.属性名&#125;</code>，相当于调用<code>get属性名()</code></p>
+<p>例如<code>$&#123;域名称.user.birthday&#125;</code>相当于<code>$&#123;域名称.user.getBirthDay()&#125;</code></p>
+<p>也可以调用自定义的<code>getXxx()</code>方法：<code>$&#123;域名称.user.getXxx()&#125;相当于$&#123;域名称.user.xxx&#125;</code></p>
+</li>
+</ul>
+</li>
+<li><p>获取List集合：</p>
+<ul>
+<li><code>$&#123;域名称.键名&#125;</code>，返回键名对应的List集合，相当于<code>$&#123;域名称.get(&quot;键名&quot;)&#125;</code></li>
+<li><code>$&#123;域名称.键名[索引]&#125;</code>，相当于调用键名对应的List集合对象的<code>get(索引)</code>，此方法不会越界</li>
+</ul>
+</li>
+<li><p>获取Map集合：</p>
+<ul>
+<li><p><code>$&#123;域名称.键名&#125;</code>返回键名对应的Map集合，相当于<code>$&#123;域名称.get(&quot;键名&quot;)&#125;</code></p>
+</li>
+<li><p><code>$&#123;域名称.键名.Map的键名&#125;</code>，相当于调用键名对应的Map集合对象的<code>get(&quot;Map的键名&quot;)</code></p>
+<p>还可以写成<code>$&#123;域名称.键名[&quot;Map的键名&quot;]&#125;</code>,此方法相当于Map集合对象的<code>get(&quot;Map的键名&quot;)</code></p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>隐式对象</p>
+<ul>
+<li><p>EL表达式中有11个隐式对象</p>
+<ul>
+<li><p><code>pageContext</code>：可以用于获取其他8个内置对象</p>
+<p>用法：<code>$&#123;pageContext.request&#125;</code>：获取<code>request</code>内置对象</p>
+<p>案例：可以用于<strong>动态获取虚拟目录</strong>：<code>$&#123;pageContext.request.contextPath&#125;</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="JSTL标签">
+          <a href="#JSTL标签" class="heading-link"><i class="fas fa-link"></i></a><a href="#JSTL标签" class="headerlink" title="JSTL标签"></a>JSTL标签</h4>
+      <p><strong>JSTL 是 JavaServer Pages Standard Tag Library （JSP标准标签库）的缩写</strong></p>
+<ul>
+<li><p>概念：是由Apache组织提供的开源免费JSP标签</p>
+</li>
+<li><p>作用：用于简化和替换JSP页面上的Java代码</p>
+</li>
+<li><p>使用步骤：</p>
+<ol>
+<li>导入jar包：<code>taglibs-standard-impl-1.2.5.jar</code>和<code>taglibs-standard-spec-1.2.5.jar</code></li>
+<li>引入标签库：<code>&lt;%@ tablib prefix=&quot;前缀名&quot; uri=&quot;资源路径&quot;%&gt;</code></li>
+<li>使用标签</li>
+</ol>
+</li>
+<li><p>常用的JSTL标签</p>
+<ul>
+<li><p><code>if</code>，相当于Java代码的if语句</p>
+<ul>
+<li><p>格式：<code>&lt;前缀名:if test=&quot;boolean表达式的值&quot;&gt;&lt;/前缀名:if&gt;</code></p>
+</li>
+<li><p>用法：必须指定<code>test</code>属性，如果为<code>true</code>，则显示<code>if</code>标签体的内容，否则不显示<code>if</code>标签体的内容</p>
+<p>通常在<code>test</code>属性搭配EL表达式使用</p>
+</li>
+</ul>
+</li>
+<li><p><code>choose</code>，相当于Java代码的switch语句</p>
+<ul>
+<li><p>格式：</p>
+<figure class="highlight jsp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:choose&gt;</span><br><span class="line">            &lt;c:when test=<span class="string">&quot;$&#123;requestScope.number == 1&#125;&quot;</span>&gt;</span><br><span class="line">                &lt;h3&gt;星期一&lt;/h3&gt;</span><br><span class="line">            &lt;/c:when&gt;</span><br><span class="line">            &lt;c:when test=<span class="string">&quot;$&#123;requestScope.number == 2&#125;&quot;</span>&gt;</span><br><span class="line">                &lt;h3&gt;星期二&lt;/h3&gt;</span><br><span class="line">            &lt;/c:when&gt;</span><br><span class="line">            &lt;c:otherwise&gt;</span><br><span class="line">                &lt;h3&gt;其他&lt;/h3&gt;</span><br><span class="line">            &lt;/c:otherwise&gt;</span><br><span class="line">        &lt;/c:choose&gt;</span><br></pre></td></tr></table></div></figure></li>
+<li><p>用法：在<code>choose</code>标签内的每一个<code>when</code>标签相当于<code>switch</code>语句的每一个<code>case</code>，<code>otherwise</code>相当于<code>switch</code><br>语句的<code>default</code></p>
+<p><code>when</code>标签：条件在<code>test</code>属性中指出，通常搭配EL语句</p>
+</li>
+</ul>
+</li>
+<li><p><code>foreach</code>，相当于Java代码的for语句</p>
+<ul>
+<li>格式：</li>
+<li>属性：<ol>
+<li><code>begin</code>：开始值，包括</li>
+<li><code>end</code>：结束值，包括</li>
+<li><code>var</code>：临时变量名</li>
+<li><code>step</code>：步长</li>
+<li><code>varStatus</code>：循环的状态对象<ul>
+<li><code>index</code>：元素在容器中的索引，从0开始</li>
+<li><code>count</code>：循环计数器，从1开始</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>JSTL案例：</p>
+<ul>
+<li>需求：在request域中有一个存放User对象的List集合，使用JSTL和EL将List集合内容展示到JSP的表格中</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="三层架构">
+          <a href="#三层架构" class="heading-link"><i class="fas fa-link"></i></a><a href="#三层架构" class="headerlink" title="三层架构"></a>三层架构</h3>
+      <ol>
+<li>界面层（表示层）：用户看得到的界面，用户可以通过界面上的组件和服务器交互</li>
+<li>业务逻辑层：处理业务逻辑</li>
+<li>数据访问层：操作数据存储文件</li>
+</ol>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210806001159331.png" alt="image-20210806001159331">
+      </p>
+
+        <h5 id="案例：用户信息的列表展示，代码详见day17-case">
+          <a href="#案例：用户信息的列表展示，代码详见day17-case" class="heading-link"><i class="fas fa-link"></i></a><a href="#案例：用户信息的列表展示，代码详见day17-case" class="headerlink" title="案例：用户信息的列表展示，代码详见day17_case"></a>案例：用户信息的列表展示，代码详见day17_case</h5>
+      <ul>
+<li><p>需求：用户信息的增删改查操作</p>
+</li>
+<li><p>设计：</p>
+<ul>
+<li><p>技术选型：Servlet + JSP + MySQL + JDBCTemplate + Druid + BeanUtils + Tomcat</p>
+</li>
+<li><p>数据库设计：user表，包括用户的编号、姓名、性别、年龄、籍贯、QQ、邮箱</p>
+<figure class="highlight sql"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">user</span>(</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    gender <span class="type">varchar</span>(<span class="number">5</span>),</span><br><span class="line">    age <span class="type">int</span>,</span><br><span class="line">    address <span class="type">varchar</span>(<span class="number">32</span>),</span><br><span class="line">    qq <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">    email <span class="type">varchar</span>(<span class="number">50</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></div></figure></li>
+</ul>
+</li>
+<li><p>开发：</p>
+<ul>
+<li>环境搭建：<ol>
+<li>创建数据库环境</li>
+<li>创建项目，导入需要的jar包</li>
+</ol>
+</li>
+<li>coding：</li>
+</ul>
+</li>
+</ul>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210806011642699.png" alt="image-20210806011642699">
+      </p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210806155853142.png" alt="image-20210806155853142">
+      </p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210806162531202.png" alt="image-20210806162531202">
+      </p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210806165132525.png" alt="image-20210806165132525">
+      </p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210806184821807.png" alt="image-20210806184821807">
+      </p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210806211454118.png" alt="image-20210806211454118">
+      </p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210806213921964.png" alt="image-20210806213921964">
+      </p>
+<ul>
+<li>测试</li>
+<li>部署运维</li>
+</ul>
+
+        <h6 id="基础功能：">
+          <a href="#基础功能：" class="heading-link"><i class="fas fa-link"></i></a><a href="#基础功能：" class="headerlink" title="基础功能："></a>基础功能：</h6>
+      <ol>
+<li>列表查询</li>
+<li>登录</li>
+<li>添加</li>
+<li>删除</li>
+<li>修改</li>
+</ol>
+
+        <h6 id="复杂功能：">
+          <a href="#复杂功能：" class="heading-link"><i class="fas fa-link"></i></a><a href="#复杂功能：" class="headerlink" title="复杂功能："></a>复杂功能：</h6>
+      <ol>
+<li>删除选中</li>
+<li>分页查询</li>
+<li>复杂条件查询</li>
+</ol>
+
+        <h3 id="Filter：过滤器">
+          <a href="#Filter：过滤器" class="heading-link"><i class="fas fa-link"></i></a><a href="#Filter：过滤器" class="headerlink" title="Filter：过滤器"></a>Filter：过滤器</h3>
+      
+        <h4 id="web中的过滤器：">
+          <a href="#web中的过滤器：" class="heading-link"><i class="fas fa-link"></i></a><a href="#web中的过滤器：" class="headerlink" title="web中的过滤器："></a>web中的过滤器：</h4>
+      <ul>
+<li>当访问服务器资源时，过滤器可以将请求拦截下来，完成一些特殊的功能</li>
+</ul>
+
+        <h4 id="过滤器的作用：">
+          <a href="#过滤器的作用：" class="heading-link"><i class="fas fa-link"></i></a><a href="#过滤器的作用：" class="headerlink" title="过滤器的作用："></a>过滤器的作用：</h4>
+      <ul>
+<li>一般用于完成通用的操作，如：登录验证、统一编码处理、敏感字符过滤</li>
+</ul>
+
+        <h4 id="快速入门：-1">
+          <a href="#快速入门：-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#快速入门：-1" class="headerlink" title="快速入门："></a>快速入门：</h4>
+      
+        <h5 id="步骤：-2">
+          <a href="#步骤：-2" class="heading-link"><i class="fas fa-link"></i></a><a href="#步骤：-2" class="headerlink" title="步骤："></a>步骤：</h5>
+      <ol>
+<li>定义一个类，实现接口<code>Filter</code></li>
+<li>重写接口的方法<ul>
+<li><code>init()</code></li>
+<li><code>doFilter()</code><ul>
+<li>放行请求：<code>filterChain.doFilter(ServletRequest servletRequest,ServletResponse servletResponse)</code></li>
+</ul>
+</li>
+<li><code>destroy()</code></li>
+</ul>
+</li>
+<li>配置拦截路径</li>
+</ol>
+
+        <h5 id="过滤器细节：">
+          <a href="#过滤器细节：" class="heading-link"><i class="fas fa-link"></i></a><a href="#过滤器细节：" class="headerlink" title="过滤器细节："></a>过滤器细节：</h5>
+      
+        <h6 id="web-xml配置">
+          <a href="#web-xml配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#web-xml配置" class="headerlink" title="web.xml配置"></a>web.xml配置</h6>
+      <p>类似于Servlet的配置，指定某个<code>filter-name</code>的<code>url-pattern</code></p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210807133551501.png" alt="image-20210807133551501">
+      </p>
+
+        <h6 id="过滤器执行流程">
+          <a href="#过滤器执行流程" class="heading-link"><i class="fas fa-link"></i></a><a href="#过滤器执行流程" class="headerlink" title="过滤器执行流程"></a>过滤器执行流程</h6>
+      <ol>
+<li>执行过滤器</li>
+<li>执行放行后的资源：<code>chain.doFilter(request,response)</code></li>
+<li>执行放行之后的代码</li>
+</ol>
+
+        <h6 id="过滤器生命周期方法">
+          <a href="#过滤器生命周期方法" class="heading-link"><i class="fas fa-link"></i></a><a href="#过滤器生命周期方法" class="headerlink" title="过滤器生命周期方法"></a>过滤器生命周期方法</h6>
+      <ul>
+<li><code>init()</code>：服务器开启后即执行，不需要访问都会执行，一般用于加载资源</li>
+<li><code>doFilter()</code>：<strong>每一次</strong>请求<strong>被拦截的资源时</strong>会执行</li>
+<li><code>destroy()</code>：服务器正常关闭后销毁执行，一般用于释放资源</li>
+</ul>
+
+        <h6 id="过滤器配置详解">
+          <a href="#过滤器配置详解" class="heading-link"><i class="fas fa-link"></i></a><a href="#过滤器配置详解" class="headerlink" title="过滤器配置详解"></a>过滤器配置详解</h6>
+      <ul>
+<li><p>拦截路径设置：</p>
+<ol>
+<li>具体资源的拦截：<code>/index.jsp</code>，只有访问<code>index.jsp</code>资源时，过滤器才会被执行</li>
+<li>具体目录拦截：<code>/user/*</code>，访问/user下的所有资源时都会被过滤器执行拦截</li>
+<li>后缀名拦截：<code>*.jsp</code>，访问所有JSP资源时都会被过滤器执行拦截</li>
+<li>拦截所有：<code>/*</code>，访问所有资源都会被过滤器执行拦截</li>
+</ol>
+</li>
+<li><p>拦截方式设置：资源被访问的方式</p>
+<ol>
+<li><p>注解配置：设定<code>dispatcherTypes</code>属性的值</p>
+<p>可选的<em>属性值</em>：</p>
+<ul>
+<li><code>REQUEST</code>：浏览器<strong>直接请求</strong>资源时才会执行此过滤器，默认值</li>
+<li><code>FORWARD</code>：<strong>转发</strong>访问资源时才会执行此过滤器</li>
+<li><code>INCLUDE</code>：包含访问资源时才会执行此过滤器</li>
+<li><code>ERROR</code>：错误跳转资源时才会执行此过滤器</li>
+<li><code>ASYNC</code>：异步访问资源时才会执行此过滤器</li>
+</ul>
+</li>
+<li><p><code>web.xml</code>配置：在<code>filter-mapping</code>标签里设定<code>dispatcher</code>标签的内容为可选的<em>属性值</em>，<em>属性值</em>与注解方式取值一样</p>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h6 id="过滤器链-配置多个过滤器">
+          <a href="#过滤器链-配置多个过滤器" class="heading-link"><i class="fas fa-link"></i></a><a href="#过滤器链-配置多个过滤器" class="headerlink" title="过滤器链(配置多个过滤器)"></a>过滤器链(配置多个过滤器)</h6>
+      <ul>
+<li><p><strong>拦截顺序</strong>：对于两个过滤器A和B，被拦截和返回是对称的</p>
+<ol>
+<li><font color="SandyBrown">A执行了</font></li>
+<li><font color="Tomato">B执行了</font></li>
+<li><font color="DarkCyan">资源被访问到了</font></li>
+<li><font color="Tomato">B回来了</font></li>
+<li><font color="SandyBrown">A回来了</font></li>
+</ol>
+</li>
+<li><p><strong>先后顺序</strong>：</p>
+<ul>
+<li><p>注解配置：按照<strong>类名</strong>的字符串进行比较，值小的先执行</p>
+<p>例如：<code>AFilter</code>和<code>BFilter</code>，显然<code>AFilter</code>小于<code>BFilter</code>，所以<code>AFilter</code>先执行；</p>
+<p>同样的：<code>Filter12</code>小于<code>Filter2</code>，所以<code>Filter12</code>先执行</p>
+</li>
+<li><p><code>web.xml</code>配置：看<code>&lt;filter-mapping&gt;</code>的位置，定义在<code>web.xml</code>越靠前的越先执行</p>
+</li>
+<li><p>如果注解配置和<code>web.xml</code>同时配置了过滤器，那么会优先执行<code>web.xml</code>中配置的过滤器</p>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h6 id="案例1：登录验证（权限控制）">
+          <a href="#案例1：登录验证（权限控制）" class="heading-link"><i class="fas fa-link"></i></a><a href="#案例1：登录验证（权限控制）" class="headerlink" title="案例1：登录验证（权限控制）"></a>案例1：登录验证（权限控制）</h6>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210807174933312.png" alt="image-20210807174933312">
+      </p>
+<ul>
+<li>需求：<ol>
+<li>访问day17_case案例的资源，验证其是否登录<ul>
+<li>验证用户是否登录，可以通过Session域中存放的User对象判断，如果有直接放行，如果没有就跳转到登录页面</li>
+<li>排除登录页面本身，只关心是否是登录相关的资源才走过滤器，否则直接放行</li>
+</ul>
+</li>
+<li>如果登录了，则直接放行</li>
+<li>如果没有登录，则跳转到登录页面，提示”您尚未登录，请先登录”</li>
+</ol>
+</li>
+</ul>
+
+        <h6 id="案例2：敏感词汇过滤">
+          <a href="#案例2：敏感词汇过滤" class="heading-link"><i class="fas fa-link"></i></a><a href="#案例2：敏感词汇过滤" class="headerlink" title="案例2：敏感词汇过滤"></a>案例2：敏感词汇过滤</h6>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210807174853954.png" alt="image-20210807174853954">
+      </p>
+<ul>
+<li><p>需求：</p>
+<ol>
+<li>对day17_case案例录入的数据进行敏感词汇过滤</li>
+<li>敏感词汇参考<code>敏感词汇.txt</code></li>
+<li>如果是敏感词汇，替换为<code>***</code></li>
+</ol>
+</li>
+<li><p>分析：</p>
+<ul>
+<li>需要对request对象进行增强</li>
+</ul>
+</li>
+<li><p>增强对象的功能：利用<strong>设计模式</strong></p>
+<ul>
+<li><p><code>Decorator</code>装饰模式</p>
+</li>
+<li><p>代理模式</p>
+<ul>
+<li><p>概念：</p>
+<ol>
+<li>真实对象：被代理的对象</li>
+<li>代理对象：</li>
+<li>代理模式：代理对象去代理真实对象，达到增强真实对象功能的目的</li>
+</ol>
+</li>
+<li><p>实现方式：</p>
+<ol>
+<li>静态代理：在一个类文件描述代理模式</li>
+<li>动态代理：在内存中形成代理类</li>
+</ol>
+</li>
+<li><p>实现步骤：</p>
+<ol>
+<li>代理对象和真实对象实现相同的接口</li>
+<li>利用<code>java.lang.reflect.Proxy</code><br>类的静态方法：<code>newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h)</code><br>获取一个代理对象，其中参数：<ul>
+<li><code>loader</code>是真实对象的<code>ClassLoader</code>类加载器</li>
+<li><code>interfaces</code>是真实对象实现的接口的数组，提供<code>ClassLoader</code>的<code>getInterfaces()</code>获取</li>
+<li><code>h</code>是代理对象调用任意方法时都会执行的函数式接口，重写<code>invoke(Object proxy,Method method,Object[] args)</code><br>方法即可，此方法中<code>proxy</code>是代理对象，<code>method</code>是代理对象的所有方法，<code>args</code>是执行<code>method</code>所需的参数列表。</li>
+</ul>
+</li>
+<li>使用代理对象调用方法</li>
+<li>增强方法，增强的方式有：<ul>
+<li>增强参数列表</li>
+<li>增强返回值</li>
+<li>增强方法体的执行逻辑</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="Listener：监听器">
+          <a href="#Listener：监听器" class="heading-link"><i class="fas fa-link"></i></a><a href="#Listener：监听器" class="headerlink" title="Listener：监听器"></a>Listener：监听器</h3>
+      
+        <h4 id="web中的监听器：">
+          <a href="#web中的监听器：" class="heading-link"><i class="fas fa-link"></i></a><a href="#web中的监听器：" class="headerlink" title="web中的监听器："></a>web中的监听器：</h4>
+      <ul>
+<li>web的三大组件之一</li>
+</ul>
+
+        <h4 id="事件监听机制：">
+          <a href="#事件监听机制：" class="heading-link"><i class="fas fa-link"></i></a><a href="#事件监听机制：" class="headerlink" title="事件监听机制："></a>事件监听机制：</h4>
+      <ul>
+<li>事件：一件事情</li>
+<li>事件源：事件发生的地方</li>
+<li>监听器：一个对象</li>
+<li>注册监听：将事件、事件源、监听器绑定在一起。当事件源上发生某个事件之后，执行监听器代码</li>
+</ul>
+
+        <h4 id="监听器对象：">
+          <a href="#监听器对象：" class="heading-link"><i class="fas fa-link"></i></a><a href="#监听器对象：" class="headerlink" title="监听器对象："></a>监听器对象：</h4>
+      <ul>
+<li><p><code>ServletContextListener</code>：监听<code>ServletContext</code>对象的创建和销毁。此接口的实现接收有关其所属 Web<br>应用程序的<code>ServletContext</code>上下文更改的通知。要接收通知事件，必须在 Web 应用程序的部署描述符中配置实现类。</p>
+<ul>
+<li><p>方法：</p>
+<ol>
+<li><p><code>public void contextInitialized(ServletContextEvent sce) </code></p>
+<p>ServletContext对象被创建后会调用此方法，在初始化 Web 应用程序中的所有过滤器或 servlet 之前，应该通知所有<br>ServletContextListener 关于上下文初始化的信息。</p>
+</li>
+<li><p><code>public void contextDestroyed(ServletContextEvent sce) </code></p>
+<p>ServletContext对象被销毁之前会调用此方法，通知即将关闭ServletContext，在通知所有 ServletContextListener<br>上下文销毁之前，所有 servlet 和过滤器都已销毁。</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="快速入门：-2">
+          <a href="#快速入门：-2" class="heading-link"><i class="fas fa-link"></i></a><a href="#快速入门：-2" class="headerlink" title="快速入门："></a>快速入门：</h4>
+      
+        <h5 id="步骤：-3">
+          <a href="#步骤：-3" class="heading-link"><i class="fas fa-link"></i></a><a href="#步骤：-3" class="headerlink" title="步骤："></a>步骤：</h5>
+      <ol>
+<li><p>定义一个类，实现<code>ServletContextListener</code>接口</p>
+</li>
+<li><p>重写接口的方法</p>
+</li>
+<li><p>配置：</p>
+<ul>
+<li><p><code>web.xml</code>配置</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210807215817460.png" alt="image-20210807215817460">
+      </p>
+<p>可以用于读取<code>&lt;context-param&gt;</code>标签内的初始化参数，通过<code>&lt;param-name&gt;</code>来获取<code>&lt;param-value&gt;</code><br>标签内的值，调用ServletContext对象的<code>String getInitParameter(String s)</code>方法传入<code>param-name</code>即可</p>
+</li>
+<li><p>注解配置：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210807215853195.png" alt="image-20210807215853195" style="zoom:80%;">
+      <br>被此注解标记的类是一个监听器类，等同于<code>web.xml</code>的<code>&lt;listener-class&gt;</code></p>
+</li>
+</ul>
+</li>
+</ol>
+
+        <h2 id="综合案例：黑马旅游网">
+          <a href="#综合案例：黑马旅游网" class="heading-link"><i class="fas fa-link"></i></a><a href="#综合案例：黑马旅游网" class="headerlink" title="综合案例：黑马旅游网"></a>综合案例：黑马旅游网</h2>
+      
+        <h3 id="需求：">
+          <a href="#需求：" class="heading-link"><i class="fas fa-link"></i></a><a href="#需求：" class="headerlink" title="需求："></a>需求：</h3>
+      <ul>
+<li><p>技术选型：</p>
+<ol>
+<li>Web层：<ul>
+<li>Servlet：前端控制器</li>
+<li>HTML：视图层</li>
+<li>Filter：过滤器</li>
+<li>BeanUtils：数据封装成JavaBean</li>
+<li>Jackson：序列化JSON</li>
+</ul>
+</li>
+<li>Service层<ul>
+<li>JavaMail：发送邮件的工具</li>
+<li>Redis：NOSQL内存数据库做缓存</li>
+<li>Jedis：操作Redis</li>
+</ul>
+</li>
+<li>DAO层<ul>
+<li>MySQL：数据库持久层</li>
+<li>Druid：数据库连接池</li>
+<li>JDBCTemplate：操作数据库的模板工具</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>数据库：</p>
+</li>
+</ul>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210812213208092.png" alt="image-20210812213208092">
+      </p>
+
+        <h3 id="实现：">
+          <a href="#实现：" class="heading-link"><i class="fas fa-link"></i></a><a href="#实现：" class="headerlink" title="实现："></a>实现：</h3>
+      
+        <h4 id="1-用户注册：">
+          <a href="#1-用户注册：" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-用户注册：" class="headerlink" title="1.用户注册："></a>1.用户注册：</h4>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210812225952027.png" alt="image-20210812225952027">
+      </p>
+<ul>
+<li><p>前端表单提交之前在浏览器利用正则表达式验证：</p>
+<ul>
+<li>1.用户名：6到20位的单词字符</li>
+<li>2.密码：6到20位的单词字符</li>
+<li>3.email：例如<span class="exturl"><a class="exturl__link" href="mailto:&#49;&#50;&#51;&#64;&#x71;&#113;&#x2e;&#x63;&#111;&#x6d;">&#49;&#50;&#51;&#64;&#x71;&#113;&#x2e;&#x63;&#111;&#x6d;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>4.姓名：非空</li>
+<li>5.手机号：手机号正则</li>
+<li>6.出生日期：非空</li>
+<li>7.验证码：非空</li>
+</ul>
+</li>
+<li><p>所有表单项验证通过后提交表单：使用AJAX异步提交到registerUserServlet，参数可以调用表单的serialize()</p>
+<ul>
+<li>原因：前端使用的是HTML，不像JSP可以直接从Servlet获取值，只能通过AJAX响应数据</li>
+<li><font color="red">踩坑1</font>：点击提交按钮提交表单数据，但表单提交<strong>会导致页面刷新</strong>，在submit事件绑定的回调函数内部做逻辑处理时就要<br><strong>防止表单提交刷新</strong>页面，利用AJAX发送请求完毕后，要<strong>使submit回调函数返回false</strong></li>
+<li><font color="red">踩坑2</font>：AJAX返回的数据默认是字符串，要么在AJAX发送请求指定参数为’json’，要么在后端指定响应头</li>
+<li><font color="red"><strong>踩坑踩大坑！！疯狂乱码，跟过滤器设置响应头有关，响应头全部当做text/html处理会乱码</strong></font></li>
+</ul>
+</li>
+<li><p>邮件激活：</p>
+<ul>
+<li>发送邮件<ul>
+<li>开启发件邮箱的POP3/SMTP服务，发送一条带有激活链接的邮件，链接到activeUserServlet<ul>
+<li><font color="red">踩坑</font>：MailUtil工具类默认是qq邮箱作为发件箱，需要自己灵活修改</li>
+</ul>
+</li>
+<li>激活邮件中为了区分是哪个用户点击的，需要给激活链接一个唯一校验码，用UuidUtil工具类生成</li>
+<li>激活链接需要把UuidUtil工具类生成的校验码设置为激活链接的请求参数，以供服务器比对数据库</li>
+</ul>
+</li>
+<li>用户点击邮件激活<ul>
+<li>用户点击激活链接之后发送请求到activeCodeServlet进行校验，请求参数为code校验码<ul>
+<li>如果存在此校验码的用户，则修改<code>tab_user</code>表的<code>status</code>字段为<code>Y</code>，并返回激活成功提示</li>
+<li>如果不存在此校验码的用户，则返回一个错误提示</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="2-用户登录">
+          <a href="#2-用户登录" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-用户登录" class="headerlink" title="2.用户登录"></a>2.用户登录</h4>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210813145133785.png" alt="image-20210813145133785">
+      </p>
+<ul>
+<li>前端：<ul>
+<li>给表单绑定submit事件，点击登录按钮发送AJAX请求到loginServlet，根据返回的JSON判断是否成功登录</li>
+</ul>
+</li>
+<li>后端：<ul>
+<li>接收前端的请求参数，封装为User对象，传递给service层查询</li>
+<li>根据查询的结果，判断是否存在此User对象在数据库中<ul>
+<li>如果存在此User，判断User对象的status是否激活<ul>
+<li>如果没有激活，则封装ResultInfo一个错误提示</li>
+<li>如果已经激活，则封装ResultInfo一个成功信息，并且把登录的User对象存入Session中</li>
+</ul>
+</li>
+<li>如果不存在此User，封装ResultInfo对象一个错误提示</li>
+</ul>
+</li>
+<li>把ResultInfo对象转为JSON字符串并且返回给前端，记得设置响应头为JSON格式</li>
+</ul>
+</li>
+</ul>
+<p><strong>登录成功之后的用户名显示：</strong></p>
+<ul>
+<li>登录成功之后页面加载完成就发送AJAX请求，取出Seesion中的User对象，显示到前端对应的文本中</li>
+</ul>
+
+        <h4 id="3-用户退出登录">
+          <a href="#3-用户退出登录" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-用户退出登录" class="headerlink" title="3.用户退出登录"></a>3.用户退出登录</h4>
+      <ul>
+<li>前端：<ul>
+<li>点击退出链接访问exitServlet</li>
+</ul>
+</li>
+<li>后端：<ul>
+<li>销毁存放了User对象的Session，可以<code>removeAttribute()</code>也可以<code>invalidate()</code>使所有的session失效</li>
+<li>跳转到登录页面</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="优化Servlet">
+          <a href="#优化Servlet" class="heading-link"><i class="fas fa-link"></i></a><a href="#优化Servlet" class="headerlink" title="优化Servlet"></a><font color="red">优化Servlet</font></h4>
+      <ul>
+<li>背景原因：对于前端请求的每一个功能都需要对应的Servlet进行接收和响应，造成大量Servlet的编写</li>
+<li>优化方式：把对同一个数据库的操作的Servlet抽象为一个Servlet，前端请求的每一个功能封装为每一个方法</li>
+</ul>
+
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210813173209744.png" alt="image-20210813173209744" style="zoom:50%;">
+      
+
+<ul>
+<li>在封装的BaseServlet中获取request请求对象的URI，提取出访问的具体方法<code>method</code></li>
+<li>获取调用此<code>service()</code>方法的具体的BaseServlet<strong>子类对象</strong>，调用this.getClass()利用反射执行这个<code>method</code><ul>
+<li>因为</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="4-旅游分类信息导航栏">
+          <a href="#4-旅游分类信息导航栏" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-旅游分类信息导航栏" class="headerlink" title="4.旅游分类信息导航栏"></a>4.旅游分类信息导航栏</h4>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210813230628575.png" alt="image-20210813230628575">
+      </p>
+<ul>
+<li>前端：<ul>
+<li>发送AJAX请求，加载分类导航栏的数据</li>
+<li>请求到后端的所有分类导航栏JSON数据后，遍历数据显示到页面上</li>
+</ul>
+</li>
+<li>后端<ul>
+<li>查询数据库中分类导航栏tab_category表中所有的数据，可以利用<code>order by</code>子句按照<code>cid</code>排序查询结果</li>
+<li>封装为List集合，转为JSON返回给前端</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="5-对分类信息导航栏的查询进行缓存优化">
+          <a href="#5-对分类信息导航栏的查询进行缓存优化" class="heading-link"><i class="fas fa-link"></i></a><a href="#5-对分类信息导航栏的查询进行缓存优化" class="headerlink" title="5.对分类信息导航栏的查询进行缓存优化"></a>5.对分类信息导航栏的查询进行缓存优化</h4>
+      <ul>
+<li>原因：由于分类信息导航栏不会经常产生变化，每一次<code>header.html</code><br>加载完毕都会加载分类信息导航栏，大量查询数据库，适合使用<code>Redis</code>进行缓存</li>
+<li>实现：在Servlet调用的ServiceImpl实现类中对<code>findAll()</code>方法进行优化<ul>
+<li>判断分类信息导航栏集合是否为空<ul>
+<li>如果为空，说明是第一次查询，则查询数据库，然后写入<code>Redis</code>缓存</li>
+<li>如果不为空，说明不是第一次查询，直接返回Redis的结果</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><font color="red">踩坑</font>：<ul>
+<li>Jedis死活连接不上，配置文件也没有问题，结果是忘了开启Redis服务器端了…</li>
+<li>UTF-8编码存入Redis的内容，在windows控制台下默认GBK查看会乱码，先利用<code>chcp 65001</code>切换编码</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="6-旅游线路的分类展示">
+          <a href="#6-旅游线路的分类展示" class="heading-link"><i class="fas fa-link"></i></a><a href="#6-旅游线路的分类展示" class="headerlink" title="6.旅游线路的分类展示"></a>6.旅游线路的分类展示</h4>
+      <ul>
+<li><p>首先要保证前端可以区分每一个分类导航栏中的按钮链接：也就是每一个分类按钮指向的链接的请求参数可以为这个分类的<code>cid</code><br>，在第<code>4</code>步拼接这些分类标签时的循环中就要处理好每一个a标签的<code>href</code>中的参数<code>cid</code></p>
+</li>
+<li><p><strong>怎么让每一个分类的HTML静态页面能发送自己的cid到后端查询内容？</strong></p>
+<ul>
+<li>由于点击不同分类的链接，跳转到统一的<code>route_list.html</code>页面，唯一能区分的就是请求参数，所以：<ul>
+<li>通过此<code>route_list.html</code>页面的<font color="purple"><code>location</code>对象的<code>search</code>属性</font>返回此页面URL<code>?</code>及之后的请求参数</li>
+<li>然后AJAX发送这个<code>?</code>之后的请求参数（也就是此页面的<code>cid</code>）查询数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>前端：</p>
+<ul>
+<li>AJAX发送请求，携带参数：<ul>
+<li>要查询的路线<code>cid</code>：<code>cid</code>的值</li>
+<li>要查询的分页的页码<code>currentPage</code></li>
+<li>每一页显示的条数<code>pageSize</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>后端：</p>
+<ul>
+<li>接收前端请求的参数：<code>cid</code>、当前页码<code>currentPage</code>、每一页的条数<code>pageSize</code></li>
+<li>调用service层查询此<code>cid</code>对应的数据，以及按照当前页码和每一页的条数<code>limit</code>查询</li>
+<li>查询的结果封装为<code>PageBean&lt;T&gt;</code>对象，序列化为JSON返回给前端</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="7-旅游线路分类的分页">
+          <a href="#7-旅游线路分类的分页" class="heading-link"><i class="fas fa-link"></i></a><a href="#7-旅游线路分类的分页" class="headerlink" title="7.旅游线路分类的分页"></a>7.旅游线路分类的分页</h4>
+      <ul>
+<li>前端：根据JSON的数据<strong>动态拼接HTML标签</strong>，主要是<code>ul</code>标签中的<code>li</code>标签数量和内容要根据查询出的此路线分类的<strong>分页数量</strong>动态拼接<ul>
+<li>拼接标签要注意，为了能保证标签中的链接也是异步请求，不能直接<code>href</code>发送请求，要把<code>href</code><br>的超链接设置为<code>javascript:function</code>的形式<ul>
+<li>例如<code>&lt;a href=&quot;javascript:load(要请求的cid,要请求的页码)&quot;&gt;&lt;/a&gt;</code><br>，这里的cid就是此页面的分类，请求的页码就是此标签要链接到的请求的<code>currentPage</code>，此<code>load(cid,currentPage)</code>是异步的</li>
+</ul>
+</li>
+<li>可以把<code>load(cid,currentPage)</code>方法抽取出来，方便不同的链接传入参数异步请求不同的分类及其分页</li>
+</ul>
+</li>
+<li>后端：接收前端的请求参数：<code>cid</code>和<code>currentPage</code>（和<code>pageSize</code>），查询数据库并返回结果<ul>
+<li>包装成PageBean对象，并序列化为JSON返回</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="8-分页按钮优化显示">
+          <a href="#8-分页按钮优化显示" class="heading-link"><i class="fas fa-link"></i></a><a href="#8-分页按钮优化显示" class="headerlink" title="8.分页按钮优化显示"></a>8.分页按钮优化显示</h4>
+      <ul>
+<li><p>由于一个分类可能包含若干个分页，那么导致分页按钮过多，需要根据目前所在的页码动态调整分页按钮数量</p>
+</li>
+<li><p>前端：分页按钮的起始索引和结束索引都保持他么之间最多相差10个按钮</p>
+<ul>
+<li><p>定义两个变量当做索引：起始的<code>begin</code>和一个结束的<code>end</code></p>
+</li>
+<li><p>如果此分类的总分页数量不超过10页，那么就直接显示这些分页按钮：<code>begin=1</code>，<code>end=10</code></p>
+</li>
+<li><p>如果此分类的总分页数量超过10页，那么就按照前面5个按钮，后面4个按钮，当前分页按钮位于第6个</p>
+<ul>
+<li><p><code>begin = currentPage -5</code>，<code>end = currentPage + 4</code></p>
+</li>
+<li><p>处理最前面和最后面的情况：</p>
+<ul>
+<li><p>如果<code>currentPage &lt; 5</code>就显示前10页的结果：<code>begin =1</code>，<code>end =10</code></p>
+</li>
+<li><p>如果<code>currentPage &gt; 总分页数量 - 4</code>就显示最后10页的结果：</p>
+<p><code>begin = 总分页数量 - 9</code>，<code>end = 总分页数量</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>经过以上处理就可以保证当前页面按钮在第6个的位置，除非总记录数不足10条或者：</p>
+<ul>
+<li>当前页码不足6，则只显示前10个分页</li>
+<li>当前页码在最后4条以内，则只显示最后10个分页</li>
+</ul>
+</li>
+<li><p>另外，如果每一次分页之后都想让页面<strong>回到顶端</strong>，可以在此函数内执行：<code>window.scrollTo(0,0)</code></p>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="9-旅游线路模糊搜索">
+          <a href="#9-旅游线路模糊搜索" class="heading-link"><i class="fas fa-link"></i></a><a href="#9-旅游线路模糊搜索" class="headerlink" title="9.旅游线路模糊搜索"></a>9.旅游线路模糊搜索</h4>
+      <ul>
+<li><p>前端：</p>
+<ul>
+<li>为搜索按钮绑定单击事件，如果单击就获取搜索输入框的值作为参数跳转到相应的搜索结果页面<ul>
+<li>跳转：修改<code>location</code>对象的<code>href</code>属性：<code>location.href = &quot;要跳转的url?传递的参数列表&quot;</code></li>
+</ul>
+</li>
+<li>搜索结果页面也就是<code>route_list.html</code>，只不过这次查询的参数除了<code>cid</code>之外还要限制为<code>rname</code><ul>
+<li>在这个页面接收<code>location</code>地址栏的参数，获取<code>cid</code>和<code>rname</code></li>
+</ul>
+</li>
+<li>前端对<code>load(cid,currentPage)</code>方法添加一个参数：<code>load(cid,currentPage,rname)</code></li>
+<li>获取当前页面实际的<code>rname</code>，利用<code>window.decodeURI</code>解码，然后修改所有按钮的<code>load</code><br>方法为新的load方法，即传入<code>cid</code>、<code>currentPage</code>、<code>rname</code></li>
+<li></li>
+</ul>
+</li>
+<li><p>后端：接收前端传递的参数<code>cid</code>和<code>rname</code>，编写SQL进行模糊查询，并返回结果</p>
+<ul>
+<li><p>注意判断<code>rname</code>是否为空或是否为<code>&quot;&quot;</code>空字符串</p>
+<ul>
+<li><p><font color="red">踩坑1</font>：</p>
+<ol>
+<li><code>rname</code>还有可能为”<code>null</code>“这个字符串，因为JavaScript中：这个拼接操作会导致</li>
+</ol>
+
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210814213435643.png" alt="image-20210814213435643" style="zoom:80%;">
+       
+
+<p>被解码的<code>currentRname</code><strong>可能为<code>null</code>对象的情况</strong>，被第二条语句和<code>&#39;&#39;</code>拼接就成了字符串的<code>&#39;null&#39;</code></p>
+</li>
+<li><p><font color="red">踩坑2</font>：<code>cid</code>也有可能为<code>&quot;null&quot;</code>这个字符串的值，没有选择分类时直接搜索就会导致<code>cid</code><br>为<code>&quot;null</code>“</p>
+</li>
+</ul>
+</li>
+<li><p>可以在dao层利用条件查询的<code>where 1 = 1</code>拼接<code>and 字段名 = 字段值</code><br>来拼接SQL，然后把参数按实际是否存在的情况装入集合调用<code>toArray()</code>进行JDBCTemplate的查询</p>
+</li>
+<li><p>最后把查询到的结果封装为<code>PageBean</code>对象，序列化为JSON返回给前端</p>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="10-旅游路线的查看详情">
+          <a href="#10-旅游路线的查看详情" class="heading-link"><i class="fas fa-link"></i></a><a href="#10-旅游路线的查看详情" class="headerlink" title="10.旅游路线的查看详情"></a>10.旅游路线的查看详情</h4>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210815013209415.png" alt="image-20210815013209415">
+      </p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210815013246676.png" alt="image-20210815013246676">
+      </p>
+<ul>
+<li>前端：点击每一个路线的<code>&lt;a&gt;查看详情&lt;/a&gt;</code>标签，会被链接到此旅游路线的详情页面：<code>route_detail.html</code><ul>
+<li>区分点击的是哪个详情页面：为链接的<code>URL</code>传递参数：<code>rid=每条路线的rid</code></li>
+<li>在<code>route_detail.html</code>页面加载完成后发送AJAX请求，参数为<code>rid</code>，查询此旅游路线的数据</li>
+<li>接收后端返回的此旅游路线的JSON数据，完成展示：<ul>
+<li>遍历JSON数据，拼接相应的数据为HTML标签，填入页面</li>
+<li>对于小图预览图，由于已经有写好的JavaScript控制样式，只需要注意超过4张小图就隐藏后面的<ul>
+<li>隐藏：即设置此图片所在的<code>&lt;a&gt;&lt;/a&gt;</code>标签的<code>style</code>为<code>display:none</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>后端：接收前端发送的<code>rid</code>，查询数据库中此路线的数据<ul>
+<li>首先要查出请求的<code>rid</code>旅游路线在<code>tab_route</code>中的路线详情，封装为<code>Route</code>对象</li>
+<li>再从<code>tab_img</code>表查询出此<code>rid</code>对应的图片数据，封装为<code>List&lt;RouteImg&gt;</code>集合，设置为<code>Route</code>对象的成员</li>
+<li>最后从<code>tab_seller</code>表查询出此<code>rid</code>的路线对应的商家详情，封装为<code>Seller</code>对象，同样的设置为成员</li>
+<li>可以再查询出此<code>Route</code>对象所属的旅游路线分类，但是此页面不要求做展示，没有必要</li>
+<li>最后把封装好的<code>Route</code>对象序列化为JSON返回给前端</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="11-点击收藏按钮或取消收藏按钮的判断">
+          <a href="#11-点击收藏按钮或取消收藏按钮的判断" class="heading-link"><i class="fas fa-link"></i></a><a href="#11-点击收藏按钮或取消收藏按钮的判断" class="headerlink" title="11.点击收藏按钮或取消收藏按钮的判断"></a>11.点击收藏按钮或取消收藏按钮的判断</h4>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210815160048822.png" alt="image-20210815160048822">
+      </p>
+<ul>
+<li>前端：<ul>
+<li>发送AJAX请求，参数传递此旅游路线的rid<ul>
+<li>发送AJAX的时机要等到这个页面加载完毕并且此商品的详细信息加载完毕，否则修改按钮样式可能还没有经过第[10]<br>步的查看详情遍历显示完，自然也就获取不到标签对象修改不了值了</li>
+<li>所以要编写一个AJAX方法，调用方法的时机在<code>loadImg()</code>方法里的最后，也就是上一步加载完毕</li>
+</ul>
+</li>
+<li>接收后端返回的结果，根据结果显示按钮 <code>点击收藏</code> 或 <code>取消收藏</code><ul>
+<li>返回的结果为<code>true</code>就给<code>$(#favorite)</code>标签添加已收藏样式和不可点击，否则<code>false</code>显示默认样式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>后端：<ul>
+<li>接收前端的旅游路线rid参数，并且获取session中的User用户对象，去<code>tab_favorite</code>表中查询路线与用户是否存在此对应记录判断是否收藏，返回一个是否收藏的结果的布尔值</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="12-收藏次数">
+          <a href="#12-收藏次数" class="heading-link"><i class="fas fa-link"></i></a><a href="#12-收藏次数" class="headerlink" title="12.收藏次数"></a>12.收藏次数</h4>
+      <ul>
+<li>前端：不需要做调整，只需要对返回的Route旅游路线对象的<code>count</code>属性进行展示就行了</li>
+<li></li>
+</ul>
+<p>后端：在查询路线详情service层封装Route对象的时候额外再去调用dao层利用聚合函数统计一下此旅游路线被收藏的数量，然后设置Route对象的<code>count</code><br>属性就行了</p>
+
+        <h4 id="13-点击收藏功能的实现">
+          <a href="#13-点击收藏功能的实现" class="heading-link"><i class="fas fa-link"></i></a><a href="#13-点击收藏功能的实现" class="headerlink" title="13.点击收藏功能的实现"></a>13.点击收藏功能的实现</h4>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210815224049640.png" alt="image-20210815224049640">
+      </p>
+<ul>
+<li>前端：发送AJAX请求，判断用户是否登录<ul>
+<li>已经登录：<ul>
+<li>发送AJAX请求，传递要收藏的旅游路线的rid即可，User对象不需要传递，因为session对象里有</li>
+<li>收藏写入数据库后不需要返回值，但是前端此时应该刷新一下页面改变”点击收藏”为”取消收藏”</li>
+</ul>
+</li>
+<li>没有登录：弹框提示用户尚未登录，然后跳转到登录页面</li>
+</ul>
+</li>
+<li>后端：<ul>
+<li>接收前端的参数，要收藏的路线的rid、当前登录的用户的uid</li>
+<li>调用service层添加收藏记录</li>
+</ul>
+</li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://taoyyz.github.io/tags/Java/">Java</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://taoyyz.github.io/tags/Servlet/">Servlet</a></span></div><console class="log" 123></console><div class="post-reward reward"><div class="reward-button">看的开心的话可以请我喝杯奶茶~热狗也行呜呜呜</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/zfb.jpg"><div class="reward-qrcode-alipay__text">支付宝</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/vx.jpg"><div class="reward-qrcode-wechat__text">微信</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/08/05/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">开发、构建、部署</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/05/14/JavaReview/"><span class="paginator-prev__text">Java复习——从入土到入门</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaWeb%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">
+          JavaWeb服务器端学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E5%9B%9E%E9%A1%BE"><span class="toc-number">1.1.</span> <span class="toc-text">
+          Web相关概念回顾</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.1.</span> <span class="toc-text">
+          软件架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.2.</span> <span class="toc-text">
+          资源分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="toc-number">1.1.3.</span> <span class="toc-text">
+          网络通信三要素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BD%AF%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">
+          Tomcat服务器软件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tomcat"><span class="toc-number">1.2.1.</span> <span class="toc-text">
+          Tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%EF%BC%9A"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">
+          下载：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">
+          安装：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%B8%E8%BD%BD%EF%BC%9A"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">
+          卸载：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%EF%BC%9A"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">
+          启动：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%EF%BC%9A"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">
+          访问：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%EF%BC%9A"><span class="toc-number">1.2.1.6.</span> <span class="toc-text">
+          关闭：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-number">1.2.1.7.</span> <span class="toc-text">
+          配置：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-number">1.2.1.7.1.</span> <span class="toc-text">
+          部署项目的方式：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-%E7%9B%B4%E6%8E%A5%E5%B0%86%E9%A1%B9%E7%9B%AE%E6%94%BE%E5%88%B0%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84webapps%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%8D%B3%E5%8F%AF"><span class="toc-number">1.2.1.7.1.1.</span> <span class="toc-text">
+          1.直接将项目放到安装目录下的webapps目录下即可</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AEconf%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84server-xml%E6%96%87%E4%BB%B6%EF%BC%8C%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%9F%E6%95%88"><span class="toc-number">1.2.1.7.1.2.</span> <span class="toc-text">
+          2.配置conf目录下的server.xml文件，重启服务器生效</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-%E5%9C%A8conf-Catalina-localhost%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%88%9B%E5%BB%BA%E4%BB%BB%E6%84%8F%E7%9A%84xml%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.1.7.1.3.</span> <span class="toc-text">
+          3.在conf&#x2F;Catalina&#x2F;localhost目录下创建任意的xml文件</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%8A%A8%E6%80%81%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.2.1.7.2.</span> <span class="toc-text">
+          静态项目和动态项目</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tomcat%E4%B8%8EIDEA%E9%9B%86%E6%88%90"><span class="toc-number">1.2.1.8.</span> <span class="toc-text">
+          Tomcat与IDEA集成</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#IDEA%E9%9B%86%E6%88%90Tomcat"><span class="toc-number">1.2.1.8.1.</span> <span class="toc-text">
+          IDEA集成Tomcat</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IDEA%E5%90%AF%E5%8A%A8Tomcat"><span class="toc-number">1.2.1.8.2.</span> <span class="toc-text">
+          IDEA启动Tomcat</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IDEA%E7%9A%84Tomcat%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.1.8.3.</span> <span class="toc-text">
+          IDEA的Tomcat项目配置</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet%E5%85%A5%E9%97%A8"><span class="toc-number">1.3.</span> <span class="toc-text">
+          Servlet入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%9A"><span class="toc-number">1.3.1.</span> <span class="toc-text">
+          快速入门：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Servlet%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.3.2.</span> <span class="toc-text">
+          Servlet执行过程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Servlet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.3.3.</span> <span class="toc-text">
+          Servlet生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Servlet3-0%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91"><span class="toc-number">1.3.4.</span> <span class="toc-text">
+          Servlet3.0注解开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Servlet%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.5.</span> <span class="toc-text">
+          Servlet体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Servlet%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.6.</span> <span class="toc-text">
+          Servlet相关配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-number">1.4.</span> <span class="toc-text">
+          HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%B6%88%E6%81%AF%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.4.1.</span> <span class="toc-text">
+          请求消息数据格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Request"><span class="toc-number">1.4.2.</span> <span class="toc-text">
+          Request</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Request%E5%AF%B9%E8%B1%A1%E7%BB%A7%E6%89%BF%E4%BD%93%E7%B3%BB"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">
+          Request对象继承体系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Request%E5%8A%9F%E8%83%BD"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">
+          Request功能</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Request%E5%AF%B9%E8%B1%A1%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E6%B6%88%E6%81%AF"><span class="toc-number">1.4.2.2.1.</span> <span class="toc-text">
+          Request对象获取请求消息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD"><span class="toc-number">1.4.2.2.2.</span> <span class="toc-text">
+          其他功能</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">
+          案例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BeanUtils"><span class="toc-number">1.4.2.4.</span> <span class="toc-text">
+          BeanUtils</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%B6%88%E6%81%AF%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.4.3.</span> <span class="toc-text">
+          响应消息数据格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Response"><span class="toc-number">1.4.4.</span> <span class="toc-text">
+          Response</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Response%E5%AF%B9%E8%B1%A1%E7%BB%A7%E6%89%BF%E4%BD%93%E7%B3%BB"><span class="toc-number">1.4.4.1.</span> <span class="toc-text">
+          Response对象继承体系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Response%E5%8A%9F%E8%83%BD"><span class="toc-number">1.4.4.2.</span> <span class="toc-text">
+          Response功能</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Response%E5%AF%B9%E8%B1%A1%E8%AE%BE%E7%BD%AE%E5%93%8D%E5%BA%94%E6%B6%88%E6%81%AF"><span class="toc-number">1.4.4.2.1.</span> <span class="toc-text">
+          Response对象设置响应消息</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-1"><span class="toc-number">1.4.4.3.</span> <span class="toc-text">
+          案例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%8C%E6%88%90%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">1.4.4.3.1.</span> <span class="toc-text">
+          完成重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">1.4.4.3.1.1.</span> <span class="toc-text">
+          步骤：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E7%9A%84%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-number">1.4.4.3.1.2.</span> <span class="toc-text">
+          重定向的特点：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E5%86%99%E6%B3%95%EF%BC%9A"><span class="toc-number">1.4.4.3.1.3.</span> <span class="toc-text">
+          路径写法：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BE%93%E5%87%BA%E5%AD%97%E7%AC%A6%E6%95%B0%E6%8D%AE%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-number">1.4.4.3.2.</span> <span class="toc-text">
+          服务器输出字符数据到浏览器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%EF%BC%9A-1"><span class="toc-number">1.4.4.3.2.1.</span> <span class="toc-text">
+          步骤：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.4.3.2.2.</span> <span class="toc-text">
+          注意：乱码问题</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BE%93%E5%87%BA%E5%AD%97%E8%8A%82%E6%95%B0%E6%8D%AE%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-number">1.4.4.3.3.</span> <span class="toc-text">
+          服务器输出字节数据到浏览器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.4.4.3.3.1.</span> <span class="toc-text">
+          步骤</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">1.4.4.3.3.2.</span> <span class="toc-text">
+          注意</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E6%A1%88%E4%BE%8B%E2%80%94%E2%80%94Response"><span class="toc-number">1.4.4.3.4.</span> <span class="toc-text">
+          验证码案例——Response</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BA%A7%E7%94%9F%E9%AA%8C%E8%AF%81%E7%A0%81%E5%9B%BE%E5%83%8F"><span class="toc-number">1.4.4.3.4.1.</span> <span class="toc-text">
+          产生验证码图像</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ServletContext"><span class="toc-number">1.4.5.</span> <span class="toc-text">
+          ServletContext</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%A1%88%E4%BE%8B"><span class="toc-number">1.4.5.1.</span> <span class="toc-text">
+          文件下载案例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.5.1.1.</span> <span class="toc-text">
+          中文文件名问题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF"><span class="toc-number">1.4.6.</span> <span class="toc-text">
+          会话技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie"><span class="toc-number">1.4.6.1.</span> <span class="toc-text">
+          Cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.4.6.1.1.</span> <span class="toc-text">
+          概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-number">1.4.6.1.2.</span> <span class="toc-text">
+          快速入门</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Cookie%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.4.6.1.3.</span> <span class="toc-text">
+          Cookie的特点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Cookie%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.4.6.1.4.</span> <span class="toc-text">
+          Cookie的作用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-2"><span class="toc-number">1.4.6.1.5.</span> <span class="toc-text">
+          案例</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Session"><span class="toc-number">1.4.6.2.</span> <span class="toc-text">
+          Session</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="toc-number">1.4.6.2.1.</span> <span class="toc-text">
+          概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-1"><span class="toc-number">1.4.6.2.2.</span> <span class="toc-text">
+          快速入门</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.6.2.3.</span> <span class="toc-text">
+          原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Session%E7%9A%84%E7%BB%86%E8%8A%82"><span class="toc-number">1.4.6.2.4.</span> <span class="toc-text">
+          Session的细节</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Session%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.4.6.2.5.</span> <span class="toc-text">
+          Session的特点</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Session%E5%92%8CCookie%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="toc-number">1.4.6.3.</span> <span class="toc-text">
+          Session和Cookie的区别：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E6%A1%88%E4%BE%8B%E2%80%94%E2%80%94Session"><span class="toc-number">1.4.6.4.</span> <span class="toc-text">
+          验证码案例——Session</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSP"><span class="toc-number">1.4.7.</span> <span class="toc-text">
+          JSP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-2"><span class="toc-number">1.4.7.1.</span> <span class="toc-text">
+          概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="toc-number">1.4.7.2.</span> <span class="toc-text">
+          原理：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JSP%E7%9A%84%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.4.7.3.</span> <span class="toc-text">
+          JSP的内置对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JSP%E6%8C%87%E4%BB%A4"><span class="toc-number">1.4.7.4.</span> <span class="toc-text">
+          JSP指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JSP%E6%B3%A8%E9%87%8A"><span class="toc-number">1.4.7.5.</span> <span class="toc-text">
+          JSP注释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MVC%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.4.7.6.</span> <span class="toc-text">
+          MVC开发模式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#JSP%E6%BC%94%E5%8F%98%E5%8E%86%E5%8F%B2%EF%BC%9A"><span class="toc-number">1.4.7.6.1.</span> <span class="toc-text">
+          JSP演变历史：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MVC%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="toc-number">1.4.7.6.2.</span> <span class="toc-text">
+          MVC的概念：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EL%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.4.7.7.</span> <span class="toc-text">
+          EL表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JSTL%E6%A0%87%E7%AD%BE"><span class="toc-number">1.4.7.8.</span> <span class="toc-text">
+          JSTL标签</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="toc-number">1.4.8.</span> <span class="toc-text">
+          三层架构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E7%9A%84%E5%88%97%E8%A1%A8%E5%B1%95%E7%A4%BA%EF%BC%8C%E4%BB%A3%E7%A0%81%E8%AF%A6%E8%A7%81day17-case"><span class="toc-number">1.4.8.0.1.</span> <span class="toc-text">
+          案例：用户信息的列表展示，代码详见day17_case</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD%EF%BC%9A"><span class="toc-number">1.4.8.0.1.1.</span> <span class="toc-text">
+          基础功能：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%8A%9F%E8%83%BD%EF%BC%9A"><span class="toc-number">1.4.8.0.1.2.</span> <span class="toc-text">
+          复杂功能：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Filter%EF%BC%9A%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">1.4.9.</span> <span class="toc-text">
+          Filter：过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#web%E4%B8%AD%E7%9A%84%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%9A"><span class="toc-number">1.4.9.1.</span> <span class="toc-text">
+          web中的过滤器：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9A"><span class="toc-number">1.4.9.2.</span> <span class="toc-text">
+          过滤器的作用：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%9A-1"><span class="toc-number">1.4.9.3.</span> <span class="toc-text">
+          快速入门：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%EF%BC%9A-2"><span class="toc-number">1.4.9.3.1.</span> <span class="toc-text">
+          步骤：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E7%BB%86%E8%8A%82%EF%BC%9A"><span class="toc-number">1.4.9.3.2.</span> <span class="toc-text">
+          过滤器细节：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#web-xml%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.9.3.2.1.</span> <span class="toc-text">
+          web.xml配置</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-number">1.4.9.3.2.2.</span> <span class="toc-text">
+          过滤器执行流程</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.9.3.2.3.</span> <span class="toc-text">
+          过滤器生命周期方法</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.4.9.3.2.4.</span> <span class="toc-text">
+          过滤器配置详解</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E9%93%BE-%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">1.4.9.3.2.5.</span> <span class="toc-text">
+          过滤器链(配置多个过滤器)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B1%EF%BC%9A%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81%EF%BC%88%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%EF%BC%89"><span class="toc-number">1.4.9.3.2.6.</span> <span class="toc-text">
+          案例1：登录验证（权限控制）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B2%EF%BC%9A%E6%95%8F%E6%84%9F%E8%AF%8D%E6%B1%87%E8%BF%87%E6%BB%A4"><span class="toc-number">1.4.9.3.2.7.</span> <span class="toc-text">
+          案例2：敏感词汇过滤</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Listener%EF%BC%9A%E7%9B%91%E5%90%AC%E5%99%A8"><span class="toc-number">1.4.10.</span> <span class="toc-text">
+          Listener：监听器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#web%E4%B8%AD%E7%9A%84%E7%9B%91%E5%90%AC%E5%99%A8%EF%BC%9A"><span class="toc-number">1.4.10.1.</span> <span class="toc-text">
+          web中的监听器：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6%EF%BC%9A"><span class="toc-number">1.4.10.2.</span> <span class="toc-text">
+          事件监听机制：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E5%99%A8%E5%AF%B9%E8%B1%A1%EF%BC%9A"><span class="toc-number">1.4.10.3.</span> <span class="toc-text">
+          监听器对象：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%9A-2"><span class="toc-number">1.4.10.4.</span> <span class="toc-text">
+          快速入门：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%EF%BC%9A-3"><span class="toc-number">1.4.10.4.1.</span> <span class="toc-text">
+          步骤：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B%EF%BC%9A%E9%BB%91%E9%A9%AC%E6%97%85%E6%B8%B8%E7%BD%91"><span class="toc-number">1.5.</span> <span class="toc-text">
+          综合案例：黑马旅游网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%EF%BC%9A"><span class="toc-number">1.5.1.</span> <span class="toc-text">
+          需求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="toc-number">1.5.2.</span> <span class="toc-text">
+          实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%EF%BC%9A"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">
+          1.用户注册：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">
+          2.用户登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%94%A8%E6%88%B7%E9%80%80%E5%87%BA%E7%99%BB%E5%BD%95"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">
+          3.用户退出登录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96Servlet"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">
+          优化Servlet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%97%85%E6%B8%B8%E5%88%86%E7%B1%BB%E4%BF%A1%E6%81%AF%E5%AF%BC%E8%88%AA%E6%A0%8F"><span class="toc-number">1.5.2.5.</span> <span class="toc-text">
+          4.旅游分类信息导航栏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%AF%B9%E5%88%86%E7%B1%BB%E4%BF%A1%E6%81%AF%E5%AF%BC%E8%88%AA%E6%A0%8F%E7%9A%84%E6%9F%A5%E8%AF%A2%E8%BF%9B%E8%A1%8C%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96"><span class="toc-number">1.5.2.6.</span> <span class="toc-text">
+          5.对分类信息导航栏的查询进行缓存优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%97%85%E6%B8%B8%E7%BA%BF%E8%B7%AF%E7%9A%84%E5%88%86%E7%B1%BB%E5%B1%95%E7%A4%BA"><span class="toc-number">1.5.2.7.</span> <span class="toc-text">
+          6.旅游线路的分类展示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E6%97%85%E6%B8%B8%E7%BA%BF%E8%B7%AF%E5%88%86%E7%B1%BB%E7%9A%84%E5%88%86%E9%A1%B5"><span class="toc-number">1.5.2.8.</span> <span class="toc-text">
+          7.旅游线路分类的分页</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E5%88%86%E9%A1%B5%E6%8C%89%E9%92%AE%E4%BC%98%E5%8C%96%E6%98%BE%E7%A4%BA"><span class="toc-number">1.5.2.9.</span> <span class="toc-text">
+          8.分页按钮优化显示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-%E6%97%85%E6%B8%B8%E7%BA%BF%E8%B7%AF%E6%A8%A1%E7%B3%8A%E6%90%9C%E7%B4%A2"><span class="toc-number">1.5.2.10.</span> <span class="toc-text">
+          9.旅游线路模糊搜索</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-%E6%97%85%E6%B8%B8%E8%B7%AF%E7%BA%BF%E7%9A%84%E6%9F%A5%E7%9C%8B%E8%AF%A6%E6%83%85"><span class="toc-number">1.5.2.11.</span> <span class="toc-text">
+          10.旅游路线的查看详情</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-%E7%82%B9%E5%87%BB%E6%94%B6%E8%97%8F%E6%8C%89%E9%92%AE%E6%88%96%E5%8F%96%E6%B6%88%E6%94%B6%E8%97%8F%E6%8C%89%E9%92%AE%E7%9A%84%E5%88%A4%E6%96%AD"><span class="toc-number">1.5.2.12.</span> <span class="toc-text">
+          11.点击收藏按钮或取消收藏按钮的判断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-%E6%94%B6%E8%97%8F%E6%AC%A1%E6%95%B0"><span class="toc-number">1.5.2.13.</span> <span class="toc-text">
+          12.收藏次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-%E7%82%B9%E5%87%BB%E6%94%B6%E8%97%8F%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.5.2.14.</span> <span class="toc-text">
+          13.点击收藏功能的实现</span></a></li></ol></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/head.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">taoyyz</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://weibo.com/6368186555/" target="_blank" rel="noopener" data-popover="微博：taoyyz" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/taoyyz" target="_blank" rel="noopener" data-popover="知乎：taoyyz" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/10111280" target="_blank" rel="noopener" data-popover="哔哩哔哩：宝贝球球ouo" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fas fa-tv"></i></span></a><a class="sidebar-ov-social-item" href="angelahape" target="_blank" rel="noopener" data-popover="微信：angelahape" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weixin"></i></span></a><a class="sidebar-ov-social-item" href="tencent://message?uin=2655026691" target="_blank" rel="noopener" data-popover="QQ：2655026691" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a><a class="sidebar-ov-social-item" href="https://www.youtube.com/channel/UCsz2-9ReY8ayMd-92rEGKFQ" target="_blank" rel="noopener" data-popover="Youtube：Xiaotao" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-youtube"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">7</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">13</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div></div><div id="tishi" style="text-align:center;user-select:none;font-weight:600;">本站已运行</div><span id="sitetime" style="text-align:center;display:block;user-select:none;">载入天数...<script language="javascript">const siteTime = () => {
+  window.setTimeout(siteTime, 500);
+  const startTime = Date.UTC(2021, 3, 10, 23, 0, 0); // 北京时间
+  const currentTime = Date.now();
+  const timeDifference = currentTime - startTime;
+
+  const seconds = Math.floor((timeDifference / 1000) % 60);
+  const minutes = Math.floor((timeDifference / 1000 / 60) % 60);
+  const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  const years = Math.floor(days / 365);
+  const remainingDays = days % 365;
+
+  let timeString = '';
+
+  if (years > 0) {
+    timeString += `${years}年`;
+  }
+
+  timeString += `${remainingDays}天${hours}时${minutes}分${seconds}秒`;
+
+  document.getElementById("sitetime").innerHTML = timeString;
+};
+
+siteTime();
+</script></span></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>taoyyz小陶</span></div><div></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"></div><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

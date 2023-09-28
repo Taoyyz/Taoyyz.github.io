@@ -1,0 +1,2119 @@
+<!DOCTYPE html><style>body {
+  cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/default.cur),
+  default;
+}
+
+a,
+img {
+  cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/pointer.cur),
+  default;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: dodgerblue;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, .4) 25%,
+    transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .4) 50%,
+    rgba(255, 255, 255, .4) 75%,
+    transparent 75%,
+    transparent);
+  border-radius: 3em;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #DEDEDE;
+  border-radius: 3em;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}</style><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="数据库入门知识，包括SQL基本语法、事务、JDBC、Redis、Jedis等基本知识和用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库入门">
+<meta property="og:url" content="http://taoyyz.github.io/2021/08/16/%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="欢迎光临taoyyz的Blog">
+<meta property="og:description" content="数据库入门知识，包括SQL基本语法、事务、JDBC、Redis、Jedis等基本知识和用法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210726225240780.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210726225800471.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210726234508663.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210726235040097.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210727001101914.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210727172303571.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210728175417542.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210729235017508.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210730011505571.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210730011619411.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210730002712176.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210730011726163.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210730142551600.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210730142611142.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210730142644773.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210730150424971.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210730150811208.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210730150824252.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210802002118624.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210802012636684.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210802012048708.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210802170207621.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210802170250282.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210802183748055.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210802184006077.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210802195312357.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210802231214849.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210802231301364.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210802231719762.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210810125041138.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210810140033474.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210810202656627.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210810202711265.png">
+<meta property="article:published_time" content="2021-08-16T10:02:17.000Z">
+<meta property="article:modified_time" content="2023-09-28T16:57:07.664Z">
+<meta property="article:author" content="taoyyz小陶">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://taoyyz.github.io/images/image-20210726225240780.png"><title>数据库入门 | 欢迎光临taoyyz的Blog</title><link ref="canonical" href="http://taoyyz.github.io/2021/08/16/%E6%95%B0%E6%8D%AE%E5%BA%93/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","wordWrap":true},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: true,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/links/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">资源和链接</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="far fa-address-card"></i></span><span class="header-nav-menu-item__text">关于</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">欢迎光临taoyyz的Blog</div><div class="header-banner-info__subtitle"></div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">数据库入门</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-08-16</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2023-09-29</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">11.7k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">70分</span></span></div></header><div class="post-body"><p><font size="7" face="微软雅黑">数据库</font></p>
+
+        <h2 id="数据库的基本概念：">
+          <a href="#数据库的基本概念：" class="heading-link"><i class="fas fa-link"></i></a><a href="#数据库的基本概念：" class="headerlink" title="数据库的基本概念："></a>数据库的基本概念：</h2>
+      <p><strong>数据库：DataBase，简称为DB</strong></p>
+<ul>
+<li><p>数据库：用于存储和管理数据的仓库</p>
+</li>
+<li><p>数据库的<strong>特点</strong>：</p>
+<ol>
+<li>持久化存储数据：数据库是一个文件系统</li>
+<li>方便存储和管理数据</li>
+<li>使用了统一的方式操作数据库 —— SQL</li>
+</ol>
+</li>
+<li><p>常见的数据库软件：</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210726225240780.png" alt="image-20210726225240780">
+      </p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210726225800471.png" alt="image-20210726225800471">
+      </p>
+<ul>
+<li><code>MySQL</code>：开源的免费小型数据库，已经被Oracle收购，MySQL6.x版本开始收费。</li>
+<li><code>Oracle</code>：收费的大型数据库，Oracle公司的产品</li>
+<li><code>DB2</code>：IBM公司的收费数据库产品，常应用在银行系统中</li>
+<li><code>SQLServer</code>：微软公司的中型收费数据库，常用于<code>C#</code>、<code>.NET</code>等语言</li>
+<li><code>SyBase</code>：已淡出历史舞台，提供了一个专业的数据建模工具PowerDesigner</li>
+<li><code>SQLite</code>：嵌入式的小型数据库，应用在手机端</li>
+</ul>
+</li>
+</ul>
+
+        <h2 id="MySQL数据库软件：">
+          <a href="#MySQL数据库软件：" class="heading-link"><i class="fas fa-link"></i></a><a href="#MySQL数据库软件：" class="headerlink" title="MySQL数据库软件："></a>MySQL数据库软件：</h2>
+      <ul>
+<li><p>安装：参见教程</p>
+</li>
+<li><p>卸载：</p>
+<ol>
+<li>在MySQL的安装目录下找到<code>my.ini</code>文件，复制其中的<code>datadir=&quot;路径&quot;</code>这一行</li>
+<li>控制面板卸载<code>MySQL</code></li>
+<li>删除掉第1步<code>datadir</code>路径的那个目录及所有文件</li>
+</ol>
+</li>
+<li><p>配置：</p>
+<ul>
+<li><p><strong>启动</strong>MySQL服务</p>
+<ol>
+<li>在windows服务里手动启动</li>
+<li>在<code>cmd</code>窗口下输入<code>services.msc</code>打开windows的<strong>服务</strong>窗口再启动</li>
+<li>以管理员身份运行<code>cmd</code>，输入<code>net start mysql</code>即可启动服务</li>
+</ol>
+</li>
+<li><p><strong>关闭</strong>MySQL服务</p>
+<ol>
+<li><p>在windows服务里手动关闭</p>
+</li>
+<li><p>在<code>cmd</code>窗口下输入<code>services.msc</code>打开windows的<strong>服务</strong>窗口再关闭</p>
+</li>
+<li><p>以管理员身份运行<code>cmd</code>，输入<code>net stop mysql</code>即可启动服务</p>
+</li>
+</ol>
+</li>
+<li><p><strong>登录</strong>MySQL：</p>
+<ul>
+<li><p>控制台输入<code>mysql -u用户名 -p密码</code>，也可以<code>-p</code>不跟密码，然后再密文输入密码</p>
+</li>
+<li><p>远程登录：</p>
+<ol>
+<li><p><code>mysql -h主机地址 -u用户名 -p密码</code></p>
+<p>例如登录本机：<code>mysql -hlocalhost -uroot -p123456</code></p>
+</li>
+<li><p><code>mysql --host=主机地址 --user=用户名 --password=密码</code></p>
+<p>例如登录本机<code>mysql --host=localhost --user=root --password=123456</code></p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>退出</strong>MySQL：</p>
+<ul>
+<li>控制台输入<code>exit</code></li>
+<li>控制台输入<code>quit</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>MySQL目录结构：</p>
+<ul>
+<li><p>MySQL安装目录：</p>
+</li>
+<li><p>MySQL数据目录：</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210726234508663.png" alt="image-20210726234508663">
+       </p>
+</li>
+<li><p>几个概念：</p>
+<ul>
+<li>数据库：文件夹</li>
+<li>表：文件</li>
+<li>字段：表中的每一行记录</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h2 id="SQL">
+          <a href="#SQL" class="heading-link"><i class="fas fa-link"></i></a><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2>
+      
+        <h3 id="概念">
+          <a href="#概念" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念" class="headerlink" title="概念"></a>概念</h3>
+      <p>结构化查询语言（Structured Query Language）简称SQL，是一种特殊目的的编程语言，是一种数据库查询和<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%AD%E8%A8%80/2317999">程序设计语言</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，用于存取数据以及查询、更新和管理<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F">关系数据库系统</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。</p>
+<p>SQL定义了操作所有关系型数据库的规则，但是不同的数据库的操作方式可能存在差异，称为”方言”</p>
+
+        <h3 id="通用语法">
+          <a href="#通用语法" class="heading-link"><i class="fas fa-link"></i></a><a href="#通用语法" class="headerlink" title="通用语法"></a>通用语法</h3>
+      <ul>
+<li>SQL语句可以写单行或多行，<strong>以分号结尾</strong></li>
+<li>可使用空格和缩进来增强语句的可读性
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210726235040097.png" alt="image-20210726235040097">
+      </li>
+<li>MySQL数据库的SQL语句<strong>不区分大小写</strong>，但关键字建议大写</li>
+<li>注释：<ul>
+<li>单行注释：<code>-- 注释内容</code> 或 <code>#注释内容</code>(MySQL特有)，<code>-- 注释内容</code>的形式注意空格</li>
+<li>多行注释：<code>/* 注释内容 */</code></li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="SQL分类">
+          <a href="#SQL分类" class="heading-link"><i class="fas fa-link"></i></a><a href="#SQL分类" class="headerlink" title="SQL分类"></a>SQL分类</h3>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210727001101914.png" alt="image-20210727001101914">
+      </p>
+
+        <h4 id="DDL-Data-Definition-Language-数据定义语言">
+          <a href="#DDL-Data-Definition-Language-数据定义语言" class="heading-link"><i class="fas fa-link"></i></a><a href="#DDL-Data-Definition-Language-数据定义语言" class="headerlink" title="DDL(Data Definition Language)数据定义语言"></a>DDL(Data Definition Language)数据定义语言</h4>
+      <p>用来定义数据库对象：数据库、表、列等。</p>
+<p>关键字：<code>create</code>、<code>drop</code>、<code>alter</code>等</p>
+<ul>
+<li><p><strong>操作数据库：CRUD</strong></p>
+<ul>
+<li><p><code>C(Create)</code>：创建</p>
+<ul>
+<li><font color="OrangeRed">创建</font>数据库：<code>create database 数据库名称;</code>如果数据库已存在会报错</li>
+<li>创建数据库，判断数据库不存在才创建：<code>create database if not exists 数据库名称;</code></li>
+<li>创建数据库，并且指定字符集：<code>create database 数据库名称 character set 字符集;</code></li>
+</ul>
+</li>
+<li><p><code>R(Retrieve)</code>：查询</p>
+<ul>
+<li><p><font color="OrangeRed">查询所有</font>数据库的名称列表：<code>show databases;</code></p>
+<p>对于MySQL自带的几个数据库：</p>
+<ol>
+<li><code>information_schema</code>：存放<em>视图</em>，并不对应真正的物理文件</li>
+<li><code>mysql</code>：核心数据库，存放核心数据</li>
+<li><code>performance_schema</code>：性能相关</li>
+<li><code>test</code>：测试数据库，可以随意修改</li>
+</ol>
+</li>
+<li><p><font color="OrangeRed">查看某个</font>数据库的创建语句(以及字符集)：<code>show create database 数据库名称;</code></p>
+</li>
+</ul>
+</li>
+<li><p><code>U(Update)</code>：修改</p>
+<ul>
+<li><font color="OrangeRed">修改</font>数据库的字符集：<code>alter database 数据库名称 character set 字符集名称;</code></li>
+</ul>
+</li>
+<li><p><code>D(Delete)</code>：删除</p>
+<ul>
+<li><font color="OrangeRed">删除</font>数据库：<code>drop database 数据库名称;</code>如果数据库不存在会报错</li>
+<li>删除数据库，判断数据库存在才会删除：<code>drop database if exists 数据库名称;</code></li>
+</ul>
+</li>
+<li><p>使用数据库</p>
+<ul>
+<li><font color="OrangeRed">查询当前正在使用的数据库</font>名称：<code>select database();</code>：可能返回NULL或正在使用的数据库名称</li>
+<li><font color="OrangeRed">使用某个数据库</font>：<code>use 数据库名称;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>操作表</strong></p>
+<ul>
+<li><p><code>C(Create)</code>：创建</p>
+<ul>
+<li><p>语法：</p>
+<ol>
+<li><p><font color="OrangeRed">创建表</font>，同时指定列名和数据类型：</p>
+<p><code>crate table 表名(列名1 数据类型1,列名2 数据类型2,...,列名N 数据类型N)</code></p>
+<p><strong>注意：</strong>最右一个列名和数据类型不能加<code>,</code>逗号</p>
+<p><strong>数据类型：</strong>(除了数字类型，其他类型要使用引号引起来(单双都可以))</p>
+<p>​    常用的数据类型：</p>
+<ol>
+<li><p><code>int(integer)</code>：整数类型，例如<code>age int</code></p>
+</li>
+<li><p><code>double</code>：小数类型，需要指定小数位数，例如<code>score double(5,2)</code>表示一共5位，小数点后2位</p>
+</li>
+<li><p><code>date</code>：日期类型，只包含年月日，格式为<code>yyyy-MM-dd</code></p>
+</li>
+<li><p><code>datetime</code>：日期类型，包含年月日时分秒，格式为<code>yyyy-MM-dd HH:mm:ss</code></p>
+</li>
+<li><p><code>timestamp</code>：时间戳类型，包含年月日时分秒，格式为<code>yyyy-MM-dd HH:mm:ss</code></p>
+<p><strong><code>datetime</code>和<code>timestamp</code>的区别</strong>：如果不给<code>timestamp</code>赋值，或给<code>timestamp</code>赋值为<code>null</code>，则默认使用系统当前时间赋值，适用于添加当前时间</p>
+<ol start="6">
+<li><code>varchar</code>：字符串类型，需要指定最大字符长度，例如<code>name varchar(20)</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p><font color="OrangeRed">从其他表复制表</font>：<code>create table 表名 like 被复制的表名;</code></p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><code>R(Retrieve)</code>：查询</p>
+<ul>
+<li><font color="OrangeRed">查询某个数据库中所有的表的名称</font>：<code>show tables;</code></li>
+<li><font color="OrangeRed">查询表结构</font>：<code>desc 表名;</code></li>
+</ul>
+</li>
+<li><p><code>U(Update)</code>：修改</p>
+<ul>
+<li><font color="OrangeRed">修改表名</font>：<code>alter table 表名 rename to 新表名</code>;</li>
+<li><font color="OrangeRed">修改表的字符集</font>：<code>alter table 表名 character set 字符集名称</code>;</li>
+<li><font color="OrangeRed"><strong>修改表中的字段</strong></font>：<ol>
+<li><font color="DeepSkyBlue">添加一列</font>：<code>alter table 表名 add 添加的列名 添加的数据类型;</code></li>
+<li><font color="DeepSkyBlue">修改列名称和类型</font>：<ul>
+<li>只修改列的类型：<code>alter table 表名 modify 列名 修改之后的数据类型;</code></li>
+<li>同时修改列名和数据类型：<code>alter table 表名 change 原列名 新列名 新数据类型;</code></li>
+</ul>
+</li>
+<li><font color="DeepSkyBlue">删除列</font>：<code>alter table 表名 drop 被删除的列名;</code></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><code>D(Delete)</code>：删除</p>
+<ul>
+<li><font color="OrangeRed">删除表</font>：<code>drop table 表名</code>如果表不存在会报错</li>
+<li>删除表，判断表存在才会删除：<code>drop table if exists 表名</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="DML-Data-Manipulation-Language-数据操作语言">
+          <a href="#DML-Data-Manipulation-Language-数据操作语言" class="heading-link"><i class="fas fa-link"></i></a><a href="#DML-Data-Manipulation-Language-数据操作语言" class="headerlink" title="DML(Data Manipulation Language)数据操作语言"></a>DML(Data Manipulation Language)数据操作语言</h4>
+      <p>用来对数据库中表的数据进行增删改。</p>
+<p>关键字：<code>insert</code>、<code>delete</code>、<code>update</code>等</p>
+<ul>
+<li><p>添加数据</p>
+<ul>
+<li><p>语法</p>
+<ul>
+<li><font color="OrangeRed">添加数据到某些对应的列</font>：<code>insert into 表名(列名1,列名2,...,列名N) values(值1,值,...,值N);</code></li>
+</ul>
+</li>
+<li><p>添加数据到<font color="OrangeRed">每一列</font>：<code>insert into 表名 values(值1,值,...,值N);</code> <strong>此时必须为每一列赋值</strong></p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>列名要和值一一对应</li>
+<li>如果要给所有的列添加数据，可以省略表名后<code>(列名...)</code>的内容</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>删除数据</p>
+<ul>
+<li><p>语法</p>
+<ul>
+<li><p><font color="OrangeRed">按条件删除</font>：<code>delete from 表名 where 条件;</code></p>
+</li>
+<li><p><font color="OrangeRed">删除表中所有记录</font>：<code>delete from 表名;</code>:warning:</p>
+<p>另一种方式：<code>truncate 表名;</code>或<code>truncate table 表名;</code>:warning:</p>
+</li>
+</ul>
+<p><strong>注意：</strong></p>
+<ol>
+<li><p>:warning:如果不加<code>where</code>条件，则删除表中的所有记录</p>
+</li>
+<li><p>:warning:如果要删除所有记录，不加<code>where</code>条件即可，相当于对每一行删除，效率低</p>
+<p>:warning:推荐使用<code>truncate</code>删除表，相当于直接删除原表，再创建一个一模一样的空表，效率高</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210727172303571.png" alt="image-20210727172303571">
+      </p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>修改数据</p>
+<ul>
+<li>语法：<ul>
+<li>:warning:<font color="OrangeRed">更新指定列名的所有位置数据</font>：<code>update 表名 set 列名1 = 值1,列名2 = 值2,...,列名N = 值N;</code></li>
+<li><font color="OrangeRed">按条件更新指定列名的数据</font>：<code>update 表名 set 列名1 = 值1,...列名N = 值 N where 条件;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="DQL-Data-Query-Language-数据查询语言">
+          <a href="#DQL-Data-Query-Language-数据查询语言" class="heading-link"><i class="fas fa-link"></i></a><a href="#DQL-Data-Query-Language-数据查询语言" class="headerlink" title="DQL(Data Query Language)数据查询语言"></a>DQL(Data Query Language)数据查询语言</h4>
+      <p>用来查询数据库中表的记录（数据）。</p>
+<p>关键字：<code>select</code>、<code>where</code>等</p>
+<ul>
+<li><p>查询数据：</p>
+<ul>
+<li><p><font color="red">基础查询</font></p>
+<ul>
+<li><p><font color="DeepSkyBlue">查询表中所有字段的记录</font>：<code>select * from 表名;</code></p>
+</li>
+<li><p>查询需要的字段：<code>select 字段1,字段2,...字段N from 表名;</code></p>
+</li>
+<li><p><font color="DeepSkyBlue">去除重复</font>结果：<code>select distinct 字段 from 表名</code></p>
+<p><strong>注意：</strong><code>DISTINCT</code>去重的依据是查询出来的字段那一行<strong>所有字段值完全相同，否则不认为是重复</strong></p>
+</li>
+<li><p><font color="DeepSkyBlue">引入表达式</font>，例如计算两个字段的和可以写成：<code>select num1 + num2 from 表名;</code></p>
+<p><strong>注意：</strong>如果<code>num1</code>或<code>num2</code>有一个为<code>NULL</code>，那么结果都为<code>NULL</code></p>
+<p>解决方法：利用<code>IFNULL(exp1,exp2)</code>判空，如果<code>exp1</code>的值为<code>NULL</code>，则表达式的值为<code>exp2</code></p>
+</li>
+<li><p><font color="DeepSkyBlue">给字段起别名</font>：<code>select 字段1 as 别名1,字段2 as 别名2,...,字段N as 别名N from 表名;</code></p>
+<p><strong>注意</strong>：利用<code>as</code>起别名可以省略as，用空格代替即可</p>
+</li>
+</ul>
+</li>
+<li><p><font color="red">条件查询</font>：<code>select * from 表名 where 条件;</code></p>
+<ul>
+<li><p>where字句后跟查询条件</p>
+</li>
+<li><p>运算符</p>
+<ul>
+<li><p><code>&gt;</code>、<code>&lt;</code>、<code>&lt;=</code>、<code>&gt;=</code>、<code>=</code>、<code>&lt;&gt;</code></p>
+<p><strong>注意</strong>：在<code>SQL</code>中：</p>
+<ol>
+<li><font color="orange">等于</font>就是<code>=</code>，而不是Java中的<code>==</code></li>
+<li><font color="orange">不等于</font>可以用<code>!=</code>表示，也可以用<code>&lt;&gt;</code>表示</li>
+</ol>
+</li>
+<li><p><code>between value1 and value2</code>：选取满足<code>value1</code>到<code>value2</code>之间值的行，<code>mysql</code>中包括边界</p>
+</li>
+<li><p><code>in</code>：简化对于同一个值的选取，例如<code>where age=18 or age=20 or age=22;</code></p>
+<p>简化之后可以写作：<code>where age in (18,20,22);</code></p>
+</li>
+<li><p><strong><code>like</code>：模糊查询</strong></p>
+<ul>
+<li>占位符：<ol>
+<li><code>_</code>：单个任意字符</li>
+<li><code>%</code>：0个或多个任意字符</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><code>is NULL</code>：判断某字段的值为<code>NULL</code>不能直接用<code>=</code>号，要用字段值<code>is NULL</code>判断</p>
+</li>
+<li><p><code>and</code>或<code>&amp;&amp;</code>：逻辑与</p>
+</li>
+<li><p><code>or</code>或<code>||</code>：逻辑或，同一个字段的多次连续<code>||</code>推荐使用<code>in(值的集合)</code></p>
+</li>
+<li><p><code>not</code>或<code>!</code>：逻辑非</p>
+<p><strong>not可应用于：</strong></p>
+<ol>
+<li>对<code>between...and</code>取反：<code>not between...and</code>，不介于…之间</li>
+<li>对<code>is NULL</code>取反：<code>is not NULL</code>，某字段的值不为空</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><font color="red">排序查询</font>：<code>select * from 表名 order by 排序字段1 排序方式1,排序字段2 排序方式2,...;</code></p>
+<ul>
+<li><p>排序方式：默认为<code>ASC</code>顺序排序，<code>DESC</code>逆序排序</p>
+<p><strong>注意</strong>：如果有多个排序字段和方式，则只在满足第一个排序字段和方式产生相等结果时，按顺序按照后面的排序字段和方式排序。</p>
+</li>
+</ul>
+</li>
+<li><p><font color="red">聚合函数</font>：将一列数据作为一个整体，进行纵向计算</p>
+<ul>
+<li><p><code>count</code>：计算个数（计数器）</p>
+</li>
+<li><p><code>max</code>：计算最大值</p>
+</li>
+<li><p><code>min</code>：计算最小值</p>
+</li>
+<li><p><code>sum</code>：计算和</p>
+</li>
+<li><p><code>avg</code>：计算平均值，对于包含<code>NULL</code>的字段，<code>avg</code>不会此字段计入平均值计算</p>
+<p><strong>注意</strong>：聚合函数的计算会排除参数字段值为NULL的那一行，特别是<code>count()</code></p>
+<p>解决方案：</p>
+<ol>
+<li>尽量选择不含有<code>NULL</code>的列进行聚合函数的计算，例如<strong>主键</strong></li>
+<li>利用<code>IFNULL(exp1,exp2)</code>把可能含有<code>NULL</code>的字段作为<code>exp1</code>替换为<code>exp2</code></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><font color="red">分组查询</font>：<code>select * from 表名 group by 分组字段;</code></p>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>分组查询之后的字段只能为：分组字段、聚合函数，不推荐为其他字段，包括<code>*</code></li>
+<li>对分组查询之后的结果进行条件判断，利用**<code>having</code>**子句<ul>
+<li><code>where</code> 和 <code>having</code> 的<font color="green">区别</font>：<ol>
+<li><code>where</code> 在分组之前进行限定，如果不满足<code>where</code>的条件，则不参与分组</li>
+<li><code>having</code>在分组之后进行限定，如果不满足<code>having</code>后聚合函数的条件，则不显示</li>
+<li><code>where</code>后不可以跟聚合函数，<code>having</code>可以进行聚合函数的判断</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><font color="red">分页查询</font>：<code>select * from 表名 limit 开始的索引,要显示的条数;</code></p>
+<ul>
+<li>分页计算公式：    <code>开始的索引 = (当前页码 - 1) * 每页的条数</code> </li>
+</ul>
+
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210728175417542.png" alt="image-20210728175417542">
+      
+
+<ul>
+<li>分页操作是一个<strong>方言</strong>，例如<code>LIMIT</code>只适用于<code>MySQL</code>数据库</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="DCL-Data-Control-Language-数据控制语言">
+          <a href="#DCL-Data-Control-Language-数据控制语言" class="heading-link"><i class="fas fa-link"></i></a><a href="#DCL-Data-Control-Language-数据控制语言" class="headerlink" title="DCL(Data Control Language)数据控制语言"></a>DCL(Data Control Language)数据控制语言</h4>
+      <p>用来定义数据库的访问权限和安全级别，及创建用户。DCL主要由DBA（数据库管理员）进行管理。</p>
+<p>关键字：<code>GRANT</code>、<code>REVOKE</code>等</p>
+<ul>
+<li><p>管理用户</p>
+<ul>
+<li><p>添加用户：<code>create user &#39;用户名&#39;@&#39;主机名&#39; identified by &#39;密码&#39;;</code></p>
+</li>
+<li><p>删除用户：<code>drop user &#39;用户名&#39;@&#39;主机名&#39;;</code></p>
+</li>
+<li><p>修改用户密码：</p>
+<ol>
+<li>修改表字段内容：<code>update user set Password = password(&#39;新密码&#39;) where User = &#39;用户名&#39;;</code></li>
+<li>DCL简化语法：<code>set password for &#39;用户名&#39;@&#39;主机名&#39; = password(&#39;新密码&#39;);</code></li>
+</ol>
+<p><strong>忘记了root密码？</strong></p>
+<ol>
+<li>管理员运行cmd：<code>net stop mysql</code> 停止mysql服务</li>
+<li>使用无验证方式启动mysql服务：<code>mysqld --skip-grant-tables</code> 此时当前cmd会陷入阻塞</li>
+<li>在另一个cmd直接输入<code>mysql</code>回车，登录进去修改user表的root用户密码，然后关掉所有cmd</li>
+<li>在任务管理器杀掉<code>mysqld</code>的进程</li>
+<li>管理员运行cmd：<code>net start mysql</code> 启动mysql服务</li>
+</ol>
+</li>
+<li><p>查询用户：</p>
+<ol>
+<li><p>切换到<code>mysql</code>数据库：<code>use mysql;</code></p>
+</li>
+<li><p>查询<code>user</code>表：<code>select * from user;</code></p>
+<p>Host字段通配符：<code>%</code>表示可以在任意主机使用用户登录数据库（包含了<code>localhost</code>）</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>授权</p>
+<ul>
+<li>查询权限：<code>show grants for &#39;用户名&#39;@&#39;主机名&#39;;</code></li>
+<li>授予权限：<code>grant 权限列表 on 数据库名.表名 to &#39;用户名&#39;@&#39;主机名&#39;;</code><ul>
+<li>授予所有权限到所有数据库的所有表：<code>grant all on *.* to 用户名;</code></li>
+</ul>
+</li>
+<li>撤销权限：<code>revoke 权限列表 on 数据库名.表名 from &#39;用户名&#39;@&#39;主机名&#39;;</code></li>
+</ul>
+</li>
+<li><p>建议刷新：<code>flush privileges;</code></p>
+</li>
+</ul>
+
+        <h3 id="约束">
+          <a href="#约束" class="heading-link"><i class="fas fa-link"></i></a><a href="#约束" class="headerlink" title="约束"></a>约束</h3>
+      <ul>
+<li><p>作用：对表中的数据进行限定，保证数据的正确性、有效性和完整性。</p>
+</li>
+<li><p>约束的分类：</p>
+<ul>
+<li><p><font color="red">主键约束</font>：<code>primary Key</code></p>
+<p><strong>作用</strong>：非空且唯一，一张表只能有一个字段为主键，主键是表中记录的唯一标识</p>
+<ul>
+<li><p>添加主键：</p>
+<ol>
+<li>创建表时指定主键约束：<code>id int primary key</code></li>
+<li>修改表字段属性时添加主键约束：<code>alter table 表名 modify 字段名 数据类型 primary key;</code></li>
+</ol>
+</li>
+<li><p>删除主键约束：<code>alter table 表名 drop primary key</code>，因为主键只有一个，所以不需要指定字段</p>
+<p><strong>注意</strong>：使用<code>alter table 表名 modify 字段</code>的方式不能删除掉主键约束</p>
+<p>主键约束使得一列的字段值不能相同且非空，相当于<code>unique</code>和<code>not null</code></p>
+</li>
+<li><p>主键<font color="red">自动增长</font>：</p>
+<ol>
+<li><p>创建表时对主键指定自动增长：<code>id int primary key auto_increment</code></p>
+</li>
+<li><p>修改表字段时添加自动增长：<code>alter table 表名 modify 字段名 数据类型 auto_increment;</code></p>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>只有当自动增长的字段值赋值为0或null时，会触发自动增长，产生自增数值并插入</li>
+<li>后续才添加自动增长时，必须保证自动增长字段没有值为1，否则添加自动增长不成功</li>
+<li>:warning:后续才添加自动增长会导致自动增长字段中为0的变成1，除非手动配置<code>ini</code>文件</li>
+<li>在发生外键值不存在时，自动增长值依然会<code>+1</code>，但主键冲突不会导致<code>+1</code></li>
+</ol>
+</li>
+<li><p>删除自动增长：<code>alter table 表名 modify 字段 属性值;</code>，可以省略主键设置，因为主键不会被<code>modify</code>移除</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><font color="red">非空约束</font>：<code>not null</code></p>
+<ul>
+<li>添加非空约束：<ol>
+<li>创建表时指定非空约束：直接在字段的数据类型后指定约束：<code>name varchar(20) not null</code></li>
+<li>修改表字段属性时添加非空约束：<code>alter table 表名 modify 字段名 数据类型 not null;</code></li>
+</ol>
+</li>
+<li>删除非空约束：<code>alter table 表名 modify 字段名 数据类型;</code>此时没有给该字段指定约束</li>
+</ul>
+</li>
+<li><p><font color="red">唯一约束</font>：<code>unique</code></p>
+<ul>
+<li><p>添加唯一约束：</p>
+<ol>
+<li>创建表时指定唯一约束：直接在字段的数据类型后指定约束：<code>phone varchar(20) unique</code></li>
+</ol>
+</li>
+<li><p>删除唯一约束：<code>alter table 表名 drop index 要删除唯一约束的字段名;</code></p>
+<p><strong>注意</strong>：使用<code>alter table 表名 modify 字段</code>的方式不能删除掉唯一约束</p>
+<p>​    唯一约束使得一列的字段值不能相同，但不包括<code>null</code>（<code>null</code>可重复）</p>
+</li>
+</ul>
+</li>
+<li><p><font color="red">外键约束</font>：<code>foreign key</code></p>
+<p><strong>作用</strong>：让表与表之间事实的依赖关系由外键链接，从而保证数据的正确性</p>
+<ul>
+<li><p>添加外键约束：</p>
+<ol>
+<li><p>创建表时指定外键约束：</p>
+<figure class="highlight sql"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">	...,</span><br><span class="line">	外键字段 外键属性,</span><br><span class="line">    <span class="keyword">constraint</span> 随便起个外键名称 <span class="keyword">foreign</span> key (本表外键字段名称)</span><br><span class="line">    <span class="keyword">references</span> 外键连接的表名(外键连接的表的唯一约束列名称)</span><br><span class="line">);</span><br></pre></td></tr></table></div></figure></li>
+<li><p>修改表字段属性时添加外键约束：</p>
+<figure class="highlight sql"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 要添加外键的本表名</span><br><span class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> 随便起个外键名称 <span class="keyword">foreign</span> key (本表外键字段名称) </span><br><span class="line"><span class="keyword">references</span> 外键链接的表名(外键连接的表的唯一约束列名称);</span><br></pre></td></tr></table></div></figure></li>
+</ol>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>对于本表中作为其他表外键的约束字段，如果不考虑外键操作会导致操作失败，例如删除一个作为其他表中外键的本表字段会删除失败，因为其他表外键依赖了本表这个字段</li>
+<li>对于本表中被其他表外键约束的字段，如果本表的值不存在于这个外键对应的字段的值，则操作失败，只能为外键对应的表中被约束的字段值之一，但是<strong>外键字段值可以为<code>NULL</code></strong></li>
+</ol>
+</li>
+<li><p>删除外键：<code>alter table 表名 drop foreign key 要删除的外键名称;</code></p>
+</li>
+<li><p><font color="green">级联操作</font>：使得修改外键对应的表的字段值，可以自动影响本表外键字段</p>
+<ol>
+<li><p><font color="orange">级联更新</font>：</p>
+<ul>
+<li><p>在创建表时指定外键的级联更新：</p>
+<figure class="highlight sql"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">	...,</span><br><span class="line">	外键字段 外键属性,</span><br><span class="line">    <span class="keyword">constraint</span> 随便起个外键名称 <span class="keyword">foreign</span> key (本表外键字段名称)</span><br><span class="line">    <span class="keyword">references</span> 外键连接的表名(外键连接的表的唯一约束列名称)</span><br><span class="line">    <span class="keyword">on</span> update cascade</span><br><span class="line">);</span><br></pre></td></tr></table></div></figure></li>
+<li><p>修改表字段属性时添加外键的级联更新：</p>
+<figure class="highlight sql"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 要添加外键的本表名</span><br><span class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> 随便起个外键名称 <span class="keyword">foreign</span> key (本表外键字段名称) </span><br><span class="line"><span class="keyword">references</span> 外键链接的表名(外键连接的表的唯一约束列名称)</span><br><span class="line"><span class="keyword">on</span> update cascade;</span><br></pre></td></tr></table></div></figure></li>
+</ul>
+</li>
+<li><p><font color="orange">级联删除</font>：</p>
+<ul>
+<li><p>在创建表时指定外键的级联删除：</p>
+<figure class="highlight sql"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">	...,</span><br><span class="line">	外键字段 外键属性,</span><br><span class="line">    <span class="keyword">constraint</span> 随便起个外键名称 <span class="keyword">foreign</span> key (本表外键字段名称)</span><br><span class="line">    <span class="keyword">references</span> 外键连接的表名(外键连接的表的唯一约束列名称)</span><br><span class="line">    <span class="keyword">on</span> <span class="keyword">delete</span> cascade</span><br><span class="line">);</span><br></pre></td></tr></table></div></figure></li>
+<li><p>修改表字段属性时添加外键的级联删除：</p>
+<figure class="highlight sql"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 要添加外键的本表名</span><br><span class="line"><span class="keyword">add</span> <span class="keyword">constraint</span> 随便起个外键名称 <span class="keyword">foreign</span> key (本表外键字段名称) </span><br><span class="line"><span class="keyword">references</span> 外键链接的表名(外键连接的表的唯一约束列名称)</span><br><span class="line"><span class="keyword">on</span> <span class="keyword">delete</span> cascade;</span><br></pre></td></tr></table></div></figure></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h2 id="数据库的设计">
+          <a href="#数据库的设计" class="heading-link"><i class="fas fa-link"></i></a><a href="#数据库的设计" class="headerlink" title="数据库的设计"></a>数据库的设计</h2>
+      
+        <h3 id="多表之间的关系">
+          <a href="#多表之间的关系" class="heading-link"><i class="fas fa-link"></i></a><a href="#多表之间的关系" class="headerlink" title="多表之间的关系"></a>多表之间的关系</h3>
+      <ul>
+<li><p>分类：</p>
+<ul>
+<li><strong>一对一</strong>：例如：人和身份证号：一个人只有一个身份证号，一个身份证号只对应一个人</li>
+<li><strong>一对多</strong>：例如：部门和员工：一个部门含有多个员工，一个员工只属于一个部门</li>
+<li><strong>多对多</strong>：例如：学生和课程：一个学生可以选修多个课程，一个课程可以被多个学生选择</li>
+</ul>
+</li>
+<li><p>实现关系：</p>
+<ul>
+<li>一对一：在<strong>任意一方</strong>添加<strong>外键</strong>（这个外键必须是<code>unique</code>的），<strong>指向另一方</strong>的主键。多在一张表实现</li>
+<li><strong>一对多</strong>：在<strong>多的一方</strong>建立<strong>外键</strong>，<strong>指向一的一方</strong>的主键</li>
+<li><strong>多对多</strong>：需要<strong>借助第三方中间表</strong>，至少包含两个字段作为<strong>外键</strong>（<em>联合主键</em>），<strong>分别指向两张表的主键</strong></li>
+</ul>
+<p><strong>案例</strong>：一条路线的分类只有一种，一个用户可以选择多条路线，一个路线也可以被多个用户选择。</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210729235017508.png" alt="image-20210729235017508">
+      </p>
+</li>
+</ul>
+
+        <h3 id="范式">
+          <a href="#范式" class="heading-link"><i class="fas fa-link"></i></a><a href="#范式" class="headerlink" title="范式"></a>范式</h3>
+      <ul>
+<li><p>概念：设计数据库时需要遵循的一些规范。遵循越高的范式要求遵循较低的所有范式</p>
+<ul>
+<li><p>来自百度百科：</p>
+<p>​        设计关系数据库时，遵从不同的规范要求，设计出合理的关系型数据库，这些不同的规范要求被称为不同的范式，各种范式呈递次规范，越高的范式数据库冗余越小。目前关系数据库有六种范式：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、巴斯-科德范式（BCNF）、第四范式(4NF）和第五范式（5NF，又称完美范式）。</p>
+</li>
+</ul>
+</li>
+<li><p>分类：</p>
+<ul>
+<li><p><font color="red">第一范式（1NF）</font>：每一列都是不可分割的原子数据项</p>
+
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210730011505571.png" alt="image-20210730011505571" style="zoom:67%;">
+      
+
+<p>可能存在的问题：</p>
+<ol>
+<li>存在非常严重的数据冗余（重复）</li>
+<li>添加数据存在问题</li>
+<li>删除数据存在问题</li>
+</ol>
+</li>
+<li><p><font color="red">第二范式（2NF）</font>：在1NF的基础上，非码属性必须完全依赖于候选码（在1NF基础上<strong>消除</strong>非主属性对主码的<strong>部分函数依赖</strong>，可以解决数据冗余问题）</p>
+
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210730011619411.png" alt="image-20210730011619411" style="zoom:80%;">
+      
+
+<p>概念：</p>
+<ul>
+<li><p><font color="orange">函数依赖</font>：A–&gt;B，通过A属性（属性组）的属性值可以确定唯一B属性的值，则B依赖于A</p>
+<ol>
+<li>A<strong>属性</strong>的值确定B属性的值：例如学号A可以确定唯一的学生姓名B，则学生姓名B依赖于学号A</li>
+<li>A<strong>属性组</strong>的值确定B属性值：例如学号和课程为一组A，可以确定成绩B，则成绩B依赖于属性组A</li>
+</ol>
+</li>
+<li><p><font color="orange">完全函数依赖</font>：A–&gt;B，如果A是一个属性组，则B属性值的确定需要依赖于A属性组中<strong>所有</strong>属性值</p>
+</li>
+<li><p><font color="orange">部分函数依赖</font>：A–&gt;B，如果A是一个属性组，则B属性值的确定只需要依赖A属性组中<strong>某些</strong>属性值</p>
+</li>
+<li><p><font color="orange">传递函数依赖</font>：A–&gt;B，B–&gt;C，如果通过A属性（属性组）的值可以确定唯一B属性的值，再通过B属性（属性组）的值可以确定唯一C属性的值，则称C传递函数依赖于A。例如学号可以确定系名，系名又可以确定系主任，则系主任是传递依赖于学号的</p>
+</li>
+<li><p><font color="orange">码</font>：在一张表中，如果一个属性或属性组被其他所有属性完全依赖，则这个属性或属性组为该表的码</p>
+
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210730002712176.png" alt="image-20210730002712176" style="zoom:80%;">
+      
+
+<p>该表中，学号并不能确定唯一的分数，只有<strong>（学号+课程）</strong>可以确定<strong>唯一的分数</strong>，<strong>此时的码为属性组</strong></p>
+<ul>
+<li>主属性：码属性组中的所有属性</li>
+<li>非主属性：除去码属性组的属性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><font color="red">第三范式（3NF）</font>：在2NF的基础上，任何非码属性不依赖于其他非主属性（在2NF基础上<strong>消除传递依赖</strong>）</p>
+
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210730011726163.png" alt="image-20210730011726163" style="zoom:67%;">
+      </li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="数据库的备份与还原">
+          <a href="#数据库的备份与还原" class="heading-link"><i class="fas fa-link"></i></a><a href="#数据库的备份与还原" class="headerlink" title="数据库的备份与还原"></a>数据库的备份与还原</h3>
+      <ul>
+<li>命令行：<ul>
+<li>备份：<code>mysqldump -u用户名 -p密码 要备份的数据库名称 &gt; 要保存到的路径</code></li>
+<li>还原：<ol>
+<li>登录数据库<code>mysql -u用户名 -p密码</code></li>
+<li>创建数据库<code>create database 数据库名称</code></li>
+<li>使用数据库<code>use 数据库名称</code></li>
+<li>执行文件：<code>source 保存的文件路径</code></li>
+</ol>
+</li>
+</ul>
+</li>
+<li>图形化工具：<ul>
+<li><code>DataGrip</code>：<ol>
+<li>数据库列表右键需要备份的数据库</li>
+<li>选择：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210730142551600.png" alt="image-20210730142551600">
+      </li>
+<li>配置<code>mysqldump</code>的路径：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210730142611142.png" alt="image-20210730142611142">
+      </li>
+<li>配置输出位置：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210730142644773.png" alt="image-20210730142644773">
+      </li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h2 id="多表查询">
+          <a href="#多表查询" class="heading-link"><i class="fas fa-link"></i></a><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2>
+      <ul>
+<li>基本语法：<code>select 字段列表 from 表名列表 where 条件...;</code>，直接查询的结果为笛卡尔积<ul>
+<li>笛卡尔积：全称<em>笛卡尔乘积</em>，两个集合X和Y的笛卡尔积（Cartesian product），又称直积，表示为X × Y，第一个对象是X的成员而第二个对象是Y的所有可能有序对的其中一个成员。也就是两个集合的所有组成情况。要完成多表查询需要消除无用数据。</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="多表查询的分类：">
+          <a href="#多表查询的分类：" class="heading-link"><i class="fas fa-link"></i></a><a href="#多表查询的分类：" class="headerlink" title="多表查询的分类："></a>多表查询的分类：</h3>
+      
+        <h4 id="内连接查询：">
+          <a href="#内连接查询：" class="heading-link"><i class="fas fa-link"></i></a><a href="#内连接查询：" class="headerlink" title="内连接查询："></a>内连接查询：</h4>
+      <blockquote>
+<p>内连接只查询出符合条件的数据</p>
+</blockquote>
+<p>基本思路：</p>
+<ol>
+<li>从哪些表中查询数据</li>
+<li>条件是什么</li>
+<li>查询哪些字段</li>
+</ol>
+<ul>
+<li><p><strong>隐式内连接</strong>：<code>select 字段列表 from 表名1,表名2 where 条件;</code>使用where条件消除无用数据</p>
+<p>例如：1. 查询所有员工信息和对应的部门名称：</p>
+<p>​        <code>select * from emp,dept where emp.dept_id = dept.id; -- 隐式内连接</code></p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210730150424971.png" alt="image-20210730150424971">
+      </p>
+<p>​            2. 查询员工表所有的员工名称、性别和对应部门表中的部门名称：</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210730150811208.png" alt="image-20210730150811208">
+      
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210730150824252.png" alt="image-20210730150824252" style="zoom: 80%;">
+      </p>
+</li>
+<li><p><strong>显式内连接</strong>：<code>select 字段列表 from 表名1 inner join 表名2 on 条件;</code>其中<code>inner</code>可省略</p>
+<p>例如：查询所有员工信息和对应的部门名称：</p>
+<p>​        <code>select * from emp inner join dept on emp.dept_id = dept.id</code></p>
+</li>
+</ul>
+
+        <h4 id="外连接查询：">
+          <a href="#外连接查询：" class="heading-link"><i class="fas fa-link"></i></a><a href="#外连接查询：" class="headerlink" title="外连接查询："></a>外连接查询：</h4>
+      <blockquote>
+<p>外连接可以查询某张表的数据，包括不满足条件的</p>
+</blockquote>
+<ul>
+<li>左外连接：<code>select 字段列表 from 表1 left outer join 表2 on 条件;</code>其中<code>outer</code>可省略<ul>
+<li>查询到的结果是<strong>所有的左表（表1）记录</strong>和交集内容</li>
+</ul>
+</li>
+<li>右外连接：<code>select 字段列表 from 表1 right outer join 表2 on 条件;</code>其中<code>outer</code>可省略<ul>
+<li>查询到的结果是<strong>所有的右表（表2）记录</strong>和交集内容</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="子查询：">
+          <a href="#子查询：" class="heading-link"><i class="fas fa-link"></i></a><a href="#子查询：" class="headerlink" title="子查询："></a>子查询：</h4>
+      <ul>
+<li>概念：查询中嵌套查询，称嵌套查询为子查询</li>
+<li>子查询不同情况：<ul>
+<li>子查询的结果是<strong>单行单列</strong>：子查询可以作为条件，使用运算符去判断<ul>
+<li>运算符：<code>&gt;</code>、<code>&lt;</code>、<code>&gt;=</code>、<code>&lt;=</code>、<code>=</code></li>
+</ul>
+</li>
+<li>子查询的结果是<strong>多行单列</strong>：子查询可以作为条件，使用运算符<code>in</code></li>
+<li>子查询的结果是<strong>多行多列</strong>：子查询可以作为一张虚拟表进行表的查询</li>
+</ul>
+</li>
+</ul>
+
+        <h2 id="事务">
+          <a href="#事务" class="heading-link"><i class="fas fa-link"></i></a><a href="#事务" class="headerlink" title="事务"></a>事务</h2>
+      
+        <h3 id="事务的基本介绍">
+          <a href="#事务的基本介绍" class="heading-link"><i class="fas fa-link"></i></a><a href="#事务的基本介绍" class="headerlink" title="事务的基本介绍"></a>事务的基本介绍</h3>
+      <ul>
+<li>概念：如果一个包含多个步骤的业务操作被事务管理，那么这些操作<strong>要么同时成功，要么同时失败</strong></li>
+<li>操作：<ul>
+<li>开启事务：<code>start transaction;</code><ul>
+<li>开启事务后的DML语句不会立即更新结果到数据库上，除非<code>commit</code></li>
+</ul>
+</li>
+<li>回滚：<code>rollback;</code></li>
+<li>提交：<code>commit;</code></li>
+</ul>
+</li>
+<li>MySQL数据库中事务默认自动提交（Oracle数据库默认手动提交事务）<ul>
+<li>一条DML语句会自动提交一次事务</li>
+<li>事务提交的两种方式：<ul>
+<li>自动提交：DML语句</li>
+<li>手动提交：需要手动先开启事务，然后手动提交事务</li>
+</ul>
+</li>
+<li>查看事务的默认提交方式：<code>select @@autocommit;</code>结果为0表示手动提交，为1表示自动提交</li>
+<li>修改事务的默认提交方式：<code>set @@autocommit = 0;</code>修改为手动提交</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="事务的四大特征ACID">
+          <a href="#事务的四大特征ACID" class="heading-link"><i class="fas fa-link"></i></a><a href="#事务的四大特征ACID" class="headerlink" title="事务的四大特征ACID"></a>事务的四大特征ACID</h3>
+      <ol>
+<li>原子性(Atomicity)：是不可分割的最小操作单位，要么同时成功，要么同时失败</li>
+<li>一致性(Consistency)：事务操作前后数据总量不变</li>
+<li>隔离性(Isolation)：多个事务之间相互独立</li>
+<li>持久性(Durability)：当事务提交或回滚后，数据库会持久化的保存数据</li>
+</ol>
+
+        <h3 id="事务的隔离级别">
+          <a href="#事务的隔离级别" class="heading-link"><i class="fas fa-link"></i></a><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3>
+      <ul>
+<li><p>概念：多个事务之间是隔离的、相互独立的。但是如果多个事务操作同一批数据，就会引发一些问题，通过设置不同的隔离级别就可以解决这些问题</p>
+</li>
+<li><p>存在的问题：</p>
+<ol>
+<li>脏读：一个事务读取到另一个事务中没有提交的数据</li>
+<li>不可重复读（虚读）：在同一个事务中，两次读取到的数据不一样</li>
+<li>幻读：一个事务操作（DML）数据表中所有记录，另一个事务添加了一条数据，则第一个事务查询不到自己的修改，好像产生了幻觉一样</li>
+</ol>
+</li>
+<li><p>隔离级别：</p>
+<ol>
+<li><p><code>read uncommitted</code>：读未提交</p>
+<p>产生的问题：脏读、不可重复读、幻读</p>
+</li>
+<li><p><code>read committed</code>：读已提交（Oracle默认）</p>
+<p>产生的问题：不可重复读、幻读</p>
+</li>
+<li><p><code>repeatable read</code>：可重复读（MySQL默认）</p>
+<p>产生的问题：幻读</p>
+</li>
+<li><p><code>serializable</code>：串行化</p>
+<p>可以解决所有的问题</p>
+<p><strong>注意：从小到大安全性越来越高，但是效率越来越低</strong></p>
+</li>
+</ol>
+</li>
+<li><p>查询数据库的隔离级别：<code>select @@tx_isolation;</code></p>
+</li>
+<li><p>设置数据库的隔离级别：<code>set global transaction isolation level 级别字符串;</code></p>
+<ul>
+<li>级别字符串：上述4种隔离级别的枚举。</li>
+</ul>
+</li>
+</ul>
+
+        <h2 id="JDBC">
+          <a href="#JDBC" class="heading-link"><i class="fas fa-link"></i></a><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2>
+      
+        <h3 id="概念-1">
+          <a href="#概念-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3>
+      <p><strong>JDBC是 Java DataBase Connectivity （ Java数据库连接）的简写，即利用Java操作数据库</strong></p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210802002118624.png" alt="image-20210802002118624">
+      </p>
+<ul>
+<li>JDBC的本质：官方(SUN公司)定义的一套操作所有关系型数据库的规则，即接口。各个数据库厂商去实现了这些接口，提供数据库驱动jar包，我们可以使用这套接口（JDBC）编程，真正执行的是驱动jar包中的实现类</li>
+</ul>
+
+        <h3 id="快速入门">
+          <a href="#快速入门" class="heading-link"><i class="fas fa-link"></i></a><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3>
+      <ul>
+<li><p>步骤：</p>
+<ol>
+<li><p>导入驱动jar包</p>
+<ul>
+<li>把驱动jar包复制到项目里</li>
+<li>添加为库
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210802012636684.png" alt="image-20210802012636684">
+      </li>
+</ul>
+</li>
+<li><p>注册驱动：<code>Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</code></p>
+</li>
+<li><p>获取数据库连接对象<code>Connection getConnection(String url,String user,String password)</code></p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection conn = DriverManager.getConnection(<span class="string">&quot;jdbc:mysql://localhost:3306/db3&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;199988&quot;</span>); <span class="comment">//指定URL，用户名，密码</span></span><br></pre></td></tr></table></div></figure></li>
+<li><p>定义sql：<code>String sql = &quot;update account set money = 200 where id = 2&quot;;</code></p>
+<ul>
+<li><p>IDEA连接数据库可能需要指定时区：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210802012048708.png" alt="image-20210802012048708">
+      </p>
+<p>在URL后面加上<code>?serverTimezone=GMT%2B8</code></p>
+</li>
+</ul>
+</li>
+<li><p>获取执行sql语句的<code>Statement</code>对象：<code>Statement createStatement()</code></p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Statement statement = conn.createStatement();</span><br></pre></td></tr></table></div></figure></li>
+<li><p>执行sql，接收返回的结果</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = statement.executeUpdate(sql); <span class="comment">//返回执行的语句的行数</span></span><br></pre></td></tr></table></div></figure></li>
+<li><p>处理结果</p>
+</li>
+<li><p>释放资源：关闭<code>Statement</code>对象和<code>Connection</code>对象</p>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h4 id="详解各个对象">
+          <a href="#详解各个对象" class="heading-link"><i class="fas fa-link"></i></a><a href="#详解各个对象" class="headerlink" title="详解各个对象"></a>详解各个对象</h4>
+      
+        <h5 id="DriverManager驱动管理对象">
+          <a href="#DriverManager驱动管理对象" class="heading-link"><i class="fas fa-link"></i></a><a href="#DriverManager驱动管理对象" class="headerlink" title="DriverManager驱动管理对象"></a>DriverManager驱动管理对象</h5>
+      <ul>
+<li><p>功能：</p>
+<ol>
+<li><p>注册驱动：告诉程序该使用哪一个驱动jar包</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">registerDriver</span><span class="params">(java.sql.Driver driver)</span></span></span><br></pre></td></tr></table></div></figure>
+
+<p>注册给定的驱动程序，写代码使用：<code>Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</code></p>
+<p>实际上<code>com.mysql.jdbc.Driver</code>里含有一个静态代码块：</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            DriverManager.registerDriver(<span class="keyword">new</span> Driver());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException var1) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;Can&#x27;t register driver!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>在MySQL5之后的驱动jar包的<code>META-INF/services</code>含有一个<code>java.sql.Driver</code>文件，会自动注册驱动</p>
+</li>
+<li><p>获取数据库连接：</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">(String url,String user, String password)</span></span></span><br></pre></td></tr></table></div></figure>
+
+<ul>
+<li><p>参数：</p>
+<ul>
+<li><p><code>url</code>：指定连接的路径（jdbc:mysql://ip:端口/数据库名称）</p>
+<p>例如：<code>jdbc:mysql://ip地址(域名):端口号/数据库名称</code></p>
+<p>例如：<code>jdbc:mysql://localhost:3306/db3</code></p>
+<p>如果连接的是本机的mysql，并且默认端口是3306，那么可以不写ip:端口</p>
+<p>例如<code>jdbc:mysql:///db3</code></p>
+</li>
+<li><p><code>user</code>：用户名</p>
+</li>
+<li><p><code>password</code>：密码</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h5 id="Connection数据库连接对象">
+          <a href="#Connection数据库连接对象" class="heading-link"><i class="fas fa-link"></i></a><a href="#Connection数据库连接对象" class="headerlink" title="Connection数据库连接对象"></a>Connection数据库连接对象</h5>
+      <ul>
+<li>功能：<ol>
+<li>获取执行sql的对象<ul>
+<li><code>Statement createStatement()</code>：获取一个可以执行SQL的Statement对象</li>
+<li><code>PreparedStatement prepareStatement(String sql)</code></li>
+</ul>
+</li>
+<li>管理事务<ul>
+<li>开启事务：<code>void setAutoCommit(boolean autoCommit)</code>设置为<code>false</code>则开启事务</li>
+<li>提交事务：<code>void commit()</code></li>
+<li>回滚事务：<code>void rollback()</code></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h5 id="Statement执行SQL的对象">
+          <a href="#Statement执行SQL的对象" class="heading-link"><i class="fas fa-link"></i></a><a href="#Statement执行SQL的对象" class="headerlink" title="Statement执行SQL的对象"></a>Statement执行SQL的对象</h5>
+      <ul>
+<li><p>功能：用于执行<strong>静态</strong> SQL 语句并返回它产生的结果的对象。</p>
+<ol>
+<li><p><code>boolean execute(String sql)</code>执行给定的 SQL 语句，该语句可能返回多个结果。 在某些（不常见）情况下，单个 SQL 语句可能返回多个结果集和/或更新计数。</p>
+<p>返回值：如果第一个结果是ResultSet对象，则为true ； 如果是更新计数或没有结果，则为false</p>
+</li>
+<li><p><code>int executeUpdate(String sql)</code>执行给定的 SQL 语句，它可以是INSERT 、 UPDATE或DELETE语句或不返回任何内容的DDL 语句。</p>
+<p>返回值：(1) SQL 数据操作语言 (DML) 语句受影响的行数   (2) 对于不返回任何内容的 SQL 语句返回0</p>
+</li>
+<li><p><code>ResultSet executeQuery(String sql)</code>执行给定的 SQL 语句，该语句返回单个ResultSet对象</p>
+<p>返回值：一个ResultSet对象，包含给定查询生成的数据； 从不为null</p>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h5 id="ResultSET结果集对象">
+          <a href="#ResultSET结果集对象" class="heading-link"><i class="fas fa-link"></i></a><a href="#ResultSET结果集对象" class="headerlink" title="ResultSET结果集对象"></a>ResultSET结果集对象</h5>
+      <ul>
+<li><p>功能：封装了查询的结果</p>
+<ol>
+<li><p><code>boolean next()</code>将光标从当前位置向前移动一行。 ResultSet游标最初位于第一行之前； 第一次调用next方法使第一行成为当前行； 第二次调用使第二行成为当前行，依此类推。</p>
+<p>返回值：如果新的当前行有效，则为true ； 如果没有更多行，则为false</p>
+</li>
+<li><p><code>xxx getXxx(参数)</code>获取数据，其中Xxx是数据类型，例如<code>getInt()</code>、<code>getString()</code></p>
+<p>参数：</p>
+<ul>
+<li><code>int columnIndex</code>：根据列的编号获取，从1开始</li>
+<li><code>String columnLabel</code>：根据列名称获取，是AS子句指定的列名。 如果未指定 ，则标签是列的名称</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>使用步骤：</p>
+<ol>
+<li>游标向下移动一行</li>
+<li>判断是否有数据</li>
+<li>获取数据</li>
+</ol>
+</li>
+<li><p>抽取JDBC工具类</p>
+<ul>
+<li>目的：简化书写</li>
+<li>分析：<ol>
+<li>注册驱动</li>
+<li>抽取一个方法获取连接对象：不传递参数，还要保证工具类的通用性，通过配置文件解决</li>
+<li>抽取一个方法释放资源</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h5 id="PreparedStatement">
+          <a href="#PreparedStatement" class="heading-link"><i class="fas fa-link"></i></a><a href="#PreparedStatement" class="headerlink" title="PreparedStatement"></a>PreparedStatement</h5>
+      <ul>
+<li><p>功能：表示预编译 SQL 语句的对象。SQL 语句被预编译并存储在PreparedStatement对象中。 然后可以使用此对象多次有效地执行此语句。</p>
+</li>
+<li><p><strong>解决SQL注入问题</strong>：在拼接SQL语句时，有一些SQL特殊关键词参与字符串的拼接会造成<strong>安全性问题</strong></p>
+<p>对于：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210802170207621.png" alt="image-20210802170207621" style="zoom: 67%;">
+      </p>
+<p>如果<code>password</code>值为
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210802170250282.png" alt="image-20210802170250282">
+      </p>
+<p>则整条SQL语句为：<code>select * from user where username = &#39;ur&#39; AND password = &#39;a&#39; or &#39;a&#39; = &#39;a&#39;</code></p>
+<p>此时最后一个表达式为 <code>false or true</code>，结果为<code>true</code>，造成了SQL注入</p>
+</li>
+<li><p>使用步骤：</p>
+<ol>
+<li><p>导入驱动jar包</p>
+</li>
+<li><p>注册驱动</p>
+</li>
+<li><p>获取数据库连接对象Connection</p>
+</li>
+<li><p><strong>定义SQL</strong></p>
+<ul>
+<li><p>此时SQL语句的参数使用<code>?</code>作为占位符</p>
+<p>例如：<code>select * from user where username = ? AND password = ?;</code></p>
+</li>
+</ul>
+</li>
+<li><p>获取执行SQL的对象<code>PreparedStatement prepareStatement(String sql)</code></p>
+</li>
+<li><p>给<code>?</code>赋值</p>
+<ul>
+<li><p>方法：<code>void setXxx(int parameterIndex,Xxx x)</code></p>
+<p>参数：</p>
+<ol>
+<li><code>parameterIndex</code>：第几个<code>?</code>问好</li>
+<li><code>x</code>：Xxx类型的值</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>执行SQL，不需要再次传递<code>SQL</code>语句，直接调用<code>executeQuery()</code></p>
+</li>
+<li><p>处理结果</p>
+</li>
+<li><p>释放资源</p>
+</li>
+</ol>
+</li>
+<li><p>注意：建议都使用<code>PreparedStatement</code>来完成CRUD操作，好处：</p>
+<ul>
+<li>可以防止SQL注入</li>
+<li>效率更高</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="JDBC控制事务">
+          <a href="#JDBC控制事务" class="heading-link"><i class="fas fa-link"></i></a><a href="#JDBC控制事务" class="headerlink" title="JDBC控制事务"></a>JDBC控制事务</h3>
+      <ul>
+<li>事务：一个包含多个步骤的业务操作，如果这个业务操作被事务管理，那么这些步骤要么同时成功，要么同时失败。</li>
+<li>操作：<ul>
+<li>开启事务：<code>void setAutoCommit(boolean autoCommit)</code>设置为<code>false</code>则开启事务</li>
+<li>提交事务：<code>void commit()</code></li>
+<li>回滚事务：<code>void rollback()</code></li>
+</ul>
+</li>
+<li>使用Connection对象管理事务<ol>
+<li>在执行SQL之前开启事务</li>
+<li>在所有SQL执行完毕后提交事务</li>
+<li>如果产生异常，就在异常处理程序中回滚事务</li>
+</ol>
+</li>
+</ul>
+
+        <h3 id="数据库连接池">
+          <a href="#数据库连接池" class="heading-link"><i class="fas fa-link"></i></a><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h3>
+      <ul>
+<li><p>概念：一个存放数据库连接的容器（集合），当系统初始化好之后，容器被创建，容器中会申请一些连接对象，当用户申请访问数据库时，从容器中获取连接对象，当用户访问完之后，把连接归还给连接池。</p>
+</li>
+<li><p>好处：</p>
+<ol>
+<li>节约资源</li>
+<li>访问高效</li>
+</ol>
+</li>
+<li><p>实现：</p>
+<ol>
+<li><p>标准接口：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210802183748055.png" alt="image-20210802183748055">
+      
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210802184006077.png" alt="image-20210802184006077">
+      </p>
+<ul>
+<li>方法：<ol>
+<li>获取连接：<code>Connection getConnection()</code></li>
+<li>归还连接：如果连接对象Connection是从连接池获取的，那么调用Connection.close()方法，不会再关闭连接，而是归还连接</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>DataSource接口由驱动程序供应商实现，一般有：</p>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h4 id="C3P0：数据库连接池技术">
+          <a href="#C3P0：数据库连接池技术" class="heading-link"><i class="fas fa-link"></i></a><a href="#C3P0：数据库连接池技术" class="headerlink" title="C3P0：数据库连接池技术"></a><code>C3P0</code>：数据库连接池技术</h4>
+      <ul>
+<li><p>步骤：</p>
+<ol>
+<li><p>导入jar包：<code>c3p0-0.9.5.2.jar</code>和<code>mchange-commons-java-0.2.12.jar</code>。前提是要导入<code>mysql</code>驱动包</p>
+</li>
+<li><p>定义配置文件：</p>
+<ul>
+<li><p>名称：<code>c3p0.properties</code>或<code>c3p0-config.xml</code></p>
+<p>在xml配置文件中可以定义多套配置：</p>
+<ol>
+<li>默认配置在<code>&lt;default-config&gt;</code>中</li>
+<li>其他自定义配置在<code>&lt;named-config name=&quot;配置名称&quot;&gt;</code>中</li>
+</ol>
+</li>
+<li><p>路径：直接将文件放在<code>src</code>目录下即可</p>
+</li>
+</ul>
+</li>
+<li><p>创建核心对象：数据库连接池对象<code>ComboPooledDataSource</code></p>
+<p>无参构造会使用配置文件的<code>&lt;default-config&gt;</code>：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210802195312357.png" alt="image-20210802195312357" style="zoom:80%;">
+       </p>
+<p>需要使用指定<code>&lt;named-config name=&quot;配置名称&quot;&gt;</code>利用重载的<code>ComboPooledDataSource(String conf)</code></p>
+</li>
+<li><p>获取连接对象：<code>Connection getConnection()</code></p>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h4 id="Druid：数据库连接池实现技术，由阿里巴巴提供">
+          <a href="#Druid：数据库连接池实现技术，由阿里巴巴提供" class="heading-link"><i class="fas fa-link"></i></a><a href="#Druid：数据库连接池实现技术，由阿里巴巴提供" class="headerlink" title="Druid：数据库连接池实现技术，由阿里巴巴提供"></a><code>Druid</code>：数据库连接池实现技术，由阿里巴巴提供</h4>
+      <ul>
+<li><p>步骤：</p>
+<ol>
+<li><p>导入jar包：<code>druid-1.1.21.jar</code></p>
+</li>
+<li><p>定义配置文件：</p>
+<ul>
+<li>properties形式的</li>
+<li>可以叫任意名称，可以放在任意目录下</li>
+</ul>
+</li>
+<li><p>加载配置文件：利用<code>Properties</code>对象的<code>load()</code></p>
+</li>
+<li><p>获取数据库连接池对象：通过工厂类：<code>DruidDataSourceFactory</code>来获取</p>
+<p>方法：<code>DataSource createDataSource(Properties properties)</code>传入<code>Properties</code>对象</p>
+</li>
+<li><p>获取连接对象：<code>Connection getConnection()</code></p>
+</li>
+</ol>
+</li>
+<li><p>定义工具类：</p>
+<ul>
+<li>定义一个<code>DruidUtils</code></li>
+<li>提供静态代码块加载配置文件并且初始化连接池对象</li>
+<li>提供方法<ol>
+<li>获取连接的方法：提高数据库连接池获取连接</li>
+<li>释放资源</li>
+<li>获取连接池的方法</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="Spring-JDBC：JDBC-Template">
+          <a href="#Spring-JDBC：JDBC-Template" class="heading-link"><i class="fas fa-link"></i></a><a href="#Spring-JDBC：JDBC-Template" class="headerlink" title="Spring JDBC：JDBC Template"></a>Spring JDBC：JDBC Template</h3>
+      <ul>
+<li>Spring框架对JDBC的简单封装。提供了一个JDBCTemplate对象来简化JDBC的开发</li>
+</ul>
+
+        <h4 id="基本步骤">
+          <a href="#基本步骤" class="heading-link"><i class="fas fa-link"></i></a><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h4>
+      <ol>
+<li><p>导入jar包</p>
+</li>
+<li><p>创建<code>JdbcTemplate</code>对象：<code>public JdbcTemplate(DataSource ds)</code>该构造方法需要一个数据源对象</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JdbcTemplate template = <span class="keyword">new</span> JdbcTemplate(ds);</span><br></pre></td></tr></table></div></figure></li>
+<li><p>调用JdbcTemplate对象的方法来完成CRUD的操作</p>
+<ul>
+<li><p><code>update()</code>：执行DML语句：增、删、改</p>
+</li>
+<li><p><code>queryForMap()</code>：查询结果，将结果集封装为Map集合，返回<code>Map&lt;String,Object&gt;</code>，只能查询一行</p>
+</li>
+<li><p><code>queryForList()</code>：查询结果，将结果集封装为List集合，返回<code>List&lt;Map&lt;String, Object&gt;&gt;</code></p>
+</li>
+<li><p><code>query()</code>：查询结果，将结果集封装为JavaBean对象</p>
+<p>注意：<code>query()</code>方法的参数比较特殊，</p>
+<ol>
+<li><p>一般来说第一个参数为<code>String sql</code>的SQL语句</p>
+</li>
+<li><p>第二个参数为<code>RowMapper&lt;T&gt; rowMapper</code>一个<code>RowMapper&lt;T&gt;</code>接口，我们可以：</p>
+<ul>
+<li><p>传递一个接口的匿名类，直接：</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210802231214849.png" alt="image-20210802231214849">
+       </p>
+</li>
+<li><p>使用lambda表达式简化上面的代码：</p>
+<p> 
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210802231301364.png" alt="image-20210802231301364">
+      </p>
+</li>
+<li><p>传递一个<code>RowMapper&lt;T&gt;</code>接口的实现类：</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210802231719762.png" alt="image-20210802231719762">
+      </p>
+<p>例如：<code>new BeanPropertyRowMapper&lt;T&gt;(Class&lt;T&gt; mappedClass)</code></p>
+<p>构造方法参数为查询的<code>JavaBean</code>的<code>Class</code>对象，即<code>T.class</code></p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><code>queryForObject()</code>：查询结果，将结果封装为对象，一般用于聚合函数的查询</p>
+<p>方法：<code>T queryForObject(String sql,Class&lt;T&gt; requiredType)</code></p>
+<p>参数：</p>
+<ol>
+<li><code>String sql</code>：SQL语句，一般是聚合函数查询</li>
+<li><code>Class&lt;T&gt; requiredType</code>：查询出来的类型的<code>Class</code>对象，一般为<code>Long.class</code></li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+
+        <h4 id="练习：">
+          <a href="#练习：" class="heading-link"><i class="fas fa-link"></i></a><a href="#练习：" class="headerlink" title="练习："></a>练习：</h4>
+      <ul>
+<li>需求：操作db3数据库的emp表<ol>
+<li>修改1号记录的salary为8888</li>
+<li>添加一条记录</li>
+<li>删除刚才添加的记录</li>
+<li>查询id为1的记录，将其封装为Map集合</li>
+<li>查询所有的记录，将其封装为List集合</li>
+<li>查询所有的记录，将其封装为Emp对象的List集合</li>
+<li>查询总的记录数</li>
+</ol>
+</li>
+</ul>
+
+        <h2 id="Redis">
+          <a href="#Redis" class="heading-link"><i class="fas fa-link"></i></a><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2>
+      
+        <h3 id="概念-2">
+          <a href="#概念-2" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念-2" class="headerlink" title="概念"></a>概念</h3>
+      <ul>
+<li><p>Redis是一款高性能的<strong>NOSQL</strong>系列的<strong>非关系型</strong>数据库</p>
+<ul>
+<li>它是用C语言开发的一个高性能键值对（<code>key-value</code>）数据库，目前Redis支持的键值数据类型如下：<ul>
+<li>字符串类型：string</li>
+<li>哈西类型：hash</li>
+<li>列表类型：list</li>
+<li>集合类型：set</li>
+<li>有序集合类型：sortedset</li>
+</ul>
+</li>
+<li>Redis的应用场景：<ul>
+<li>缓存（数据查询，短连接，新闻内容，商品内容等）</li>
+<li>聊天室的在线好友列表</li>
+<li>任务队列（秒杀，抢购，12306等）</li>
+<li>应用排行榜</li>
+<li>网站访问统计</li>
+<li>数据过期处理</li>
+<li>分布式集群架构中的session分离</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210810125041138.png" alt="image-20210810125041138">
+      </p>
+<ul>
+<li><p><strong>NOSQL</strong>：</p>
+<p>NOSQL是Not Only SQL（不仅仅是SQL）的缩写，是一项全新的数据库理念，泛指非关系型数据库。NOSQL数据库的产生是为了解决大规模数据集合多重数据种类带来的挑战，尤其是大数据应用难题。</p>
+<ul>
+<li><strong>NOSQL和关系型数据库的比较：</strong><ul>
+<li>优点：<ol>
+<li>成本：NOSQL数据库简单易部署，基本都是开源软件，不需要像使用Oracle那样花费大量成本购买使用，相比关系型数据库价格便宜。</li>
+<li>查询速度：NOSQL数据库将数据存储在缓存之中，关系型数据库将数据存储在硬盘之中，NOSQL查询速度远高于关系型数据库。</li>
+<li>存储数据的格式：NOSQL的存储格式是<code>key,value</code>的形式、文档形式、图片形式等，所以可以存储基本数据类型以及对象或者集合等多种格式，而关系型数据库只支持基础类型。</li>
+<li>扩展性：关系型数据库有类似于join这样的多表查询机制的限制导致扩展很艰难。</li>
+</ol>
+</li>
+<li>缺点：<ol>
+<li>维护的工具和资料有限，因为NOSQL是属于新的技术，不如关系型数据库的技术成熟</li>
+<li>不提供对SQL的支持，没有SQL这样的工业标准，将会导致一定的学习和使用成本</li>
+<li>不提供关系型数据库对事务的处理</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>NOSQL数据库的优势：</strong><ul>
+<li>性能NOSQL是基于键值对的，可以想象成表中的主键和值的对应关系，而且不需要经过SQL层的解析，所以性能非常高</li>
+<li>可扩展性同样也是基于键值对，数据之间没有耦合性，所以非常容易水平扩展</li>
+</ul>
+</li>
+<li><strong>关系型数据库的优势：</strong><ul>
+<li>复杂查询可以用SQL语句方便的在一个表和多个表之间做非常复杂的数据查询</li>
+<li>事务支持使得对于安全性能很高的数据访问要求得以实现。</li>
+</ul>
+</li>
+<li><strong>主流的NOSQL产品：</strong><ol>
+<li>键值对（<code>key,value</code>）存储数据库：<ul>
+<li>相关产品：Tokyo Cabinet/Tyrant、Redis、Voldemort、Berkeley DB</li>
+<li>典型应用：内容缓存，主要用于处理大量数据的高负载访问</li>
+<li>数据模型：一系列键值对</li>
+<li>优势：快速查询</li>
+<li>劣势：存储的数据缺少结构化</li>
+</ul>
+</li>
+<li>列存储数据库<ul>
+<li>相关产品：Cassandra、HBase、Riak</li>
+<li>典型应用：分布式的文件系统</li>
+<li>数据模型：以列簇式的存储，将同一列数据存储在一起</li>
+<li>优势：查找速度快，可扩展性强，更容易进行分布式扩展</li>
+<li>劣势：功能相对局限</li>
+</ul>
+</li>
+<li>文档型数据库<ul>
+<li>相关产品：CouchDB、MongoDB</li>
+<li>典型应用：Web应用（与<code>key,value</code>类似，value是结构化的）</li>
+<li>数据模型：一系列键值对</li>
+<li>优势：数据结构要求不严格</li>
+<li>劣势：查询性能不高，而且缺乏统一的查询语法</li>
+</ul>
+</li>
+<li>图形（Graph）数据库<ul>
+<li>相关产品：Neo4J、InfoGrid、Infinite Graph</li>
+<li>典型应用：社交网络</li>
+<li>数据模型：图结构</li>
+<li>优势：利用图结构相关算法</li>
+<li>劣势：需要对整个图做计算才能得出结果，不容易做分布式的集群方案</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="下载安装">
+          <a href="#下载安装" class="heading-link"><i class="fas fa-link"></i></a><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3>
+      <ol>
+<li>官网：<code>https://redis.io</code></li>
+<li>中文网：<code>https://www.redis.net.cn</code></li>
+<li>下载解压之后可以直接使用：<ul>
+<li><code>redis.windows.conf</code>：配置文件</li>
+<li><code>redis-cli.exe</code>：客户端，显示中文乱码时指定<code>--raw</code>方式打开：<code>redis-cli.exe --raw</code></li>
+<li><code>redis-server.exe</code>：服务器端</li>
+</ul>
+</li>
+</ol>
+
+        <h3 id="Redis的数据结构">
+          <a href="#Redis的数据结构" class="heading-link"><i class="fas fa-link"></i></a><a href="#Redis的数据结构" class="headerlink" title="Redis的数据结构"></a>Redis的数据结构</h3>
+      <ul>
+<li>Redis存储的是：<code>key,value</code>格式的数据，其中key都是字符串，<strong>而value有5种</strong>：<ul>
+<li>字符串类型：string，最基本的类型，是二进制安全的，string可以存储任意类型数据，每个最大512M</li>
+<li>哈西类型：hash，类似于Map，一个键值对集合，每个hash可以存储2<sup>32</sup>-1个键值对，大约42亿</li>
+<li>列表类型：list，类似于linkedlist，允许重复的字符串列表，每个list最多可包含2<sup>32</sup>-1个元素，大约42亿</li>
+<li>集合类型：set，类似于HashSet，不允许重复的无序字符串集合，通过hash表实现，最大成员数2<sup>32</sup>-1个</li>
+<li>有序集合类型：sortedset，不允许重复的有序字符串集合，通过hash表实现，最大成员数2<sup>32</sup>-1个</li>
+</ul>
+</li>
+</ul>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210810140033474.png" alt="image-20210810140033474">
+      </p>
+
+        <h3 id="命令操作">
+          <a href="#命令操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#命令操作" class="headerlink" title="命令操作"></a>命令操作</h3>
+      
+        <h4 id="操作字符串string类型">
+          <a href="#操作字符串string类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#操作字符串string类型" class="headerlink" title="操作字符串string类型"></a>操作字符串string类型</h4>
+      <ol>
+<li>存储：<code>set key value</code>，存储一个<code>value</code>到<code>key</code>里</li>
+<li>获取：<code>get key</code>，通过此<code>key</code>获取对应的<code>value</code></li>
+<li>删除：<code>del key</code>，删除此<code>key</code>对应的键值对</li>
+</ol>
+
+        <h4 id="操作哈西hash类型">
+          <a href="#操作哈西hash类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#操作哈西hash类型" class="headerlink" title="操作哈西hash类型"></a>操作哈西hash类型</h4>
+      <ol>
+<li><p>存储：<code>hset key field value</code>，存储一个<code>field,value</code>的Map到对应的<code>key</code>里</p>
+</li>
+<li><p>获取：<code>hget key field</code>，通过<code>key</code>获取对应的<code>field</code>的<code>value</code></p>
+<ul>
+<li>获取<code>key</code>中所有的键和值：<code>hgetall key</code></li>
+</ul>
+</li>
+<li><p>删除：<code>hdel key field</code>，删除此<code>key</code>对应的<code>field</code>的键值对</p>
+<ul>
+<li>删除此hash容器：<code>del key</code>，删除此<code>key</code>对应的hash容器</li>
+</ul>
+<p><strong>小知识</strong>：<code>HSET</code>只能设置单个键值对，同时设置多个请使用<code>HMSET</code>，但是<code>Redis4.0.0</code>开始<code>HMSET</code>已弃用</p>
+</li>
+</ol>
+
+        <h4 id="操作列表list类型">
+          <a href="#操作列表list类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#操作列表list类型" class="headerlink" title="操作列表list类型"></a>操作列表list类型</h4>
+      <ul>
+<li>添加：<code>lpush key value</code>，添加一个<code>key</code>对应的<code>value</code>到列表左边<ul>
+<li><code>rpush key value</code>，添加一个<code>key</code>对应的<code>value</code>到列表右边</li>
+</ul>
+</li>
+<li>获取：<code>lrange key start end</code>，获取索引下标<code>start</code>到<code>end</code>的在<code>key</code>对应的元素，从左到右<ul>
+<li><code>start</code>表示起始位置下标</li>
+<li><code>end</code>表示结束位置下标</li>
+<li>下标可以为正数（从左到右以0开始的下标），也可以为负数（从右到左以-1表示最后一位）</li>
+<li><code>end</code>下标必须在下标逻辑上大于<code>start</code>下标，否则会导致返回<code>empty list or set</code></li>
+</ul>
+</li>
+<li>删除：<code>lpop key</code>，删除<code>key</code>对应的列表最左边的一个元素并返回被删除的元素<ul>
+<li><code>rpop key</code>，删除<code>key</code>对应的列表最右边的一个元素并返回被删除的元素</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="操作集合set类型">
+          <a href="#操作集合set类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#操作集合set类型" class="headerlink" title="操作集合set类型"></a>操作集合set类型</h4>
+      <ul>
+<li>存储：<code>sadd key value</code>，添加一个<code>value</code>到<code>key</code>对应的set集合中</li>
+<li>获取：<code>smembers key</code>，获取set集合中所有的元素</li>
+<li>删除：<code>srem key value</code>，删除<code>key</code>对应的set集合中的<code>value</code>值</li>
+</ul>
+
+        <h4 id="操作有序集合zset类型">
+          <a href="#操作有序集合zset类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#操作有序集合zset类型" class="headerlink" title="操作有序集合zset类型"></a>操作有序集合zset类型</h4>
+      <ul>
+<li>存储：<code>zadd key score value</code>，添加一个<code>value</code>以及其排序依据<code>score</code>到<code>key</code>对应的集合中</li>
+<li>获取：<code>zrange key start end</code>，获取索引下标为<code>start</code>到<code>end</code>的<code>key</code>对应的zset集合中的元素<ul>
+<li>可选的<code>withscores</code>：在获取元素的同时展示这些元素的<code>score</code></li>
+</ul>
+</li>
+<li>删除：<code>zrem key value</code>，删除<code>key</code>对应的zset集合中的<code>value</code>元素</li>
+</ul>
+
+        <h4 id="通用命令：">
+          <a href="#通用命令：" class="heading-link"><i class="fas fa-link"></i></a><a href="#通用命令：" class="headerlink" title="通用命令："></a>通用命令：</h4>
+      <ul>
+<li>获取所有的键：<code>keys *</code><ul>
+<li><code>*</code>可以为正则表达式</li>
+</ul>
+</li>
+<li>获取此<code>key</code>对应的<code>value</code>的类型：<code>type key</code></li>
+<li>删除此<code>key</code>对应的<code>key-value</code>键值对：<code>del key</code></li>
+<li>:warning:清空Redis服务器数据：<code>flushall</code></li>
+<li>:warning:清空当前库的所有键值对：<code>flushdb</code></li>
+</ul>
+<p><strong>一个坑</strong>：</p>
+<ul>
+<li>描述：windows控制台默认GBK编码，通过Jedis写入的数据如果是UTF-8可能导致控制台查询乱码</li>
+<li>解决方法：除了<code>redis-cli.exe --raw</code>以中文显示汉字之外，还需要先<strong>设置控制台编码</strong>：<code>chcp 65001</code></li>
+</ul>
+
+        <h3 id="持久化操作">
+          <a href="#持久化操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#持久化操作" class="headerlink" title="持久化操作"></a>持久化操作</h3>
+      <ul>
+<li><p>Redis是一个内存数据库，当Redis服务器重启后，或者电脑重启后，内存数据会丢失，所以需要将Redis的数据持久化保存到硬盘的文件中</p>
+</li>
+<li><p>Redis持久化机制：</p>
+<ul>
+<li><p>RDB：默认方式，不需要进行配置，在一定的间隔时间中，检测key的变化，然后持久化保存数据</p>
+<ul>
+<li>设置间隔时间和<code>key</code>的变化检测：<ol>
+<li>编辑配置文件：<code>redis.windows.conf</code>，设置<code>save 秒数 变化数</code></li>
+<li>重新启动redis服务器，并且指定配置文件名称：<code>redis-server.exe redis.windows.conf</code></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>AOF：日志记录的方式，可以记录每一条命令的操作，在每一次命令操作后持久化数据</p>
+<ul>
+<li>指定是否在每次操作后进行日志记录：<code>appendonly</code><ol>
+<li>编辑配置文件：<code>redis.windows.conf</code>，设置<code>appendonly</code>为<code>yes</code>开启日志记录，默认为<code>no</code></li>
+</ol>
+</li>
+<li>指定更新日志的条件：<code>appendfsync</code><ol>
+<li>编辑配置文件：<code>redis.windows.conf</code>，设置<code>appendfsync</code><ul>
+<li><code>no</code>：等操作系统进行数据缓存同步到磁盘（快）</li>
+<li><code>always</code>：每次更新操作后手动调用<code>fsync()</code>将数据写到磁盘（慢，安全）</li>
+<li><code>everysec</code>：每秒同步一次（折中，<strong>默认值</strong>）</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h2 id="Jedis">
+          <a href="#Jedis" class="heading-link"><i class="fas fa-link"></i></a><a href="#Jedis" class="headerlink" title="Jedis"></a>Jedis</h2>
+      
+        <h3 id="概念：">
+          <a href="#概念：" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念：" class="headerlink" title="概念："></a>概念：</h3>
+      <ul>
+<li>一款Java操作Redis数据库的工具</li>
+</ul>
+
+        <h3 id="使用步骤：">
+          <a href="#使用步骤：" class="heading-link"><i class="fas fa-link"></i></a><a href="#使用步骤：" class="headerlink" title="使用步骤："></a>使用步骤：</h3>
+      <ol>
+<li><p>下载Jedis的jar包：<code>jedis-2.7.0.jar</code>和Apache的<code>commons-pool2-2.3.jar</code></p>
+</li>
+<li><p>使用</p>
+<ul>
+<li><p>创建一个<code>Jedis</code>对象：<code>Jedis jedis = new Jedis()</code></p>
+<p>对于此构造方法，重载形式的<code>Jedis(String host,int port)</code>参数传递主机名和端口号，本机可省略</p>
+</li>
+<li><p>调用相应的方法，与命令行操作的方法名一致</p>
+</li>
+<li><p>使用完成后释放资源：<code>jedis.close()</code></p>
+</li>
+</ul>
+</li>
+</ol>
+
+        <h3 id="Jedis连接池">
+          <a href="#Jedis连接池" class="heading-link"><i class="fas fa-link"></i></a><a href="#Jedis连接池" class="headerlink" title="Jedis连接池"></a>Jedis连接池</h3>
+      <ul>
+<li>使用：<ol>
+<li>创建<code>JedisPool</code>连接池对象</li>
+<li>调用方法<code>getResource()</code>获取一个<code>Jedis</code>连接</li>
+<li>调用<code>close()</code>方法归还连接到连接池</li>
+</ol>
+</li>
+</ul>
+
+        <h3 id="案例">
+          <a href="#案例" class="heading-link"><i class="fas fa-link"></i></a><a href="#案例" class="headerlink" title="案例"></a>案例</h3>
+      <ul>
+<li><p>使用Redis优化此案例：</p>
+<ul>
+<li><p>提供一个index页面，页面中有一个省份的下拉列表</p>
+</li>
+<li><p>当页面加载完成，自动发送AJAX请求到服务器查询数据库中所有的省份列表</p>
+<p><strong>注意：如果查询的数据经常变化，要记得更新缓存</strong></p>
+<ul>
+<li><strong>例如在增删改数据库时删除掉Redis缓存，这样下次再次查询时就会发现没有此<code>key</code>对应的缓存数据，这时查询数据更新Redis缓存，可以保证缓存是更新之后的数据</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>优化前：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210810202656627.png" alt="image-20210810202656627">
+      </p>
+<p>优化后：
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210810202711265.png" alt="image-20210810202711265">
+      </p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://taoyyz.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://taoyyz.github.io/tags/MySQL/">MySQL</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://taoyyz.github.io/tags/SQL/">SQL</a></span></div><console class="log" 123></console><div class="post-reward reward"><div class="reward-button">看的开心的话可以请我喝杯奶茶~热狗也行呜呜呜</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/zfb.jpg"><div class="reward-qrcode-alipay__text">支付宝</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/vx.jpg"><div class="reward-qrcode-wechat__text">微信</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/08/20/SSM%E6%A1%86%E6%9E%B6/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">SSM框架基础</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/08/10/Junit%E5%8F%8D%E5%B0%84%E6%B3%A8%E8%A7%A3/"><span class="paginator-prev__text">Junit、反射、注解</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">
+          数据库的基本概念：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BD%AF%E4%BB%B6%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">
+          MySQL数据库软件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL"><span class="toc-number">3.</span> <span class="toc-text">
+          SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">3.1.</span> <span class="toc-text">
+          概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E8%AF%AD%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">
+          通用语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E5%88%86%E7%B1%BB"><span class="toc-number">3.3.</span> <span class="toc-text">
+          SQL分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DDL-Data-Definition-Language-%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80"><span class="toc-number">3.3.1.</span> <span class="toc-text">
+          DDL(Data Definition Language)数据定义语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DML-Data-Manipulation-Language-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E8%AF%AD%E8%A8%80"><span class="toc-number">3.3.2.</span> <span class="toc-text">
+          DML(Data Manipulation Language)数据操作语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DQL-Data-Query-Language-%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80"><span class="toc-number">3.3.3.</span> <span class="toc-text">
+          DQL(Data Query Language)数据查询语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DCL-Data-Control-Language-%E6%95%B0%E6%8D%AE%E6%8E%A7%E5%88%B6%E8%AF%AD%E8%A8%80"><span class="toc-number">3.3.4.</span> <span class="toc-text">
+          DCL(Data Control Language)数据控制语言</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F"><span class="toc-number">3.4.</span> <span class="toc-text">
+          约束</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.</span> <span class="toc-text">
+          数据库的设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">4.1.</span> <span class="toc-text">
+          多表之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8C%83%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">
+          范式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%A4%87%E4%BB%BD%E4%B8%8E%E8%BF%98%E5%8E%9F"><span class="toc-number">4.3.</span> <span class="toc-text">
+          数据库的备份与还原</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.</span> <span class="toc-text">
+          多表查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="toc-number">5.1.</span> <span class="toc-text">
+          多表查询的分类：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%EF%BC%9A"><span class="toc-number">5.1.1.</span> <span class="toc-text">
+          内连接查询：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%EF%BC%9A"><span class="toc-number">5.1.2.</span> <span class="toc-text">
+          外连接查询：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%9A"><span class="toc-number">5.1.3.</span> <span class="toc-text">
+          子查询：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-number">6.</span> <span class="toc-text">
+          事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-number">6.1.</span> <span class="toc-text">
+          事务的基本介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E5%BE%81ACID"><span class="toc-number">6.2.</span> <span class="toc-text">
+          事务的四大特征ACID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-number">6.3.</span> <span class="toc-text">
+          事务的隔离级别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDBC"><span class="toc-number">7.</span> <span class="toc-text">
+          JDBC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="toc-number">7.1.</span> <span class="toc-text">
+          概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-number">7.2.</span> <span class="toc-text">
+          快速入门</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%A6%E8%A7%A3%E5%90%84%E4%B8%AA%E5%AF%B9%E8%B1%A1"><span class="toc-number">7.2.1.</span> <span class="toc-text">
+          详解各个对象</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#DriverManager%E9%A9%B1%E5%8A%A8%E7%AE%A1%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="toc-number">7.2.1.1.</span> <span class="toc-text">
+          DriverManager驱动管理对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Connection%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E5%AF%B9%E8%B1%A1"><span class="toc-number">7.2.1.2.</span> <span class="toc-text">
+          Connection数据库连接对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Statement%E6%89%A7%E8%A1%8CSQL%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">7.2.1.3.</span> <span class="toc-text">
+          Statement执行SQL的对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ResultSET%E7%BB%93%E6%9E%9C%E9%9B%86%E5%AF%B9%E8%B1%A1"><span class="toc-number">7.2.1.4.</span> <span class="toc-text">
+          ResultSET结果集对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#PreparedStatement"><span class="toc-number">7.2.1.5.</span> <span class="toc-text">
+          PreparedStatement</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDBC%E6%8E%A7%E5%88%B6%E4%BA%8B%E5%8A%A1"><span class="toc-number">7.3.</span> <span class="toc-text">
+          JDBC控制事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="toc-number">7.4.</span> <span class="toc-text">
+          数据库连接池</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#C3P0%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%8A%80%E6%9C%AF"><span class="toc-number">7.4.1.</span> <span class="toc-text">
+          C3P0：数据库连接池技术</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Druid%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%AE%9E%E7%8E%B0%E6%8A%80%E6%9C%AF%EF%BC%8C%E7%94%B1%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E6%8F%90%E4%BE%9B"><span class="toc-number">7.4.2.</span> <span class="toc-text">
+          Druid：数据库连接池实现技术，由阿里巴巴提供</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-JDBC%EF%BC%9AJDBC-Template"><span class="toc-number">7.5.</span> <span class="toc-text">
+          Spring JDBC：JDBC Template</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4"><span class="toc-number">7.5.1.</span> <span class="toc-text">
+          基本步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-number">7.5.2.</span> <span class="toc-text">
+          练习：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis"><span class="toc-number">8.</span> <span class="toc-text">
+          Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-2"><span class="toc-number">8.1.</span> <span class="toc-text">
+          概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-number">8.2.</span> <span class="toc-text">
+          下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">8.3.</span> <span class="toc-text">
+          Redis的数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C"><span class="toc-number">8.4.</span> <span class="toc-text">
+          命令操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E5%AD%97%E7%AC%A6%E4%B8%B2string%E7%B1%BB%E5%9E%8B"><span class="toc-number">8.4.1.</span> <span class="toc-text">
+          操作字符串string类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E5%93%88%E8%A5%BFhash%E7%B1%BB%E5%9E%8B"><span class="toc-number">8.4.2.</span> <span class="toc-text">
+          操作哈西hash类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E5%88%97%E8%A1%A8list%E7%B1%BB%E5%9E%8B"><span class="toc-number">8.4.3.</span> <span class="toc-text">
+          操作列表list类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E9%9B%86%E5%90%88set%E7%B1%BB%E5%9E%8B"><span class="toc-number">8.4.4.</span> <span class="toc-text">
+          操作集合set类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88zset%E7%B1%BB%E5%9E%8B"><span class="toc-number">8.4.5.</span> <span class="toc-text">
+          操作有序集合zset类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="toc-number">8.4.6.</span> <span class="toc-text">
+          通用命令：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96%E6%93%8D%E4%BD%9C"><span class="toc-number">8.5.</span> <span class="toc-text">
+          持久化操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jedis"><span class="toc-number">9.</span> <span class="toc-text">
+          Jedis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="toc-number">9.1.</span> <span class="toc-text">
+          概念：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">9.2.</span> <span class="toc-text">
+          使用步骤：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Jedis%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="toc-number">9.3.</span> <span class="toc-text">
+          Jedis连接池</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-number">9.4.</span> <span class="toc-text">
+          案例</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/head.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">taoyyz</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://weibo.com/6368186555/" target="_blank" rel="noopener" data-popover="微博：taoyyz" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/taoyyz" target="_blank" rel="noopener" data-popover="知乎：taoyyz" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/10111280" target="_blank" rel="noopener" data-popover="哔哩哔哩：宝贝球球ouo" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fas fa-tv"></i></span></a><a class="sidebar-ov-social-item" href="angelahape" target="_blank" rel="noopener" data-popover="微信：angelahape" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weixin"></i></span></a><a class="sidebar-ov-social-item" href="tencent://message?uin=2655026691" target="_blank" rel="noopener" data-popover="QQ：2655026691" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a><a class="sidebar-ov-social-item" href="https://www.youtube.com/channel/UCsz2-9ReY8ayMd-92rEGKFQ" target="_blank" rel="noopener" data-popover="Youtube：Xiaotao" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-youtube"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">7</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">13</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div></div><div id="tishi" style="text-align:center;user-select:none;font-weight:600;">本站已运行</div><span id="sitetime" style="text-align:center;display:block;user-select:none;">载入天数...<script language="javascript">const siteTime = () => {
+  window.setTimeout(siteTime, 500);
+  const startTime = Date.UTC(2021, 3, 10, 23, 0, 0); // 北京时间
+  const currentTime = Date.now();
+  const timeDifference = currentTime - startTime;
+
+  const seconds = Math.floor((timeDifference / 1000) % 60);
+  const minutes = Math.floor((timeDifference / 1000 / 60) % 60);
+  const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  const years = Math.floor(days / 365);
+  const remainingDays = days % 365;
+
+  let timeString = '';
+
+  if (years > 0) {
+    timeString += `${years}年`;
+  }
+
+  timeString += `${remainingDays}天${hours}时${minutes}分${seconds}秒`;
+
+  document.getElementById("sitetime").innerHTML = timeString;
+};
+
+siteTime();
+</script></span></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>taoyyz小陶</span></div><div></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"></div><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

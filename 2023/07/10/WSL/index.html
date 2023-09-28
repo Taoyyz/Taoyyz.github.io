@@ -1,0 +1,875 @@
+<!DOCTYPE html><style>body {
+  cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/default.cur),
+  default;
+}
+
+a,
+img {
+  cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/pointer.cur),
+  default;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: dodgerblue;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, .4) 25%,
+    transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .4) 50%,
+    rgba(255, 255, 255, .4) 75%,
+    transparent 75%,
+    transparent);
+  border-radius: 3em;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #DEDEDE;
+  border-radius: 3em;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}</style><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="WSL下的ubuntu的一些操作，包括了：SSH、frp、docker、redis-benchmark、xshell、Git、Miniconda等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WSL">
+<meta property="og:url" content="http://taoyyz.github.io/2023/07/10/WSL/index.html">
+<meta property="og:site_name" content="欢迎光临taoyyz的Blog">
+<meta property="og:description" content="WSL下的ubuntu的一些操作，包括了：SSH、frp、docker、redis-benchmark、xshell、Git、Miniconda等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://taoyyz.github.io/images/WSL/image-20230703143944594.png">
+<meta property="article:published_time" content="2023-07-10T10:02:17.000Z">
+<meta property="article:modified_time" content="2023-09-28T16:57:10.186Z">
+<meta property="article:author" content="taoyyz小陶">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="服务器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://taoyyz.github.io/images/WSL/image-20230703143944594.png"><title>WSL | 欢迎光临taoyyz的Blog</title><link ref="canonical" href="http://taoyyz.github.io/2023/07/10/WSL/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","wordWrap":true},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: true,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/links/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">资源和链接</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="far fa-address-card"></i></span><span class="header-nav-menu-item__text">关于</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">欢迎光临taoyyz的Blog</div><div class="header-banner-info__subtitle"></div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">WSL</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2023-07-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2023-09-29</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">2.8k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">24分</span></span></div></header><div class="post-body">
+        <h1 id="WSL安装Ubuntu">
+          <a href="#WSL安装Ubuntu" class="heading-link"><i class="fas fa-link"></i></a><a href="#WSL安装Ubuntu" class="headerlink" title="WSL安装Ubuntu"></a>WSL安装Ubuntu</h1>
+      <ul>
+<li><p>来源</p>
+<ul>
+<li>直接在微软商店安装ubuntu即可</li>
+</ul>
+</li>
+<li><p>迁移</p>
+<ul>
+<li><p>由于默认安装到C盘下的<code>C:\Users\&lt;username&gt;\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu&lt;version&gt;onWindows_&lt;code&gt;</code>目录下，所以最好进行迁移</p>
+</li>
+<li><p>迁移步骤：</p>
+<ol>
+<li>查看系统：<code>wsl -l -v</code></li>
+<li>导出指定系统到指定位置：<code>wsl --export &lt;Name&gt; &lt;目标压缩包绝对路径&gt;</code>，例如<code>wsl --export Ubuntu d:\ubuntu.tar</code></li>
+<li>卸载当前版本：<code>wsl --unregister &lt;Name&gt;</code></li>
+<li>重新导入：<code>wsl --import &lt;NewName&gt; &lt;TargetPath&gt; &lt;目标压缩包位置&gt; --version &lt;WSL版本&gt;</code>，例如<code>wsl --import Ubuntu F:\Linux\ubuntu D:\Ubuntu.tar --version 2</code></li>
+<li>设置默认登录用户（否则为root）：<code>&lt;系统Name&gt; config --default-user &lt;username&gt;</code></li>
+</ol>
+<p>然后可以彻底删除微软商店下载的ubuntu app</p>
+</li>
+</ul>
+</li>
+<li><p>配置apt-get的镜像：</p>
+<ol>
+<li><p>管理员身份进入：<code>cd /etc/apt</code></p>
+</li>
+<li><p>备份自带的源：<code>cp sources.list sources.list.bak</code></p>
+</li>
+<li><p>修改源配置：<code>vim sources.list</code></p>
+</li>
+<li><p>替换内容为阿里云的源：</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br></pre></td></tr></table></div></figure></li>
+<li><p>更新软件列表：<code>apt-get update</code></p>
+</li>
+<li><p>升级：<code>apt-get upgrade</code></p>
+</li>
+</ol>
+</li>
+</ul>
+
+        <h1 id="配置SSH到外层主机">
+          <a href="#配置SSH到外层主机" class="heading-link"><i class="fas fa-link"></i></a><a href="#配置SSH到外层主机" class="headerlink" title="配置SSH到外层主机"></a>配置SSH到外层主机</h1>
+      <ul>
+<li><p>安装openssh-server</p>
+<ol>
+<li><p>最好先移除先前的版本：<code>apt remove openssh-server</code></p>
+</li>
+<li><p>安装：<code>apt install openssh-server</code></p>
+</li>
+<li><p>修改配置信息：<code>vim /etc/ssh/sshd_config</code></p>
+</li>
+<li><p>配置相关信息：</p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Port 2222                   <span class="comment"># 监听的端口，可以是其它的</span></span><br><span class="line">ListenAddress 0.0.0.0       <span class="comment"># 0.0.0.0 表示所有的地址</span></span><br><span class="line">PasswordAuthentication yes  <span class="comment"># 把原来的no改成yes，意思是可以用密码登录</span></span><br><span class="line">PermitRootLogin yes         <span class="comment"># 把原来的prohibit-password改成yes</span></span><br></pre></td></tr></table></div></figure></li>
+<li><p>重启ssh服务：<code>service ssh restart</code></p>
+</li>
+</ol>
+</li>
+<li><p>连接</p>
+<ul>
+<li>在cmd或PowerShell：<code>ssh &lt;子系统内用户名&gt;@localhost -p &lt;端口&gt;</code>，例如<code>ssh taoyyz@localhost -p 2222</code></li>
+</ul>
+</li>
+<li><p>此时可以直接通过访问本机的2222端口ssh到WSL内的Ubuntu系统</p>
+</li>
+</ul>
+<blockquote>
+<p>参考自CSDN：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://blog.csdn.net/jasneik/article/details/127993390?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-127993390-blog-130334713.235%5Ev38%5Epc_relevant_sort_base3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-127993390-blog-130334713.235%5Ev38%5Epc_relevant_sort_base3&utm_relevant_index=6">SSH连接WSL2踩坑记录与增加端口转换规则，实现外网与WSL2的连接</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</blockquote>
+
+        <h1 id="系统服务操作">
+          <a href="#系统服务操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#系统服务操作" class="headerlink" title="系统服务操作"></a>系统服务操作</h1>
+      <blockquote>
+<p>在 <strong>适用与 Linux 的 Windows 的子系统（WSL）</strong> 默认情况下是无法使用 <strong>systemctl</strong> 命令，使用该命令 <span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=WSL&spm=1001.2101.3001.7020">WSL</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 将抛出如下错误。</p>
+<p>System has not been booted with systemd as init system (PID 1). Can’t operate.</p>
+</blockquote>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/WSL/image-20230703143944594.png" alt="image-20230703143944594">
+      </p>
+<blockquote>
+<p>参考自CSDN：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44879989/article/details/128527355">WSL 错误 System has not been booted with systemd as init system (PID 1). Can‘t operate</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</blockquote>
+
+        <h2 id="切换dash与bash">
+          <a href="#切换dash与bash" class="heading-link"><i class="fas fa-link"></i></a><a href="#切换dash与bash" class="headerlink" title="切换dash与bash"></a>切换dash与bash</h2>
+      <ul>
+<li>区别：<ul>
+<li>dash：全称<code>Debian Almquist Shell</code>，它主要是为了执行脚本而出现，而不是交互，它速度更快，但功能相比bash要少很多，语法严格遵守POSIX标准。</li>
+<li>bash：全称<code>GNU Bourne-Again Shell</code></li>
+</ul>
+</li>
+<li>查看当前系统的shell解释器：<ul>
+<li><code>ls -l /bin/sh</code><ul>
+<li>输出<code>/bin/sh -&gt; dash</code>为dash</li>
+<li>否则输出<code>/bin/sh -&gt; /bin/bash</code>为bash</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>切换解释器：<ul>
+<li>切换为bash：<code>sudo ln -fs /bin/bash /bin/sh</code></li>
+<li>切换为dash：<code>sudo ln -fs /bin/dash /bin/sh</code></li>
+</ul>
+</li>
+</ul>
+
+        <h1 id="性能与优化">
+          <a href="#性能与优化" class="heading-link"><i class="fas fa-link"></i></a><a href="#性能与优化" class="headerlink" title="性能与优化"></a>性能与优化</h1>
+      <ul>
+<li>开启systemctl</li>
+<li>开机自启WSL</li>
+<li>设置WSL的cpu和内存（默认全核心以及一半的物理机内存）</li>
+</ul>
+<blockquote>
+<p>参考自CSDN：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://blog.csdn.net/mqq2502513332/article/details/129722096">使用WSL2必看的配置优化</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</blockquote>
+
+        <h1 id="设置frp">
+          <a href="#设置frp" class="heading-link"><i class="fas fa-link"></i></a><a href="#设置frp" class="headerlink" title="设置frp"></a>设置frp</h1>
+      <ul>
+<li>后台运行：windows下也可以使用<code>nohup &amp;</code>包裹启动frp的命令</li>
+<li>查看运行的nohup：<code>jobs -l</code></li>
+<li>关闭frp，也可以通过任务管理器中进程名称为<code>frpc.exe</code></li>
+</ul>
+
+        <h2 id="我的当前frp配置">
+          <a href="#我的当前frp配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#我的当前frp配置" class="headerlink" title="我的当前frp配置"></a>我的当前frp配置</h2>
+      <ul>
+<li>服务端：<code>http://116.63.171.90</code><ul>
+<li>通信端口：<code>7000</code></li>
+<li>管理台端口：<code>7002</code>，使用<code>http://116.63.171.90:7002</code>访问<ul>
+<li>用户名：<code>admin</code></li>
+<li>密码：<code>qwer2222</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>客户端：<ul>
+<li>已开设的端口转发：<ul>
+<li><code>c2222 -&gt; s2222</code>：ssh</li>
+<li><code>c2223 -&gt; s99</code>：nginx</li>
+<li><code>c9000 -&gt; s9000</code>：portainer</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>端口转发个人规则：<ul>
+<li>端口从99设置为nginx用<ul>
+<li>后端转发：<ul>
+<li>通过<code>远程ip:99/back_端口</code>即可访问指定端口的后端服务</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>端口从100开始：<ul>
+<li><code>100</code>：redis</li>
+<li><code>101</code>：mysql</li>
+<li><code>9000</code>：portainer<ul>
+<li>用户名：<code>admin</code></li>
+<li>密码：<code>3344520tjjTJJ</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h1 id="已运行的个人服务">
+          <a href="#已运行的个人服务" class="heading-link"><i class="fas fa-link"></i></a><a href="#已运行的个人服务" class="headerlink" title="已运行的个人服务"></a>已运行的个人服务</h1>
+      
+        <h2 id="mysql">
+          <a href="#mysql" class="heading-link"><i class="fas fa-link"></i></a><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2>
+      <ul>
+<li><p>运行命令</p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">        --name mysql_tjj \</span><br><span class="line">        -e MYSQL_ROOT_PASSWORD=taoyyz@028hhh \</span><br><span class="line">        -p 101:3306 \</span><br><span class="line">        -v /home/taoyyz/software/docker/mysql/conf/hmy.cnf:/etc/mysql/conf.d/hmy.cnf \</span><br><span class="line">        -v /home/taoyyz/software/docker/mysql/logs:/var/<span class="built_in">log</span>/mysql \</span><br><span class="line">        -v /home/taoyyz/software/docker/mysql/data:/var/lib/mysql \</span><br><span class="line">        -e TZ=Asia/Shanghai \</span><br><span class="line">        -d mysql:latest</span><br></pre></td></tr></table></div></figure></li>
+</ul>
+
+        <h2 id="redis">
+          <a href="#redis" class="heading-link"><i class="fas fa-link"></i></a><a href="#redis" class="headerlink" title="redis"></a>redis</h2>
+      <ul>
+<li><p>运行命令</p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run  \</span><br><span class="line">    -p 100:6379    \</span><br><span class="line">    --name redis_tjj    \</span><br><span class="line">    -v /home/taoyyz/software/docker/redis/redis.conf:/etc/redis/redis.conf  \</span><br><span class="line">    -v /home/taoyyz/software/docker/redis/data:/data    \</span><br><span class="line">    -d redis:latest \</span><br><span class="line">    redis-server /etc/redis/redis.conf</span><br></pre></td></tr></table></div></figure></li>
+</ul>
+
+        <h2 id="portainer">
+          <a href="#portainer" class="heading-link"><i class="fas fa-link"></i></a><a href="#portainer" class="headerlink" title="portainer"></a>portainer</h2>
+      <ul>
+<li><p>运行命令</p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name portainer_zh_tjj -p 9000:9000 --restart=always \</span><br><span class="line">            -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">            -v /home/taoyyz/software/docker/portainer-zh/data:/data \</span><br><span class="line">            6053537/portainer-ce</span><br></pre></td></tr></table></div></figure></li>
+</ul>
+
+        <h1 id="Redis性能测试">
+          <a href="#Redis性能测试" class="heading-link"><i class="fas fa-link"></i></a><a href="#Redis性能测试" class="headerlink" title="Redis性能测试"></a>Redis性能测试</h1>
+      
+        <h2 id="redis-benchmark">
+          <a href="#redis-benchmark" class="heading-link"><i class="fas fa-link"></i></a><a href="#redis-benchmark" class="headerlink" title="redis-benchmark"></a>redis-benchmark</h2>
+      <ul>
+<li>帮助</li>
+</ul>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[root@redis-test-slave ~ ]$ redis-benchmark --<span class="built_in">help</span></span><br><span class="line">Usage: redis-benchmark [-h &lt;host&gt;] [-p &lt;port&gt;] [-c &lt;clients&gt;] [-n &lt;requests]&gt; [-k &lt;boolean&gt;]</span><br><span class="line"></span><br><span class="line"> -h &lt;hostname&gt;      Server hostname (default 127.0.0.1)</span><br><span class="line"> -p &lt;port&gt;          Server port (default 6379)</span><br><span class="line"> -s &lt;socket&gt;        Server socket (overrides host and port)</span><br><span class="line"> -a &lt;password&gt;      Password <span class="keyword">for</span> Redis Auth</span><br><span class="line"> -c &lt;clients&gt;       Number of parallel connections (default 50)</span><br><span class="line"> -n &lt;requests&gt;      Total number of requests (default 100000)</span><br><span class="line"> -d &lt;size&gt;          Data size of SET/GET value <span class="keyword">in</span> bytes (default 2)</span><br><span class="line"> --dbnum &lt;db&gt;        SELECT the specified db number (default 0)</span><br><span class="line"> -k &lt;boolean&gt;       1=keep alive 0=reconnect (default 1)</span><br><span class="line"> -r &lt;keyspacelen&gt;   Use random keys <span class="keyword">for</span> SET/GET/INCR, random values <span class="keyword">for</span> SADD</span><br><span class="line">  Using this option the benchmark will expand the string __rand_int__</span><br><span class="line">  inside an argument with a 12 digits number <span class="keyword">in</span> the specified range</span><br><span class="line">  from 0 to keyspacelen-1. The substitution changes every time a <span class="built_in">command</span></span><br><span class="line">  is executed. Default tests use this to hit random keys <span class="keyword">in</span> the</span><br><span class="line">  specified range.</span><br><span class="line"> -P &lt;numreq&gt;        Pipeline &lt;numreq&gt; requests. Default 1 (no pipeline).</span><br><span class="line"> -e                 If server replies with errors, show them on stdout.</span><br><span class="line">                    (no more than 1 error per second is displayed)</span><br><span class="line"> -q                 Quiet. Just show query/sec values</span><br><span class="line"> --csv              Output <span class="keyword">in</span> CSV format</span><br><span class="line"> -l                 Loop. Run the tests forever</span><br><span class="line"> -t &lt;tests&gt;         Only run the comma separated list of tests. The <span class="built_in">test</span></span><br><span class="line">                    names are the same as the ones produced as output.</span><br><span class="line"> -I                 Idle mode. Just open N idle connections and <span class="built_in">wait</span>.</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+<ul>
+<li>案例</li>
+</ul>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Examples:</span><br><span class="line"></span><br><span class="line"> Run the benchmark with the default configuration against 127.0.0.1:6379:</span><br><span class="line">   <span class="comment"># 运行默认配置下的测试</span></span><br><span class="line">   $ redis-benchmark</span><br><span class="line"></span><br><span class="line"> Use 20 parallel clients, <span class="keyword">for</span> a total of 100k requests, against 192.168.1.1:</span><br><span class="line">   <span class="comment"># 指定并发数20,总请求数为10W,redis server主机IP为192.168.1.1</span></span><br><span class="line">   $ redis-benchmark -h 192.168.1.1 -p 6379 -n 100000 -c 20</span><br><span class="line"></span><br><span class="line"> Fill 127.0.0.1:6379 with about 1 million keys only using the SET <span class="built_in">test</span>:</span><br><span class="line">   <span class="comment"># 测试SET随机数性能</span></span><br><span class="line">   $ redis-benchmark -t <span class="built_in">set</span> -n 1000000 -r 100000000</span><br><span class="line"></span><br><span class="line"> Benchmark 127.0.0.1:6379 <span class="keyword">for</span> a few commands producing CSV output:</span><br><span class="line">   <span class="comment"># 测试结果输出到csv</span></span><br><span class="line">   $ redis-benchmark -t ping,<span class="built_in">set</span>,get -n 100000 --csv</span><br><span class="line"></span><br><span class="line"> Benchmark a specific <span class="built_in">command</span> line:</span><br><span class="line">   <span class="comment"># 执行特定命令下的测试</span></span><br><span class="line">   $ redis-benchmark -r 10000 -n 10000 <span class="built_in">eval</span> <span class="string">&#x27;return redis.call(&quot;ping&quot;)&#x27;</span> 0</span><br><span class="line"></span><br><span class="line"> Fill a list with 10000 random elements:</span><br><span class="line">   <span class="comment"># 测试list入队的速度</span></span><br><span class="line">   $ redis-benchmark -r 10000 -n 10000 lpush mylist __rand_int__</span><br><span class="line"></span><br><span class="line"> On user specified <span class="built_in">command</span> lines __rand_int__ is replaced with a random <span class="built_in">integer</span></span><br><span class="line"> with a range of values selected by the -r option.</span><br></pre></td></tr></table></div></figure>
+
+<ul>
+<li><p>浅玩了一下</p>
+<ul>
+<li><p>本地docker内直接运行<code>redis-benchmark -t set -n 1000000 -r 100000000 -a taoyyz@028hhh</code>，大约27w/s，平均响应时间0.11ms，最大响应时间3ms</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Summary:</span><br><span class="line">  throughput summary: 270051.31 requests per second</span><br><span class="line">  latency summary (msec):</span><br><span class="line">          avg       min       p50       p95       p99       max</span><br><span class="line">        0.112     0.032     0.103     0.183     0.271     3.191</span><br></pre></td></tr></table></div></figure></li>
+<li><p>服务器远程调用，大约1500rps，平均响应时间32ms</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Summary:</span><br><span class="line">  throughput summary: 1503.56 requests per second</span><br><span class="line">  latency summary (msec):</span><br><span class="line">          avg       min       p50       p95       p99       max</span><br><span class="line">       33.243    28.736    32.543    37.471    47.615   264.703</span><br></pre></td></tr></table></div></figure></li>
+</ul>
+</li>
+</ul>
+
+        <h1 id="安装Xshell">
+          <a href="#安装Xshell" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装Xshell" class="headerlink" title="安装Xshell"></a>安装Xshell</h1>
+      
+        <h2 id="安装包">
+          <a href="#安装包" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h2>
+      <ul>
+<li>Xshell安装包已经下载到我的<code>E:\破解软件\XshellPlus - 7.rar</code></li>
+<li>云盘：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://wwc.lanzouy.com/iD5sv052iane">XshellPlus - 7.rar</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>安装方法：运行内部的bat脚本即可破解安装</li>
+</ul>
+
+        <h2 id="可能出现的问题">
+          <a href="#可能出现的问题" class="heading-link"><i class="fas fa-link"></i></a><a href="#可能出现的问题" class="headerlink" title="可能出现的问题"></a>可能出现的问题</h2>
+      <ul>
+<li>由于找不到MSVCP110.dll，无法继续执行代码<ul>
+<li>原因：需要vc++的库</li>
+<li>解决方法：下载vc++相关的库</li>
+<li>库名称：<code>Visual C++ Redistributable for Visual Studio 2012 Update 4</code></li>
+<li>链接：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.microsoft.com/zh-CN/download/details.aspx?id=30679">Surface运行库下载</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+</li>
+<li>踩坑：点击下载后，可选择x86、x64、arm的exe文件，但我只装了x64还不够，还同时需要装x86的库</li>
+<li>安装包位置：已下载到<code>E:\破解软件\vc运行时库</code></li>
+<li>参考了CSDN：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://blog.csdn.net/xiaowu108/article/details/128170930">xshell运行报错：由于找不到msvcr110.dll 无法继续执行</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+
+        <h1 id="Git配置">
+          <a href="#Git配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#Git配置" class="headerlink" title="Git配置"></a>Git配置</h1>
+      
+        <h2 id="给Git配置代理">
+          <a href="#给Git配置代理" class="heading-link"><i class="fas fa-link"></i></a><a href="#给Git配置代理" class="headerlink" title="给Git配置代理"></a>给Git配置代理</h2>
+      
+        <h3 id="当前项目的仓库">
+          <a href="#当前项目的仓库" class="heading-link"><i class="fas fa-link"></i></a><a href="#当前项目的仓库" class="headerlink" title="当前项目的仓库"></a>当前项目的仓库</h3>
+      
+        <h4 id="给Git当前项目的本地仓库配置代理">
+          <a href="#给Git当前项目的本地仓库配置代理" class="heading-link"><i class="fas fa-link"></i></a><a href="#给Git当前项目的本地仓库配置代理" class="headerlink" title="给Git当前项目的本地仓库配置代理"></a>给Git当前项目的本地仓库配置代理</h4>
+      <ul>
+<li><p>HTTP代理：</p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config http.proxy <span class="string">&#x27;http://127.0.0.1:10809&#x27;</span></span><br><span class="line">git config https.proxy <span class="string">&#x27;https://127.0.0.1:10809&#x27;</span></span><br></pre></td></tr></table></div></figure></li>
+<li><p>SOCKS5代理：</p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config http.proxy <span class="string">&#x27;socks5://127.0.0.1:10808&#x27;</span></span><br><span class="line">git config https.proxy <span class="string">&#x27;socks5://127.0.0.1:10808&#x27;</span></span><br></pre></td></tr></table></div></figure></li>
+</ul>
+
+        <h4 id="取消当前项目的Git本地仓库的代理配置">
+          <a href="#取消当前项目的Git本地仓库的代理配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#取消当前项目的Git本地仓库的代理配置" class="headerlink" title="取消当前项目的Git本地仓库的代理配置"></a>取消当前项目的Git本地仓库的代理配置</h4>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="built_in">unset</span> http.proxy</span><br><span class="line">git config --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="全局仓库">
+          <a href="#全局仓库" class="heading-link"><i class="fas fa-link"></i></a><a href="#全局仓库" class="headerlink" title="全局仓库"></a>全局仓库</h3>
+      
+        <h4 id="给Git全局仓库配置代理">
+          <a href="#给Git全局仓库配置代理" class="heading-link"><i class="fas fa-link"></i></a><a href="#给Git全局仓库配置代理" class="headerlink" title="给Git全局仓库配置代理"></a>给Git全局仓库配置代理</h4>
+      <ul>
+<li><p>HTTP代理：</p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy <span class="string">&#x27;http://127.0.0.1:10809&#x27;</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;https://127.0.0.1:10809&#x27;</span></span><br></pre></td></tr></table></div></figure></li>
+<li><p>SOCKS5代理：</p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy <span class="string">&#x27;socks5://127.0.0.1:10808&#x27;</span></span><br><span class="line">git config --global https.proxy <span class="string">&#x27;socks5://127.0.0.1:10808&#x27;</span></span><br></pre></td></tr></table></div></figure></li>
+</ul>
+
+        <h4 id="取消全局仓库的代理配置">
+          <a href="#取消全局仓库的代理配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#取消全局仓库的代理配置" class="headerlink" title="取消全局仓库的代理配置"></a>取消全局仓库的代理配置</h4>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="查看Git配置">
+          <a href="#查看Git配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#查看Git配置" class="headerlink" title="查看Git配置"></a>查看Git配置</h2>
+      
+        <h3 id="查看当前Git仓库的配置">
+          <a href="#查看当前Git仓库的配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#查看当前Git仓库的配置" class="headerlink" title="查看当前Git仓库的配置"></a>查看当前Git仓库的配置</h3>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="查看全局配置">
+          <a href="#查看全局配置" class="heading-link"><i class="fas fa-link"></i></a><a href="#查看全局配置" class="headerlink" title="查看全局配置"></a>查看全局配置</h3>
+      <figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list --global</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="安装Miniconda">
+          <a href="#安装Miniconda" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装Miniconda" class="headerlink" title="安装Miniconda"></a>安装Miniconda</h1>
+      
+        <h2 id="Linux下">
+          <a href="#Linux下" class="heading-link"><i class="fas fa-link"></i></a><a href="#Linux下" class="headerlink" title="Linux下"></a>Linux下</h2>
+      <ol>
+<li><p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda官网</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>下载对应系统的sh脚本</p>
+</li>
+<li><p>下载完成后，把sh脚本放到任意位置，然后执行以下命令添加执行权限并执行：</p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></div></figure></li>
+<li><p>一路回车，注意有些地方需要输入yes</p>
+</li>
+<li><p>安装完成后，<code>~</code>目录应该会有<code>.condarc</code>，并且<code>~</code>目录的<code>.bashrc</code>最后应该会有miniconda的路径</p>
+</li>
+<li><p>此时执行<code>conda -v</code>查看，如果命令没有找到，执行<code>source ~/.bashrc</code>使配置立即生效</p>
+</li>
+<li><p>出现<code>PackagesNotFoundError: The following packages are missing from the target environment</code>等问题，可能是源不正确，尝试：<code>conda config --remove-key channels</code></p>
+</li>
+</ol>
+<blockquote>
+<p>参考了<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.taodudu.cc/news/show-5865794.html?action=onClick">此链接</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</blockquote>
+
+        <h2 id="windows下">
+          <a href="#windows下" class="heading-link"><i class="fas fa-link"></i></a><a href="#windows下" class="headerlink" title="windows下"></a>windows下</h2>
+      <ol>
+<li><p>同样的，在miniconda官网下载安装包</p>
+</li>
+<li><p>下载完成后打开安装程序，过程中取消勾选了为当前用户安装（不推荐）</p>
+<ul>
+<li><p>为所有用户安装后，可能需要自己配置环境变量，在环境变量中配置如下内容：</p>
+<ul>
+<li><p>一个名为<code>MINI_CONDA_HOME</code>的系统变量</p>
+</li>
+<li><p>在<code>Path</code>变量中，<strong>分别</strong>添加以下几条：</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%MINI_CONDA_HOME%</span><br><span class="line">%MINI_CONDA_HOME%\Library\mingw-w64\bin</span><br><span class="line">%MINI_CONDA_HOME%\Library\usr\bin</span><br><span class="line">%MINI_CONDA_HOME%\Library\bin</span><br><span class="line">%MINI_CONDA_HOME%\Scripts</span><br></pre></td></tr></table></div></figure>
+
+<blockquote>
+<p>Windwos下会把Python和一些pip安装的包，映射为exe程序。所以依赖scripts文件夹</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>此时，在CMD中输入<code>conda</code>应该可以访问到<code>Miniconda</code>的程序</p>
+<ul>
+<li><p>由于为所有用户安装，导致环境和包会默认下载到<code>C:\Users\当前用户\.conda</code>文件夹中</p>
+</li>
+<li><p>需要修改（没有则创建）<code>C:\Users\当前用户\.condarc</code>文件，并填写内容：</p>
+<figure class="highlight yaml"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">envs_dirs:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">D:\env\miniconda3\envs</span></span><br></pre></td></tr></table></div></figure></li>
+<li><p>此时仍然可能未生效，最好在创建环境时，使用绝对路径：</p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create --prefix 目标环境文件夹的绝对路径 python=版本</span><br><span class="line"><span class="comment"># 例如：conda create --prefix D:\env\miniconda3\envs\py3.8 python=3.8</span></span><br><span class="line"><span class="comment"># 上述将创建一个3.8版本的Python环境到D盘环境的py3.8中去</span></span><br></pre></td></tr></table></div></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+        <h2 id="常用操作">
+          <a href="#常用操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2>
+      <ul>
+<li>列举环境：<code>conda env list</code></li>
+<li>搜索包：<code>conda search 包名</code></li>
+<li>创建环境：<code>conda create -n 环境名 python=版本号</code></li>
+<li>切换环境：<code>conda activate 环境名</code></li>
+<li>退出环境：<code>conda deactivate</code></li>
+<li>查看pip包安装位置和其他信息：<code>pip show 包名</code></li>
+</ul>
+
+        <h1 id="安装homeassistant">
+          <a href="#安装homeassistant" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装homeassistant" class="headerlink" title="安装homeassistant"></a>安装homeassistant</h1>
+      
+        <h2 id="环境：">
+          <a href="#环境：" class="heading-link"><i class="fas fa-link"></i></a><a href="#环境：" class="headerlink" title="环境："></a>环境：</h2>
+      <ul>
+<li><p>安装homeassistant2023.8.4需要Python3.11版本，使用conda创建python3.11版本环境并切换</p>
+</li>
+<li><p>安装homeassistant需要的一些依赖：</p>
+<ul>
+<li><p><code>pip3 install home-assistant-frontend</code>，核心依赖，缺少会导致启动一大堆报错</p>
+<blockquote>
+<p>参考自<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://community.home-assistant.io/t/setup-failed-for-dependencies-http/145523">社区</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</blockquote>
+</li>
+<li><p><code>pip3 install pycountry</code>，国家地图依赖</p>
+</li>
+<li><p><code>pip3 install webrtcvad</code>，核心依赖，缺少会导致cloud、mobile-app等一堆报错</p>
+<blockquote>
+<p>参考自<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://community.home-assistant.io/t/after-the-update-ha-could-not-set-up-cloud-assist-pipeline-mobile-app-and-default-config/569738">社区</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</blockquote>
+</li>
+<li><p><code>pip3 install homeassistant==2023.8.4</code>，homeassistant自身</p>
+</li>
+</ul>
+</li>
+<li><p>运行<code>hass</code>启动homeassistant服务</p>
+</li>
+<li><p>访问<code>localhost:8123</code>即可</p>
+</li>
+</ul>
+
+        <h1 id="CMD操作">
+          <a href="#CMD操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#CMD操作" class="headerlink" title="CMD操作"></a>CMD操作</h1>
+      <ul>
+<li>切换盘符：<code>盘符:</code>，例如切换到D盘：<code>d:</code>回车即可</li>
+<li>查看当前文件夹内容：<code>dir</code></li>
+<li>查看命令所在位置：<code>where 命令</code></li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://taoyyz.github.io/tags/%E8%BF%90%E7%BB%B4/">运维</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://taoyyz.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a></span></div><console class="log" 123></console><div class="post-reward reward"><div class="reward-button">看的开心的话可以请我喝杯奶茶~热狗也行呜呜呜</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/zfb.jpg"><div class="reward-qrcode-alipay__text">支付宝</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/vx.jpg"><div class="reward-qrcode-wechat__text">微信</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2022/08/14/Mac%E6%8A%80%E5%B7%A7/"><span class="paginator-prev__text">Mac使用技巧</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WSL%E5%AE%89%E8%A3%85Ubuntu"><span class="toc-number">1.</span> <span class="toc-text">
+          WSL安装Ubuntu</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AESSH%E5%88%B0%E5%A4%96%E5%B1%82%E4%B8%BB%E6%9C%BA"><span class="toc-number">2.</span> <span class="toc-text">
+          配置SSH到外层主机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E6%93%8D%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text">
+          系统服务操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E6%8D%A2dash%E4%B8%8Ebash"><span class="toc-number">3.1.</span> <span class="toc-text">
+          切换dash与bash</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">
+          性能与优化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEfrp"><span class="toc-number">5.</span> <span class="toc-text">
+          设置frp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E5%BD%93%E5%89%8Dfrp%E9%85%8D%E7%BD%AE"><span class="toc-number">5.1.</span> <span class="toc-text">
+          我的当前frp配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%B2%E8%BF%90%E8%A1%8C%E7%9A%84%E4%B8%AA%E4%BA%BA%E6%9C%8D%E5%8A%A1"><span class="toc-number">6.</span> <span class="toc-text">
+          已运行的个人服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql"><span class="toc-number">6.1.</span> <span class="toc-text">
+          mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis"><span class="toc-number">6.2.</span> <span class="toc-text">
+          redis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#portainer"><span class="toc-number">6.3.</span> <span class="toc-text">
+          portainer</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-number">7.</span> <span class="toc-text">
+          Redis性能测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-benchmark"><span class="toc-number">7.1.</span> <span class="toc-text">
+          redis-benchmark</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Xshell"><span class="toc-number">8.</span> <span class="toc-text">
+          安装Xshell</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-number">8.1.</span> <span class="toc-text">
+          安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">8.2.</span> <span class="toc-text">
+          可能出现的问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Git%E9%85%8D%E7%BD%AE"><span class="toc-number">9.</span> <span class="toc-text">
+          Git配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%99Git%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="toc-number">9.1.</span> <span class="toc-text">
+          给Git配置代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%BB%93%E5%BA%93"><span class="toc-number">9.1.1.</span> <span class="toc-text">
+          当前项目的仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99Git%E5%BD%93%E5%89%8D%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="toc-number">9.1.1.1.</span> <span class="toc-text">
+          给Git当前项目的本地仓库配置代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96%E6%B6%88%E5%BD%93%E5%89%8D%E9%A1%B9%E7%9B%AE%E7%9A%84Git%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E7%9A%84%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="toc-number">9.1.1.2.</span> <span class="toc-text">
+          取消当前项目的Git本地仓库的代理配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%BB%93%E5%BA%93"><span class="toc-number">9.1.2.</span> <span class="toc-text">
+          全局仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99Git%E5%85%A8%E5%B1%80%E4%BB%93%E5%BA%93%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="toc-number">9.1.2.1.</span> <span class="toc-text">
+          给Git全局仓库配置代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96%E6%B6%88%E5%85%A8%E5%B1%80%E4%BB%93%E5%BA%93%E7%9A%84%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="toc-number">9.1.2.2.</span> <span class="toc-text">
+          取消全局仓库的代理配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8BGit%E9%85%8D%E7%BD%AE"><span class="toc-number">9.2.</span> <span class="toc-text">
+          查看Git配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8DGit%E4%BB%93%E5%BA%93%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">9.2.1.</span> <span class="toc-text">
+          查看当前Git仓库的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE"><span class="toc-number">9.2.2.</span> <span class="toc-text">
+          查看全局配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Miniconda"><span class="toc-number">10.</span> <span class="toc-text">
+          安装Miniconda</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E4%B8%8B"><span class="toc-number">10.1.</span> <span class="toc-text">
+          Linux下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#windows%E4%B8%8B"><span class="toc-number">10.2.</span> <span class="toc-text">
+          windows下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">10.3.</span> <span class="toc-text">
+          常用操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85homeassistant"><span class="toc-number">11.</span> <span class="toc-text">
+          安装homeassistant</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%EF%BC%9A"><span class="toc-number">11.1.</span> <span class="toc-text">
+          环境：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CMD%E6%93%8D%E4%BD%9C"><span class="toc-number">12.</span> <span class="toc-text">
+          CMD操作</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/head.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">taoyyz</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://weibo.com/6368186555/" target="_blank" rel="noopener" data-popover="微博：taoyyz" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/taoyyz" target="_blank" rel="noopener" data-popover="知乎：taoyyz" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/10111280" target="_blank" rel="noopener" data-popover="哔哩哔哩：宝贝球球ouo" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fas fa-tv"></i></span></a><a class="sidebar-ov-social-item" href="angelahape" target="_blank" rel="noopener" data-popover="微信：angelahape" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weixin"></i></span></a><a class="sidebar-ov-social-item" href="tencent://message?uin=2655026691" target="_blank" rel="noopener" data-popover="QQ：2655026691" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a><a class="sidebar-ov-social-item" href="https://www.youtube.com/channel/UCsz2-9ReY8ayMd-92rEGKFQ" target="_blank" rel="noopener" data-popover="Youtube：Xiaotao" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-youtube"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">7</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">13</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div></div><div id="tishi" style="text-align:center;user-select:none;font-weight:600;">本站已运行</div><span id="sitetime" style="text-align:center;display:block;user-select:none;">载入天数...<script language="javascript">const siteTime = () => {
+  window.setTimeout(siteTime, 500);
+  const startTime = Date.UTC(2021, 3, 10, 23, 0, 0); // 北京时间
+  const currentTime = Date.now();
+  const timeDifference = currentTime - startTime;
+
+  const seconds = Math.floor((timeDifference / 1000) % 60);
+  const minutes = Math.floor((timeDifference / 1000 / 60) % 60);
+  const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  const years = Math.floor(days / 365);
+  const remainingDays = days % 365;
+
+  let timeString = '';
+
+  if (years > 0) {
+    timeString += `${years}年`;
+  }
+
+  timeString += `${remainingDays}天${hours}时${minutes}分${seconds}秒`;
+
+  document.getElementById("sitetime").innerHTML = timeString;
+};
+
+siteTime();
+</script></span></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>taoyyz小陶</span></div><div></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"></div><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

@@ -1,0 +1,725 @@
+<!DOCTYPE html><style>body {
+  cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/default.cur),
+  default;
+}
+
+a,
+img {
+  cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/pointer.cur),
+  default;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: dodgerblue;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, .4) 25%,
+    transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .4) 50%,
+    rgba(255, 255, 255, .4) 75%,
+    transparent 75%,
+    transparent);
+  border-radius: 3em;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #DEDEDE;
+  border-radius: 3em;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}</style><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="Junit单元测试和反射、注解的基本概念和基本用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Junit、反射、注解">
+<meta property="og:url" content="http://taoyyz.github.io/2021/08/10/Junit%E5%8F%8D%E5%B0%84%E6%B3%A8%E8%A7%A3/index.html">
+<meta property="og:site_name" content="欢迎光临taoyyz的Blog">
+<meta property="og:description" content="Junit单元测试和反射、注解的基本概念和基本用法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210719114838150.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210719115133805.png">
+<meta property="og:image" content="http://taoyyz.github.io/images/image-20210719134708584.png">
+<meta property="article:published_time" content="2021-08-10T10:02:17.000Z">
+<meta property="article:modified_time" content="2023-09-28T16:56:12.282Z">
+<meta property="article:author" content="taoyyz小陶">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://taoyyz.github.io/images/image-20210719114838150.png"><title>Junit、反射、注解 | 欢迎光临taoyyz的Blog</title><link ref="canonical" href="http://taoyyz.github.io/2021/08/10/Junit%E5%8F%8D%E5%B0%84%E6%B3%A8%E8%A7%A3/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","wordWrap":true},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: true,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/links/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">资源和链接</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="far fa-address-card"></i></span><span class="header-nav-menu-item__text">关于</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">欢迎光临taoyyz的Blog</div><div class="header-banner-info__subtitle"></div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Junit、反射、注解</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-08-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2023-09-29</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">2.1k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">12分</span></span></div></header><div class="post-body">
+        <h1 id="Junit单元测试">
+          <a href="#Junit单元测试" class="heading-link"><i class="fas fa-link"></i></a><a href="#Junit单元测试" class="headerlink" title="Junit单元测试"></a>Junit单元测试</h1>
+      
+        <h2 id="测试分类：">
+          <a href="#测试分类：" class="heading-link"><i class="fas fa-link"></i></a><a href="#测试分类：" class="headerlink" title="测试分类："></a>测试分类：</h2>
+      <ul>
+<li><p>黑盒测试：不需要写代码，测试程序对输入的值时候能输出期望的值</p>
+</li>
+<li><p>白盒测试：需要写代码，关注程序的具体流程（Junit属于这一种）</p>
+</li>
+</ul>
+
+        <h2 id="Junit使用">
+          <a href="#Junit使用" class="heading-link"><i class="fas fa-link"></i></a><a href="#Junit使用" class="headerlink" title="Junit使用"></a>Junit使用</h2>
+      
+        <h3 id="步骤：">
+          <a href="#步骤：" class="heading-link"><i class="fas fa-link"></i></a><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3>
+      <ol>
+<li><p>定义一个测试类（测试用例）</p>
+<p><strong>建议</strong></p>
+<ul>
+<li>测试类名为：被测试的类+Test，例如CalculatorTest</li>
+<li>包名：xxx.xxx.xx.test，例如cn.taoyyz.test</li>
+</ul>
+</li>
+<li><p>定义测试方法（可以独立运行）</p>
+<p><strong>建议</strong></p>
+<ul>
+<li>方法名：test+测试的方法名，例如testAdd()</li>
+<li>返回值：void</li>
+<li>参数列表：空参</li>
+</ul>
+</li>
+<li><p>给方法加注解：@Test，需要解决报错把依赖添加到路径</p>
+</li>
+<li><p>判定结果：一般使用<em>断言</em> Assert类来处理结果</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210719114838150.png" alt="image-20210719114838150">
+        绿色代表成功，否则失败</p>
+
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210719115133805.png" alt="image-20210719115133805" style="zoom:80%;">
+       </li>
+<li><p>可以通过多个@Test注解进行多个测试</p>
+</li>
+</ol>
+<p><strong>补充</strong></p>
+<ul>
+<li>@Before：修饰的方法会在@Test测试的方法之前执行</li>
+<li>@After：修饰的方法会在@Test测试的方法之后执行</li>
+</ul>
+
+        <h1 id="反射">
+          <a href="#反射" class="heading-link"><i class="fas fa-link"></i></a><a href="#反射" class="headerlink" title="反射"></a>反射</h1>
+      <p><strong>反射是框架设计的灵魂</strong></p>
+<ul>
+<li>框架：半成品软件。可以在框架的基础上进行软件开发，简化编码。</li>
+</ul>
+
+        <h2 id="概念">
+          <a href="#概念" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念" class="headerlink" title="概念"></a>概念</h2>
+      <p>将类的各个组成部分封装为其他对象，这就是反射机制。</p>
+<p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="/images/image-20210719134708584.png" alt="image-20210719134708584">
+      </p>
+<ul>
+<li>好处：<ol>
+<li>可以在程序运行过程中，操作这些对象。</li>
+<li>可以解耦，提高程序的可扩展性。</li>
+</ol>
+</li>
+</ul>
+
+        <h2 id="获取Class对象的方式：">
+          <a href="#获取Class对象的方式：" class="heading-link"><i class="fas fa-link"></i></a><a href="#获取Class对象的方式：" class="headerlink" title="获取Class对象的方式："></a>获取Class对象的方式：</h2>
+      <p>  1.<code>Class.forName(&quot;全类名&quot;)</code>：将字节码文件加载进内存，返回Class对象<br>    多用于配置文件,将类名定义在配置文件中.读取文件,加载类<br>  2.<code>类名.class</code>：通过类名的属性class获取<br>    多用于参数的传递<br>  3.<code>对象.getClass()</code>：继承于Object类<br>    多用于对象的获取字节码的方式</p>
+<p>  <strong>同一个.class字节码文件在一次程序运行过程中只被加载一次，不论通过哪种方式获取的对象都是同一个</strong></p>
+
+        <h2 id="Class对象的功能">
+          <a href="#Class对象的功能" class="heading-link"><i class="fas fa-link"></i></a><a href="#Class对象的功能" class="headerlink" title="Class对象的功能"></a>Class对象的功能</h2>
+      
+        <h3 id="获取功能">
+          <a href="#获取功能" class="heading-link"><i class="fas fa-link"></i></a><a href="#获取功能" class="headerlink" title="获取功能:"></a>获取功能:</h3>
+      
+        <h4 id="1-获取成员变量们">
+          <a href="#1-获取成员变量们" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-获取成员变量们" class="headerlink" title="1.获取成员变量们"></a>1.获取成员变量们</h4>
+      <ul>
+<li><p>Field getField(String name) 通过指定的成员变量名获取public字段</p>
+</li>
+<li><p>Field[] getFields() 返回此Class对象表示的类或接口的所有可访问public字段</p>
+</li>
+<li><p>Field[] getDeclaredFields() 返回由此Class对象表示的类或接口声明的所有字段的Filed数组</p>
+</li>
+<li><p>Field getDeclaredField( String name) 返回此Class对象表示的类或接口的指定声明字段。</p>
+<p><strong>操作Field：成员变量</strong></p>
+<p>1.设置值</p>
+<p><code>void set(Object obj,Object value)</code></p>
+<p>2.获取值</p>
+<p><code>Object get(Object obj)</code></p>
+<p>3.忽略访问权限修饰符的安全检查(暴力反射)</p>
+<p><code>setAccessible(boolean flag)</code></p>
+
+        <h4 id="2-获取构造方法们">
+          <a href="#2-获取构造方法们" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-获取构造方法们" class="headerlink" title="2.获取构造方法们"></a>2.获取构造方法们</h4>
+      </li>
+<li><p>Constructor<T> getConstructor( Class&lt;?&gt;… parameterTypes)返回此Class对象表示的类的指定公共构造方法</T></p>
+</li>
+<li><p>Constructor&lt;?&gt;[] getConstructors() 返回此Class对象表示的类的所有公共构造函数</p>
+</li>
+<li><p>Constructor<T> getDeclaredConstructor(Class&lt;?&gt;… parameterTypes) 返回此Class对象表示的类或接口的指定构造函数。</T></p>
+</li>
+<li><p>Constructor&lt;?&gt;[] getDeclaredConstructors() 返回此Class对象表示的类声明的所有构造函数。</p>
+<p><strong>操作Constructor：构造器</strong></p>
+<p>1.利用构造器创建对象</p>
+<p><code>T newInstance(Object... initargs)</code></p>
+<p>2.利用空参构造创建对象时，无需获取Class对象的构造器再调用newInstance方法，可以直接利用Class对象自带的newInstance方法。</p>
+
+        <h4 id="3-获取成员方法们">
+          <a href="#3-获取成员方法们" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-获取成员方法们" class="headerlink" title="3.获取成员方法们"></a>3.获取成员方法们</h4>
+      </li>
+<li><p>Method getMethod(String name,Class&lt;?&gt;… parameterTypes) 此Class对象表示的类或接口的指定公共成员方法。</p>
+</li>
+<li><p>Method[] getMethods() 此Class对象表示的类或接口的所有公共方法，包括由类或接口声明的方法以及从超类和超接口继承的方法。</p>
+</li>
+<li><p>Method getDeclaredMethod(String name,Class&lt;?&gt;… parameterTypes) 返回此Class对象表示的类或接口的指定声明方法。</p>
+</li>
+<li><p>Method[] getDeclaredMethods() 返回此Class对象表示的类或接口的所有声明方法，包括公共、受保护、默认（包）访问和私有方法，但不包括继承的方法。</p>
+<p><strong>操作Method：成员方法</strong></p>
+<p>1.执行方法</p>
+<p><code>Object invoke(Object obj,Object... args)</code>如果要执行的方法没有参数列表，则第二个参数可以省略</p>
+<p>2.获取方法名称</p>
+<p><code>String getName()</code>返回方法的名称</p>
+</li>
+</ul>
+
+        <h4 id="4-获取类名">
+          <a href="#4-获取类名" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-获取类名" class="headerlink" title="4.获取类名"></a>4.获取类名</h4>
+      <ul>
+<li><p>String getName() 返回该实体（类，接口，数组类，基本类型，或void）的全类名（包括包路径名）</p>
+</li>
+<li><p>String getSimpleName() 返回简单类名（不包括包路径）</p>
+</li>
+</ul>
+
+        <h2 id="案例需求">
+          <a href="#案例需求" class="heading-link"><i class="fas fa-link"></i></a><a href="#案例需求" class="headerlink" title="案例需求"></a>案例需求</h2>
+      <p><strong>写一个”框架”，不能改变任何代码的情况下，可以创建任意对象，执行任意的方法</strong></p>
+
+        <h3 id="实现：">
+          <a href="#实现：" class="heading-link"><i class="fas fa-link"></i></a><a href="#实现：" class="headerlink" title="实现："></a>实现：</h3>
+      <p>1.配置文件<br>2.反射</p>
+
+        <h3 id="步骤：-1">
+          <a href="#步骤：-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#步骤：-1" class="headerlink" title="步骤："></a>步骤：</h3>
+      <p>1.将需要创建的对象的全类名和需要执行的方法定义在配置文件中<br>2.在程序中加载读取配置文件<br>3.使用反射技术来加载类文件进内存<br>4.创建对象<br>5.执行方法</p>
+
+        <h1 id="注解">
+          <a href="#注解" class="heading-link"><i class="fas fa-link"></i></a><a href="#注解" class="headerlink" title="注解"></a>注解</h1>
+      
+        <h2 id="概念-1">
+          <a href="#概念-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念-1" class="headerlink" title="概念"></a>概念</h2>
+      <p>  <em>区别于”注释”：</em><br>  1.注释是用来说明程序的一些文字，给程序员看的<br>  2.注解是用来说明程序的，给计算机看的<br><strong>注解：从JDK5开始,Java增加对注解的支持，也就是注解，注解与注释是有一定区别的，可以把注解理解为代码里的特殊标记，这些标记可以在编译，类加载，运行时被读取，并执行相应的处理。通过注解开发人员可以在不改变原有代码和逻辑的情况下在源代码中嵌入补充信息。</strong></p>
+
+        <h3 id="概念描述">
+          <a href="#概念描述" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念描述" class="headerlink" title="概念描述"></a>概念描述</h3>
+      <ul>
+<li><p>JDK1.5之后的新特性</p>
+</li>
+<li><p>用来说明程序</p>
+</li>
+<li><p>使用注解：@注解名称</p>
+
+        <h3 id="作用分类">
+          <a href="#作用分类" class="heading-link"><i class="fas fa-link"></i></a><a href="#作用分类" class="headerlink" title="作用分类"></a>作用分类</h3>
+      </li>
+<li><p><strong>编写文档</strong>：通过代码里标识的注解生成文档【生成javadoc文档】</p>
+<p>​    例如在javadoc文档注释中可以利用一些注解例如：@author指定作者，利用@since指定自从…</p>
+</li>
+<li><p><strong>代码分析</strong>：通过代码里标识的注解对代码进行分析【使用反射】</p>
+</li>
+<li><p><strong>编译检查</strong>：通过代码里标识的注解让编译器能够实现基本的编译检查【Override】</p>
+</li>
+</ul>
+
+        <h3 id="JDK中预定义的一些注解">
+          <a href="#JDK中预定义的一些注解" class="heading-link"><i class="fas fa-link"></i></a><a href="#JDK中预定义的一些注解" class="headerlink" title="JDK中预定义的一些注解"></a>JDK中预定义的一些注解</h3>
+      <ul>
+<li>@Override：检测被该注解标注的方法时候是继承于父类(接口)的</li>
+<li>@Deprecated：将该注解标注的内容表示为“已过时”</li>
+<li>@SuppressWarnings：压制警告，需要传递参数String[] value，一般传递”all”</li>
+</ul>
+
+        <h3 id="自定义注解">
+          <a href="#自定义注解" class="heading-link"><i class="fas fa-link"></i></a><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h3>
+      
+        <h4 id="格式">
+          <a href="#格式" class="heading-link"><i class="fas fa-link"></i></a><a href="#格式" class="headerlink" title="格式"></a>格式</h4>
+      <p>  public @interface 注解名称 {<br>​            属性列表…;<br>  }</p>
+<ul>
+<li><p><strong>元注解：用于描述注解的注解</strong></p>
+<ul>
+<li><p>@Target：描述直接能够作用的位置</p>
+<ul>
+<li><p>参数ElementType[] value()掌握3个取值：</p>
+<p> 1.ElementType.TYPE 表示能作用于类上</p>
+<p> 2.ElementType.METHOD 表示能作用于方法上 </p>
+<p> 3.ElementType.FIELD 表示能作用于成员变量上</p>
+</li>
+</ul>
+</li>
+<li><p>@Retention：描述注解被保留的阶段</p>
+<ul>
+<li>参数RetentionPolicy value() 一般使用RetentionPolicy.RUNTIME 表示当前注解会保留到class字节码文件中，并被JVM读取到</li>
+</ul>
+</li>
+<li><p>@Documented：描述注解是否能被抽取到API文档中</p>
+</li>
+<li><p>@Inherited：描述注解是否被子类继承</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>以上的“元注解”是用于修饰Annotation的，也就是打在注解上的注解</strong></p>
+
+        <h4 id="本质">
+          <a href="#本质" class="heading-link"><i class="fas fa-link"></i></a><a href="#本质" class="headerlink" title="本质"></a>本质</h4>
+      <ul>
+<li><p>public interface MyAnnotation extends java.lang.annotation.Annotation { }</p>
+</li>
+<li><p>属性：接口中可以定义的成员方法，可以看做抽象方法</p>
+<p><strong>要求：</strong></p>
+<p>1.属性的返回值类型：</p>
+<ul>
+<li><p>基本数据类型</p>
+</li>
+<li><p>String</p>
+</li>
+<li><p>枚举</p>
+</li>
+<li><p>注解</p>
+</li>
+<li><p>以上类型的数组</p>
+</li>
+</ul>
+<p> 2.使用了含有属性的注解时必须给属性赋值</p>
+<ul>
+<li>定义的属性如果指定了default值，那就可以不赋值</li>
+<li>如果只有一个属性需要赋值，并且属性的名称为value，那么可以把(value=12)简写为(12)</li>
+<li>枚举类型赋值为color = Color.red</li>
+<li>注解类型赋值为anno = @MyAnno</li>
+<li>数组类型赋值为strArr = {“a”,”b”,”c”}，当数组只有一个值时，可以省略{大括号}</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="在程序中使用-解析-注解">
+          <a href="#在程序中使用-解析-注解" class="heading-link"><i class="fas fa-link"></i></a><a href="#在程序中使用-解析-注解" class="headerlink" title="在程序中使用(解析)注解"></a>在程序中使用(解析)注解</h3>
+      <p>  1.获取该类的字节码对象：类名.class 返回一个Class<T></T></p>
+<p>  2.获取指定的注解：调用该字节码对象的getAnnotation(Class<A> annotationClass) 返回一个<A extends annotation.annotation>注解对象</A></A></p>
+<ul>
+<li>打在一个class类上的注解可以通过getAnnotation()得到。同样的，打在一个方法上的注解也可以通过getAnnotation得到，所以对于一个Method对象，也可以调用getAnnotation()方法获取注解</li>
+<li>对于获取到的注解对象，可以直接调用它里面属性(或者是说抽象方法)得到打注解时指定的值</li>
+</ul>
+<p>3.也可以调用getAnnotations()返回所有的注解到一个Annotation[ ]数组里。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://taoyyz.github.io/tags/Java/">Java</a></span></div><console class="log" 123></console><div class="post-reward reward"><div class="reward-button">看的开心的话可以请我喝杯奶茶~热狗也行呜呜呜</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/zfb.jpg"><div class="reward-qrcode-alipay__text">支付宝</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/vx.jpg"><div class="reward-qrcode-wechat__text">微信</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/08/16/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">数据库入门</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/08/05/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"><span class="paginator-prev__text">开发、构建、部署</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Junit%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-number">1.</span> <span class="toc-text">
+          Junit单元测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">
+          测试分类：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Junit%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">
+          Junit使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">1.2.1.</span> <span class="toc-text">
+          步骤：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-number">2.</span> <span class="toc-text">
+          反射</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">
+          概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96Class%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">
+          获取Class对象的方式：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-number">2.3.</span> <span class="toc-text">
+          Class对象的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%8A%9F%E8%83%BD"><span class="toc-number">2.3.1.</span> <span class="toc-text">
+          获取功能:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%8E%B7%E5%8F%96%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E4%BB%AC"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">
+          1.获取成员变量们</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%8E%B7%E5%8F%96%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E4%BB%AC"><span class="toc-number">2.3.1.2.</span> <span class="toc-text">
+          2.获取构造方法们</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%8E%B7%E5%8F%96%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95%E4%BB%AC"><span class="toc-number">2.3.1.3.</span> <span class="toc-text">
+          3.获取成员方法们</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%8E%B7%E5%8F%96%E7%B1%BB%E5%90%8D"><span class="toc-number">2.3.1.4.</span> <span class="toc-text">
+          4.获取类名</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E9%9C%80%E6%B1%82"><span class="toc-number">2.4.</span> <span class="toc-text">
+          案例需求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="toc-number">2.4.1.</span> <span class="toc-text">
+          实现：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%EF%BC%9A-1"><span class="toc-number">2.4.2.</span> <span class="toc-text">
+          步骤：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">
+          注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="toc-number">3.1.</span> <span class="toc-text">
+          概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E6%8F%8F%E8%BF%B0"><span class="toc-number">3.1.1.</span> <span class="toc-text">
+          概念描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%88%86%E7%B1%BB"><span class="toc-number">3.1.2.</span> <span class="toc-text">
+          作用分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK%E4%B8%AD%E9%A2%84%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.1.3.</span> <span class="toc-text">
+          JDK中预定义的一些注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.1.4.</span> <span class="toc-text">
+          自定义注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.1.4.1.</span> <span class="toc-text">
+          格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E8%B4%A8"><span class="toc-number">3.1.4.2.</span> <span class="toc-text">
+          本质</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E4%BD%BF%E7%94%A8-%E8%A7%A3%E6%9E%90-%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.1.5.</span> <span class="toc-text">
+          在程序中使用(解析)注解</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/head.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">taoyyz</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://weibo.com/6368186555/" target="_blank" rel="noopener" data-popover="微博：taoyyz" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/taoyyz" target="_blank" rel="noopener" data-popover="知乎：taoyyz" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/10111280" target="_blank" rel="noopener" data-popover="哔哩哔哩：宝贝球球ouo" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fas fa-tv"></i></span></a><a class="sidebar-ov-social-item" href="angelahape" target="_blank" rel="noopener" data-popover="微信：angelahape" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weixin"></i></span></a><a class="sidebar-ov-social-item" href="tencent://message?uin=2655026691" target="_blank" rel="noopener" data-popover="QQ：2655026691" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a><a class="sidebar-ov-social-item" href="https://www.youtube.com/channel/UCsz2-9ReY8ayMd-92rEGKFQ" target="_blank" rel="noopener" data-popover="Youtube：Xiaotao" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-youtube"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">7</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">13</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div></div><div id="tishi" style="text-align:center;user-select:none;font-weight:600;">本站已运行</div><span id="sitetime" style="text-align:center;display:block;user-select:none;">载入天数...<script language="javascript">const siteTime = () => {
+  window.setTimeout(siteTime, 500);
+  const startTime = Date.UTC(2021, 3, 10, 23, 0, 0); // 北京时间
+  const currentTime = Date.now();
+  const timeDifference = currentTime - startTime;
+
+  const seconds = Math.floor((timeDifference / 1000) % 60);
+  const minutes = Math.floor((timeDifference / 1000 / 60) % 60);
+  const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  const years = Math.floor(days / 365);
+  const remainingDays = days % 365;
+
+  let timeString = '';
+
+  if (years > 0) {
+    timeString += `${years}年`;
+  }
+
+  timeString += `${remainingDays}天${hours}时${minutes}分${seconds}秒`;
+
+  document.getElementById("sitetime").innerHTML = timeString;
+};
+
+siteTime();
+</script></span></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>taoyyz小陶</span></div><div></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"></div><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>
